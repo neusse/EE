@@ -1,0 +1,43 @@
+'**********************************************************************
+'*  Name    : CONTADOR CON PIC + PULSADORES (ASCENDENTE Y DEcENDENTE) *
+'*  Author  : https://mrchunckuee.blogspot.com/                       *
+'*  Notice  : Copyright (c) 2014 MrChunckuee                          *
+'*          : All Rights Reserved                                     *
+'*  Date    : 20/05/2014                                              *
+'*  Version : 1.0                                                     *
+'*  Notes   :                                                         *
+'*          :                                                         *
+'**********************************************************************
+
+AllDigital
+TRISA = %11111111'Puerto A como entrada
+TRISB = %00000000'Puerto B como salida
+DIGITO var Byte'declaramos la variable digito
+PORTB = 63 'Muestra el numero cero en el display
+digito = 0'Inicializamos digito en cero
+MAIN:
+	If PORTA.0 = 1 Then'Si RA.0=1 hacemos lo siguiente
+	pause 100
+		If digito = 10 Then
+			digito = 0
+		Endif
+		If digito <= 10 Then
+			pause 100
+			digito = digito + 1
+			LookUp digito, [$3f, $06, $5b, $4f, $66, $6d, $7d, $07, $7f, $6f, $3f], PORTB
+		Endif
+	Endif
+
+	If PORTA.1 = 1 Then'Si RA.1=1 hacemos lo siguiente
+	pause 100
+		If digito = 0 Then
+			digito = 10
+		Endif
+		If digito >= 0 Then
+			pause 100
+			digito = digito - 1
+		    LookUp digito, [$3f, $06, $5b, $4f, $66, $6d, $7d, $07, $7f, $6f], PORTB
+		Endif
+	Endif
+Goto MAIN
+

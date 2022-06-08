@@ -1,0 +1,54 @@
+'****************************************************************
+'*  Name    : SEMAFORO CON PIC16F84A - TRES                     *
+'*  Author  : https://mrchunckuee.blogspot.com/                 *
+'*  Notice  : Copyright (c) 2014 MrChunckuee                    *
+'*          : All Rights Reserved                               *
+'*  Date    : 31/05/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+define OSC 4
+TRISB=0
+PORTB=0
+
+VECES var Byte
+
+LED_VERDE_1      var PORTB.0
+LED_AMARILLO_1   var PORTB.1
+LED_ROJO_1       var PORTB.2
+LED_VERDE_2      var PORTB.3
+LED_AMARILLO_2   var PORTB.4
+LED_ROJO_2       var PORTB.5
+
+SEMAFORO:
+    high LED_ROJO_2: high LED_VERDE_1
+    pause 9000
+    low LED_VERDE_1
+    GOSUB BLINK_LED_AMARILLO_1
+    low LED_ROJO_2: high LED_VERDE_2: high LED_ROJO_1
+    pause 9000
+    low LED_VERDE_2
+    GOSUB BLINK_LED_AMARILLO_2
+    low LED_ROJO_1 
+goto semaforo
+
+BLINK_LED_AMARILLO_1:
+    FOR VECES = 0 TO 10
+        high LED_AMARILLO_1
+        pause 300
+        low LED_AMARILLO_1
+        pause 300
+    NEXT VECES
+RETURN
+
+BLINK_LED_AMARILLO_2:
+    FOR VECES = 0 TO 10
+        high LED_AMARILLO_2
+        pause 300
+        low LED_AMARILLO_2
+        pause 300
+    NEXT VECES
+RETURN
+
+end

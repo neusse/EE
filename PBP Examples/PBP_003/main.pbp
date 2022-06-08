@@ -1,0 +1,36 @@
+'****************************************************************
+'*  Name    : SEMAFORO CON PIC 16F84A - DOS                     *
+'*  Author  : https://mrchunckuee.blogspot.com/                 *
+'*  Notice  : Copyright (c) 2014 MrChunckuee                    *
+'*          : All Rights Reserved                               *
+'*  Date    : 31/05/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+DEFINE OSC 4 'Se define el oscilador interno del PIC (4MHz).
+TRISB = 0 'Puerto B del micro controlador como salidas.
+PORTB = 0 'Inicializamos el puerto B en cero.
+
+'Definimos un nombre a cada pin donde estan los LEDs 
+VERDE1 var PORTB.0
+AMARILLO1 var PORTB.1
+ROJO1 var PORTB.2
+VERDE2 var PORTB.3
+AMARILLO2 var PORTB.4
+ROJO2 var PORTB.5
+
+SEMAFORO: 'Etiqueta de inico llamado SEMAFORO
+    high rojo2: high verde1
+    pause 9000 'Retardo en milisegundos
+    low verde1: high amarillo1
+    pause 3000 'Retardo en milisegundos
+    low amarillo1: low rojo2: high verde2: high rojo1
+    pause 9000 'Retardo en milisegundos
+    low verde2: high amarillo2
+    pause 3000 'Retardo en milisegundos
+    low rojo1: low amarillo2
+goto semaforo 'Regresamos a la etiqueta SEMAFORO bucle infinito
+end 'Termina el programa
+
+

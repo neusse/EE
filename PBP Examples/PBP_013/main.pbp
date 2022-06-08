@@ -1,0 +1,87 @@
+'****************************************************************
+'*  Name    : Count 0 to 99                                     *
+'*  Author  : https://mrchunckuee.blogspot.com/                 *
+'*  Notice  : Copyright (c) 2015 MrChunckuee                    *
+'*          : All Rights Reserved                               *
+'*  Date    : 13/05/2015                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+AllDigital
+TRISA = %00000011  ;Puerto A como entrada
+                ;RA0 button UP, RA1 button DOWN
+                ;RA2 transistor decimal
+                ;RA3 transistor unidad
+TRISB = %00000000'Puerto B como salida para los displays
+
+BUTTON_UP VAR PORTA.0
+BUTTON_DOWN VAR PORTA.1
+TRANS_DEC VAR PORTA.2
+TRANS_UNI VAR PORTA.3
+
+DISPLAY_7SEG VAR BYTE[10] ;Para Valores del 7SEG
+DISPLAY_7SEG[0]=$3f ; 0
+DISPLAY_7SEG[1]=$06 ; 1
+DISPLAY_7SEG[2]=$5b ; 2
+DISPLAY_7SEG[3]=$4f ; 3
+DISPLAY_7SEG[4]=$66 ; 4
+DISPLAY_7SEG[5]=$6d ; 5
+DISPLAY_7SEG[6]=$7d ; 6
+DISPLAY_7SEG[7]=$07 ; 7
+DISPLAY_7SEG[8]=$7f ; 8
+DISPLAY_7SEG[9]=$6f ; 9
+
+DECENA_COUNT VAR BYTE
+UNIDAD_COUNT VAR BYTE
+DIGITO var Byte
+TEMP VAR BYTE
+
+PORTA = 0
+PORTB = $3f 
+DECENA_COUNT = 0
+UNIDAD_COUNT = 0
+digito = 0
+
+MAIN:
+
+GOSUB DISPLAY_UPDATE
+
+IF BUTTON_UP = 1 THEN
+  PAUSE 100
+  UNIDAD_COUNT =  UNIDAD_COUNT + 1
+  IF UNIDAD_COUNT = 10 THEN
+    UNIDAD_COUNT = 0
+    DECENA_COUNT = DECENA_COUNT + 1
+    IF DECENA_COUNT = 10 THEN
+      DECENA_COUNT = 0
+    ENDIF
+  ENDIF
+ENDIF
+
+IF BUTTON_DOWN = 1 THEN
+  PAUSE 100
+  UNIDAD_COUNT =  UNIDAD_COUNT - 1
+  IF UNIDAD_COUNT = 0 THEN
+    UNIDAD_COUNT = 10
+    DECENA_COUNT = DECENA_COUNT - 1
+    IF DECENA_COUNT = 0 THEN
+      DECENA_COUNT = 10
+    ENDIF
+  ENDIF
+ENDIF
+	
+Goto MAIN
+
+DISPLAY_UPDATE:
+    PORTB = DISPLAY_7SEG[UNIDAD_COUNT]
+    TRANS_UNI = 1
+    PAUSE 10
+    TRANS_UNI = 0
+    PORTB = DISPLAY_7SEG[DECENA_COUNT]
+    TRANS_DEC = 1
+    PAUSE 10
+    TRANS_DEC = 0
+RETURN
+
+END

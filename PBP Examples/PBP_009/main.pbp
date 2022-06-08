@@ -1,0 +1,29 @@
+'****************************************************************
+'*  Name    : CONTROL DE MOTOR A PASOS (ARRANQUE Y REVERSA)     *
+'*  Author  : https://mrchunckuee.blogspot.com/                 *
+'*  Notice  : Copyright (c) 2014 MrChunckuee                    *
+'*          : All Rights Reserved                               *
+'*  Date    : 22/05/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+TRISA = 1 'Puerto A como entrada
+TRISB = 0 'Puerto B como salida
+DIGITO var Byte 'Variable digito para el conteo
+PORTB = 0 'Inicializamos puerto B en ceros
+INICIO: 'Etiqueta para bucle principal
+	If PORTA = 1 Then 'Se lee el estado del puerto a si BA= 1 hace lo siguiente
+			For digito = 0 To 4
+                LookUp digito, [1, 2, 4, 8], PORTB 'Crea los pulsos en el puerto B
+				pause 150 'Tiempo entre paso y paso del motor
+			Next digito
+	Endif
+	If PORTA = 2 Then 'Se lee el estado del puerto a si BR= 1 hace lo siguiente
+			For digito = 0 To 4
+				LookUp digito, [8, 4, 2, 1], PORTB 'Crea los pulsos en el puerto B
+				pause 150 'Tiempo entre paso y paso del motor
+			Next digito
+	Endif
+goto inicio
+end

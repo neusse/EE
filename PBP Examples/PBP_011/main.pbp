@@ -1,0 +1,77 @@
+'****************************************************************
+'*  Name    : UTILIZAR ADC PARA ENCENDER DISPALY CON PIC        *
+'*  Author  : https://mrchunckuee.blogspot.com/                 *
+'*  Notice  : Copyright (c) 2014 MrChunckuee                    *
+'*          : All Rights Reserved                               *
+'*  Date    : 15/06/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+DEFINE OSC 4
+; PARÁMETROS DEL ADC
+DEFINE ADC_BITS 10 ; NÚMERO DE BITS
+DEFINE ADC_CLOCK 3 ; USAR CLOCK RC DEL AD
+DEFINE ADC_SAMPLEUS 50 ; TIEMPO DE MUESTREO EN 50US
+; VARIABLES
+RES VAR WORD ; VARIAVLE PARA EL RESULTADO DE LA CONVERSIÓN
+VAL var BYTE ;VARIABLE PARA LA SALIDA
+
+TRISA=1
+TRISA.0 = 1 ; RA0 (AN0) COMO ENTRADA
+TRISB = 0 ; PORTB SALIDA (ADC)
+
+ADCON0 = %11000001 ; RELOJ DEL A/D, SELECCIONA AN0
+ADCON1 = %10001110 ; ESTABLECER SOLO UN CANAL COMO ANALÓGICO
+                   ; VOLTAJE DE REFERENCIA ES VDD
+
+PORTB = 0
+
+INICIO: ; INICIAR CONVERSIÓN
+  ADCIN 0, RES ; LEER LA ENTRADA ANALOGICA
+  VAL = res/113  ' DIVIDIMOS ENTRE 113 YA QUE 1023/9  = 113.6
+                 ' TAL VES SE PUEDE UTILIZAR 110 PARA UN RANGO CONSIDERABLE 
+  SELECT CASE VAL 
+    CASE 0
+        PORTB = %00111111; MUESTRA 0 EN EL DISPLAY
+    GOTO INICIO
+    
+    CASE 1
+        PORTB = %00000110; MUESTRA 1 EN EL DISPLAY
+    GOTO INICIO
+    
+    CASE 2
+        PORTB = %01011011; MUESTRA 2 EN EL DISPLAY
+    GOTO INICIO
+    
+    CASE 3
+        PORTB = %01001111; MUESTRA 3 EN EL DISPLAY
+    GOTO INICIO
+    
+    CASE 4
+        PORTB = %01100110; MUESTRA 4 EN EL DISPLAY
+    GOTO INICIO
+    
+    CASE 5
+        PORTB = %01101101; MUESTRA 5 EN EL DISPLAY
+    GOTO INICIO
+  
+    CASE 6
+        PORTB = %01111101; MUESTRA 6 EN EL DISPLAY
+    GOTO INICIO
+  
+    CASE 7
+        PORTB = %00000111; MUESTRA 7 EN EL DISPLAY
+    GOTO INICIO
+  
+    CASE 8
+        PORTB = %01111111; MUESTRA 8 EN EL DISPLAY
+    GOTO INICIO
+  
+    CASE 9
+        PORTB = %01101111; MUESTRA 9 EN EL DISPLAY
+    GOTO INICIO
+
+    END SELECT 
+GOTO INICIO 
+END

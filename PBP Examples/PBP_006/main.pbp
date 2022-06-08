@@ -1,0 +1,24 @@
+'****************************************************************
+'*  Name    : Contador de 0 a 9 con PIC16F84A                   *
+'*  Author  : https://mrchunckuee.blogspot.com/                 *
+'*  Notice  : Copyright (c) 2014 MrChunckuee                    *
+'*          : All Rights Reserved                               *
+'*  Date    : 12/05/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+TRISB = 0 'Puerto B como salida  
+DIGITO VAR byte 'Declaramos la variable digito
+PORTB = 0 'Inicializamos puerto B en cero
+
+INICIO:
+    DIGITO = 0  'Inicializamos digito en cero           
+CONTADOR_MAIN:
+    lookup DIGITO, [$3F, $06, $5B, $4F, $66, $6D, $7D, $07, $7F, $6F, $3F], PORTB   
+                    'El valor seleccionado por lookup se muestra en el Puerto B                        
+    DIGITO = DIGITO + 1 'Va incrementando uno a digito     
+    pause 1000   'Espera un segundo y muestra el siguiente digito                
+    if DIGITO = 10 then INICIO  'Si digito=10 reiniciara el conteo
+GOTO CONTADOR_MAIN   'Si es falso la condicion anterior sige incrementando
+END 'Fin del programa 

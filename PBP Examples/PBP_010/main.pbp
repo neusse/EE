@@ -1,0 +1,66 @@
+'****************************************************************
+'*  Name    : USO DEL ADC PARA ENCENDER LEDS CON PIC16F887      *
+'*  Author  : https://mrchunckuee.blogspot.com/                 *
+'*  Notice  : Copyright (c) 2014 MrChunckuee                    *
+'*          : All Rights Reserved                               *
+'*  Date    : 01/06/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+DEFINE OSC 4
+; PARÁMETROS DEL ADC
+DEFINE ADC_BITS 10 ; NÚMERO DE BITS
+DEFINE ADC_CLOCK 3 ; USAR CLOCK RC DEL ADC
+DEFINE ADC_SAMPLEUS 50 ; TIEMPO DE MUESTREO EN 50uS
+; VARIABLES
+RES VAR WORD ; VARIAVLE PARA EL RESULTADO DE LA CONVERSIÓN
+VAL var BYTE ;VARIABLE PARA LA SALIDA
+
+TRISA = 1 ; RA0 (AN0) COMO ENTRADA
+TRISA.0 = 1
+TRISD = 0 ; PORTD SALIDA (ADC)
+
+ADCON1 = %10000000 ; ESTABLECER SOLO UN CANAL COMO ANALÓGICO
+; VOLTAJE DE REFERENCIA ES VDD
+ADCON0 = %11000001 ; RELOJ DEL A/D, SELECCIONA AN0
+
+PORTD = 0
+
+INICIO:
+    ; INICIAR CONVERSIÓN
+    ADCIN 0, RES   ; LEER LA ENTRADA ANALOGICA
+    VAL = res/127  ' DIVIDIMOS ENTRE 127 YA QUE 1023/8 LEDS = 127.875 
+                   'LO DEJAMOS EN 127 PARA TENER UNA TOLERANCIA
+    SELECT CASE VAL ' ESTO ES PARA ENCENDER LOS LEDS DEPENDIENDO DEL 
+                    'VOLTAJE DE ENTRADA
+        CASE 0
+            PORTD = %00000000
+            GOTO INICIO
+        CASE 1
+            PORTD = %00000001
+            GOTO INICIO
+        CASE 2
+            PORTD = %00000011
+            GOTO INICIO
+        CASE 3
+            PORTD = %00000111
+            GOTO INICIO
+        CASE 4
+            PORTD = %00001111
+            GOTO INICIO
+        CASE 5
+            PORTD = %00011111
+            GOTO INICIO 
+        CASE 6
+            PORTB = %00111111
+            GOTO INICIO
+        CASE 7
+            PORTD = %01111111
+            GOTO INICIO
+        CASE 8 
+            PORTD = %11111111
+            GOTO INICIO
+    END SELECT; FIN DEL CASE
+GOTO INICIO; REGRESA AL INICIO
+END; FIN DEL PROGRAMA

@@ -1,0 +1,21 @@
+'****************************************************************
+'*  Name    : Intercalar encendido de dos LEDs                  *
+'*  Author  : https://mrchunckuee.blogspot.com/                 *
+'*  Notice  : Copyright (c) 2014 MrChunckuee                    *
+'*          : All Rights Reserved                               *
+'*  Date    : 12/05/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+cmcon=7
+DEFINE OSC 4
+TRISIO = 0
+GPIO = 0
+INICIO:
+    GPIO =%00000001
+    pause 500
+    GPIO =%00000010
+    pause 500
+goto inicio
+end

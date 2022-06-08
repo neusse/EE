@@ -1,0 +1,142 @@
+'****************************************************************
+'*  Name    : USO DE 3 CANALES ANALOGICOS CON EL PIC16F887      *
+'*  Author  : https://mrchunckuee.blogspot.com/                 *
+'*  Notice  : Copyright (c) 2014 MrChunckuee                    *
+'*          : All Rights Reserved                               *
+'*  Date    : 01/06/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+DEFINE OSC 4
+; PARÁMETROS DEL ADC
+DEFINE ADC_BITS 10 ; NÚMERO DE BITS
+DEFINE ADC_CLOCK 3 ; USAR CLOCK RC DEL ADC
+DEFINE ADC_SAMPLEUS 50 ; TIEMPO DE MUESTREO EN 50uS
+
+; VARIABLES                    
+RES_AN0 VAR WORD ; 
+RES_AN1 VAR WORD ; VARIAVLE PARA EL RESULTADO DE LA CONVERSIÓN
+RES_AN4 VAR WORD ; 
+
+VAL_AN0 var BYTE ;
+VAL_AN1 var BYTE ;VARIABLE PARA LA SALIDA
+VAL_AN4 var BYTE ;
+
+; CONFIGURACION DE ENTRADAS-SALIDAS 
+TRISA.0 = 1 ; RA0 (AN0) COMO ENTRADA
+TRISA.1 = 1 ; RA1 (AN1) COMO ENTRADA
+TRISA.5 = 1 ; RA5 (AN4) COMO ENTRADA
+
+TRISB = 0 ; PORTB SALIDA (ADC)
+TRISC = 0 ; PORTC SALIDA (ADC)
+TRISD = 0 ; PORTD SALIDA (ADC)
+
+;LIMPIAMOS EL PUERTO ANTES DE MOSTRAR
+PORTA = 0
+PORTB = 0
+PORTC = 0
+PORTD = 0
+
+MAIN:
+    GOSUB CONFIG_ADC ;CONGIGURAMOS Y LEEMOS EL ADC
+    
+    ; DIVIDIMOS ENTRE 127 YA QUE 1023/8 LEDS = 127.875 
+    ; LO DEJAMOS EN 127 PARA TENER UNA TOLERANCIA
+    VAL_AN0 = RES_AN0/127  
+    VAL_AN1 = RES_AN1/127
+    VAL_AN4 = RES_AN4/127
+    
+    ;ENDENCEMOS LOS LEDs EN B, C Y D DEPENDIENDO DEL VALOR OPTENIDO
+    GOSUB MUESTRO_AN0
+    GOSUB MUESTRO_AN1
+    GOSUB MUESTRO_AN4 
+                
+GOTO MAIN; REGRESA A LA ETIQUETA MAIN (BUCLE INFINITO)
+
+CONFIG_ADC:
+     ADCON1 = %10000000 
+     ADCON0 = %11000001 ; SELECCIONA AN0
+     ADCIN 0, RES_AN0   ; LEER AN0
+     ADCON0 = %11000101 ; SELECCIONA AN1
+     ADCIN 1, RES_AN1   ; LEER AN1
+     ADCON0 = %11010001 ; SELECCIONA AN4
+     ADCIN 4, RES_AN4   ; LEER AN4
+RETURN
+
+MUESTRO_AN0:
+    ; ESTO ES PARA ENCENDER LOS LEDS DEL PUERTO B 
+    ; DEPENDIENDO DEL VOLTAJE DE ENTRADA EN RA0
+    SELECT CASE VAL_AN0 
+        CASE 0
+            PORTB = %00000000
+        CASE 1
+            PORTB = %00000001
+        CASE 2
+            PORTB = %00000011
+        CASE 3
+            PORTB = %00000111
+        CASE 4
+            PORTB = %00001111
+        CASE 5
+            PORTB = %00011111
+        CASE 6
+            PORTB = %00111111
+        CASE 7
+            PORTB = %01111111
+        CASE 8 
+            PORTB = %11111111
+    END SELECT
+RETURN
+
+MUESTRO_AN1:
+    ; ESTO ES PARA ENCENDER LOS LEDS DEL PUERTO C 
+    ; DEPENDIENDO DEL VOLTAJE DE ENTRADA EN RA1
+    SELECT CASE VAL_AN1 
+        CASE 0
+            PORTC = %00000000
+        CASE 1
+            PORTC = %00000001
+        CASE 2
+            PORTC = %00000011
+        CASE 3
+            PORTC = %00000111
+        CASE 4
+            PORTC = %00001111
+        CASE 5
+            PORTC = %00011111
+        CASE 6
+            PORTC = %00111111
+        CASE 7
+            PORTC = %01111111
+        CASE 8 
+            PORTC = %11111111
+    END SELECT
+RETURN
+
+MUESTRO_AN4:
+    ; ESTO ES PARA ENCENDER LOS LEDS DEL PUERTO D 
+    ; DEPENDIENDO DEL VOLTAJE DE ENTRADA EN RA4
+    SELECT CASE VAL_AN4 
+        CASE 0
+            PORTD = %00000000
+        CASE 1
+            PORTD = %00000001
+        CASE 2
+            PORTD = %00000011
+        CASE 3
+            PORTD = %00000111
+        CASE 4
+            PORTD = %00001111
+        CASE 5
+            PORTD = %00011111
+        CASE 6
+            PORTD = %00111111
+        CASE 7
+            PORTD = %01111111
+        CASE 8 
+            PORTD = %11111111
+    END SELECT
+RETURN
+
+END; FIN DEL PROGRAMA
