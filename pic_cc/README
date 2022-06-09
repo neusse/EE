@@ -1,0 +1,167 @@
+
+                -----------------------------------
+                PIC_CC, a PIC16x84 Small C Compiler
+                -----------------------------------
+
+                        By Ian Stedman  ICStedman@techie.com
+
+                        Version 0.4 Alpha
+			GNU/Linux version by Andrew D. Balsa
+			<andrebalsa@altern.org>
+                        Released on Nov 04, 1998.
+
+Introduction
+------------
+
+  Welcome to my first C compiler project. This is an early Alpha release
+of a work in progress C cross-compiler for the PIC16x84 Microcontroller.
+
+  Included in this archive is all the source code. You need a PIC Assembler
+to assemble the code output by the Small C Compiler. This program generates
+assembler only!
+
+  As there are bugs and the code generator is not functional yet, this is an
+alpha release. Please E-Mail me with problems and as I have included the
+source, patches/updates if possible.
+
+  The GNU/Linux version should output assembler code compatible with the
+freely distributable PIC Assembler picasm version 1.06 by Timo Rossi
+<trossi@iki.fi> (check http://www.iki.fi/trossi/pic/), which basically
+follows Microchip syntax.
+
+
+Information
+-----------
+
+  As it stands now the Small C (cross-)compiler can be compiled on any
+GNU/Linux box.
+
+  You will have to manually edit the generated assembler, as at the moment,
+it is not possible to target a specific assembler's syntax but this is in
+development.
+
+  For GNU/Linux, the recommended target assembler is picasm 1.06 by Timo
+Rossi, other assemblers should work too but were not tested.
+
+  The included Makefile uses gcc to compile pic_cc with a few warnings but
+no fatal errors. Just cd to /src and type 'make'.
+
+
+Background
+----------
+
+  This software is a re-write of a PIC Small C compiler package for the
+16C84 by John Favata written in 1995, itself based on a Small C package by
+Chris Lewis, which was in turn based on previous work by Ron Cain.
+
+  John Favata's original version generated a pseudo 8051 syntax for the PIC.
+It then required Parallax's assembler to compile the code. Primarily the
+code generator, codepic.c was changed to generate the correct Microchip
+assembler mnemonics and syntax, and small changes were made to the libraries
+and the 16c84.h header file.
+
+  Check the HISTORY file for further details.
+
+
+The Compiler
+------------
+
+  The compiler is broken down in various files. The PIC code generator is in
+the file /src/codepic.c. The other files were very slightly modified. Read
+the file FILES for details.
+
+  To rebuild the compiler, either use the included Makefile (make clean;
+make) or compile every .c file in the /src directory to object files. Then
+link them all together. Pic_cc is around 40K when compiled under GNU/Linux.
+
+
+Limitations
+-----------
+
+  The function declarations are K & R style.
+
+e.g. the ANSI source looks like:
+
+sum(int x, int y)
+{
+  printf("%d",x + y);
+}
+
+whereas the K & R source looks like:
+
+sum()
+{
+ int x;
+ int y;
+
+ printf("%d",x + y);
+}
+
+  Floating point, long ints and 16 bit ints are not supported. Char is the
+only type supported.
+
+  You can not call more than 8 functions or go through 8 function levels.
+The PIC has an 8 level hardware stack, exceeding this will cause
+undetermined results. Therefore recursion is not possible.
+
+
+Usage
+-----
+
+   All compiled programs need the header file, 16f84.h which contains all
+the standard PIC register declarations. You should then be able to assemble
+the file with your assembler (e.g. picasm version 1.06).
+
+  There are 3 other files in the /pic_lib directory, (msg)libpic.h which
+implement the math (mul, div), shift and conditional routines. Those are
+automatically included if needed.
+
+  The files in the /pic_io directory contain some I/O code.
+
+  NOTE: not all of these have been re-written for the Microchip syntax yet.
+
+  To compile your code masterpiece, type
+
+  pic_cc <filename>.c
+
+  The compiler will generate <filename>.asm which should be compatible with
+picasm 1.06. Edit manually as needed.
+
+  Try the compiler on the files in /tests/test(0-7).c!
+
+  Command line switches:
+	-r : trace mode on. This results in the assembler output having
+comments indicating the steps followed by the compiler to generate the code.
+Note that picasm may get confused by these comments, so only use this switch
+to debug the compiler.
+
+CONTACT
+-------
+
+        I, Ian Stedman can be contacted at the followin addresses.
+
+        E-Mail, ICStedman@techie.com or Ian_Stedman@yahoo.com
+
+        Note, my current Internet access expires on 26th June 1998. After this
+        date I can not guarantee that my E-Mail will be checked regularly.
+
+        Home Address.
+
+        Mr I.C. Stedman
+        50 Berwick Crescent
+        Sidcup
+        Kent DA15 8HR
+        England
+
+  Andrew D. Balsa:  <andrebalsa@altern.org>. I am sometimes away for a month
+or more, but eventually I catch up with the mail.
+
+
+License
+-------
+
+  Nearly forgot this bit! This program is freely distributable. You can use
+the program/source without any royalties to be paid. DISTRIBUTE widely! But
+please let me know of bugs and if you improve anything or add I/O routines.
+
+  The GNU/Linux version is naturally placed under GNU/GPL.

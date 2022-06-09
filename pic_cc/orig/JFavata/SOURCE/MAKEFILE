@@ -1,0 +1,22 @@
+
+
+SRCS = data.c error.c expr.c function.c gen.c io.c lex.c main.c preproc.c primary.c stmt.c sym.c while.c codepic.c
+
+
+OBJS = data.o error.o expr.o function.o gen.o io.o lex.o main.o preproc.o primary.o stmt.o sym.o while.o codepic.o
+
+DEST = pic_cc
+
+CFLAGS = -O2
+
+COMPILER = cc
+
+$(DEST): ${OBJS} 
+	 ${COMPILER} -o ${DEST} ${OBJS} 
+
+$(OBJS): data.h defs.h
+
+clean: rm ${OBJS}
+
+
+

@@ -1,0 +1,146 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Andrew Derrick Balsa">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.05 [en] (X11; I; Linux 2.0.32 i586) [Netscape]">
+   <META NAME="Description" CONTENT="Software and hardware available on the Web for PIC development">
+   <META NAME="Keywords" CONTENT="GNU, Linux, PIC, tools, assembler, programmer">
+   <TITLE>Miscellaneous PIC tools</TITLE>
+</HEAD>
+<BODY>
+
+<H1>
+Links and GNU/GPL PIC tools</H1>
+
+<HR WIDTH="100%">
+
+<P>One can find almost every single piece of software needed for PIC development
+on the Web.
+
+<P>Obviously the reference site for PIC resources is the <A HREF="http://www.microchip.com">Microchip
+Web site</A>. Besides the data sheets for the various PIC MCUs and Microchip
+EEPROM memories, there is a nice assortment of Application Notes.
+
+<P>An excellent unofficial site is <A HREF="david.tait@man.ac.uk">David
+Tait</A>'s <A HREF="http://www.man.ac.uk/~mbhstdj">PIC pages</A>, with
+links to many PIC projects and resources.
+
+<P>Finally, a good starting point for free (in the GNU/GPL sense) PIC tools
+is the <A HREF="http://reality.sgi.com/jamesb/gnupic/">GNUPIC page</A>,
+originally by <A HREF="mailto:rdmiller@execpc.com">Rick Miller</A> and
+now maintained by <A HREF="mailto:jamesb@sgi.com">James Bowman</A>.
+
+<P><B>PCB work</B>: for the simple printed circuits usually associated
+with PIC based projects, I have found that the X Window package Pcb-1.5.5
+(by Thomas Nau and Harry Eaton) is quite usable. Less than an hour after
+compiling it, I was drawing my first PIC PCB! Available from the various
+Linux sunsite.unc.edu mirrors.
+
+<P><B>Schematics</B>: unfortunately I have not found any user-friendly
+package for GNU/Linux yet. I guess KIllustrator will be a good candidate
+in the future, with an adequate symbol library.
+
+<P><B>PIC Assembler</B>: I am using <A HREF="http://www.iki.fi/trossi/pic">picasm
+1.06</A> by <A HREF="mailto:trossi@iki.fi">Timo Rossi</A>. IMHO this is
+production quality software, stable, fast and adequately documented. Another
+very promising Assembler package is gpasm (now in version 0.0.6) by James
+Bowman&nbsp; (see links above). It has two important advantages over picasm:
+it is licensed under GNU/GPL and it follows more closely the MPASM syntax.
+
+<P><B>Simulator</B>: I have found that xnitpic, by Dave Madden, is a very
+nice package. Unfortunately it was not at all maintained during the last
+four years. I just fixed some small bugs and patched it to read standard
+INHX8M files instead of the old non-standard .pt format used initially
+by Ian King. I am sending this updated version of xnitpic to James Bowman,
+so check for it on the <A HREF="http://reality.sgi.com/jamesb/gnupic/">GNUPIC</A>
+page.
+
+<P><B>Source code editor</B>: a huge choice. Emacs is by far the best tool,
+if you can overcome the steep learning curve. I use Joe for short pieces
+of code.
+
+<P><B>PIC programmer</B>: a very nice package for GNU/Linux, called <A HREF="http://www.iki.fi/hyvatti/">Picprog
+1.0</A>, was put together by <A HREF="mailto:Jaakko.Hyvatti@iki.fi">Jaakko
+Hyvatti</A>. The hardware is based on an earlier design by Jens Madsen,
+but the Linux software also works fine (without any modifications) with
+<A HREF="http://www.gbar.dtu.dk/~c888600/newpic.htm">Jens' newest programmer
+design</A>. This one uses two general purpose NPN transistors (the earlier
+design used by Jaako has a single NPN transistor), two zener diodes and
+a few passive components, which can all be put together in one or two hours
+on a prototype board. It connects to the serial (RS-232) port of any Linux
+box.
+
+<P>This new programmer circuit is 100% safe for the PIC device being programmed,
+and is guaranteed to program the EEPROM cells with adequate data retention.
+Another advantage is that no external power supply is needed, as is the
+case with parallel port programmers. Just plug it in, launch the command
+line picprog utility and a few seconds later, you have your PIC ready for
+work!
+
+<P>BTW, I added the extra diode recommended by Jaako to Jens' newest programmer
+circuit.
+
+<P><B>C Compiler</B>: I have just put the finishing touches on the Alpha
+0.4 version of a Small C compiler for PIC processors, which outputs assembler
+code with standard Microchip mnemonics; this is derived from John Favata's
+earlier work. I am sending the package to James Bowman and will also try
+to upload it to the sunsite.unc.edu GNU/Linux archive.
+
+<P>Right now this compiler has various limitations that may or may not
+matter for specific projects. For small, simple PIC projects it could save
+time over traditional assembly language programming.
+
+<P>
+<HR WIDTH="100%">
+<H3>
+PICs, MCUs and small hardware projects: some comments</H3>
+I ignored PICs until a few weeks ago, when I found out about a small device
+for radio control model sailplanes. It was PIC based and rather elegantly
+conceived, simple and yet fulfilling all the design requirements within
+various constraints. I took a look at the hardware, thought a little bit
+about the firmware, and I was hooked.
+
+<P>PICs will never replace the complex 32 or 64 bit processors that we
+use in PCs. That's not what they were designed for! All the same, they
+are very interesting devices, and I particularly appreciated the ease with
+which one can reprogram the PIC16x84 EEPROM/Flash based devices. Compared
+to the previous generations of 8 bit processors (I programmed in Z80 assembler
+for quite some time) and also to the traditional MCUs, PICs really present
+us with a new processor paradigm.
+
+<P>What I found very interesting about PICs is that the CPU architecture
+is strictly geared to the specific requirements imposed by the intended
+uses: low power consumption, flexible bit handling, and a very simple programming
+model. Basically, form (CPU architecture) follows function.
+
+<P>Another feature of Microchip MCUs that I found particularly useful is
+that developers are very well supported over the Web. The number and variety
+of Application Notes found on the Microchip Web site is impressive, the
+data sheets are easily accessible; but most importantly, there is a vast
+amount of "unofficial" support.
+
+<P>Besides, Microchip has setup over the years a vast distribution network.
+Ordering a few parts from a well-known mail-order house was done in a few
+minutes and cost &lt; $25, and two days later I was testing the devices
+using my homemade programmer.
+
+<P>Even though PICs are a commercial venture, developers have a very high
+amount of freedom (in the GNU/GPL sense) to work on PIC based projects.
+
+<P>Right now I am using freely distributable GNU/Linux based software for
+development work, without any need to switch back to DOS. The GNU/Linux
+tools can (and should) be improved, but right now they are perfectly functional:
+with a few PIC parts (pic16c84 or pic16f84), a breadboard and a few passive
+components, one has the ideal beginner's MCU development system. I hope
+Microchip will understand the significance of a free development environment
+and begin supporting GNU/Linux based tools someday.
+<BR>&nbsp;
+
+<P>
+<HR WIDTH="100%">
+<ADDRESS>
+&nbsp;<A HREF="mailto:andrebalsa@altern.org">Andrew D. Balsa</A> - last
+updated on november 15, 1998.</ADDRESS>
+
+</BODY>
+</HTML>

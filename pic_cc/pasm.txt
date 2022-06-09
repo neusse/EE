@@ -1,0 +1,1366 @@
+Parallax PIC16Cxx Assembler v4.7	SPASM.EXE
+Parallax PIC16Cxx Programmer v4.7	SPEP.EXE
+
+
+supported	PIC12Cxxx:	508/509
+
+		PIC16C5x:	52/54/54a/55/56/57/58/58a
+
+		PIC16Cxx:	61/62/62a/63/64/64a/65/65a
+				71/72/73/73a/74/74a
+				f83/f84/84
+				554/556/558
+				620/621/622
+				710/711
+				923/924
+
+		Other:		PIC14000
+
+
+Attention!	a)  These versions of SPASM.EXE and SPEP.EXE must be used together.
+
+		b)  The DEVICE directive must appear at the start of your program and list all options.
+
+		c)  The two test files, TEST5X.SRC and TESTXX.SRC, may be assembled by SPASM.
+
+		d)  Warning!  Many PIC's now have permanent code-protect fuses.  Be careful not to code-protect /JW's.
+
+		e)  To make any 'xx programming adapter, just connect the pins VSS, VDD, MCLR, RB6, RB7, and OSC1.
+
+
+PIC14000/JW Special Handling
+----------------------------
+
+Every PIC14000/JW has 64 unique code words (0FC0h-0FFFh) and two unique fuse bits which must be initially read and saved in
+a file, so that it may be reprogrammed into the device after each erasure.  To make this calibration file, select '14kc'
+from the SPEP device menu and then read the factory-fresh PIC14000.  Save the results under some name.  Each time you erase
+the device, before you program your code into it, first load and program the calibration file.  When programming OTP's, this
+is not an issue, since SPEP will program your code into the PIC14000 while leaving the device-specific calibration data
+intact.
+
+
+
+						D I R E C T I V E S
+
+-------------------------------------------------------------------------------------------------------------------------------
+	Directive				Description
+-------------------------------------------------------------------------------------------------------------------------------
+
+	INCLUDE	'filename'			Include file 'filename' in assembly (may precede device directive)
+
+	DEVICE	type,setting,setting...		Establish device type and settings (must precede other directives/instructions)
+
+	ID	word <or> 'text'		Set id to word ('5x) or 4-character text string ('xx)
+
+label	=	value				Equate label to value
+
+label	EQU	value				Equate label to value
+
+	ORG	address				Set origin to address
+
+	DS	locations			Define space: origin=origin+locations
+
+	RESET	address				Assemble 'jmp address' at last location for reset ('5x only)
+
+	EEORG	address				Set data eeprom origin to address ('84 only)
+
+	EEDATA	data,data...			Preload data eeprom with data ('84 only)
+
+	END					End assembly (not needed)
+
+
+					P A R A L L A X   I N S T R U C T I O N   S E T
+
+-------------------------------------------------------------------------------------------------------------------------------
+Parallax Instruction	Words	Flags	W used	Description			Microchip Equivalent
+-------------------------------------------------------------------------------------------------------------------------------
+
+						========================
+						byte-oriented operations
+						========================
+
+MOV	W,#lit		1	-	-	Move literal into W		MOVLW lit
+MOV	W,fr		1	Z	-	Move fr into W			MOVF fr,0
+MOV	fr,W		1	-	-	Move W into fr			MOVWF fr
+MOV	fr,#lit		2	-	W	Move literal into fr		MOVLW lit; MOVWF fr
+MOV	fr1,fr2		2	Z	W	Move fr2 into fr1		MOVF fr2,0; MOVWF fr1
+	
+ADD	W,#lit		1	C,DC,Z	-	Add literal into W		ADDLW lit ('xx only)
+ADD	W,fr		1	C,DC,Z	-	Add fr into W			ADDWF fr,0
+ADD	fr,W		1	C,DC,Z	-	Add W into fr			ADDWF fr,1
+ADD	fr,#lit		2	C,DC,Z	W	Add literal into fr		MOVLW lit; ADDWF fr,1
+ADD	fr1,fr2		2	C,DC,Z	W	Add fr2 into fr1		MOVF fr2,0; ADDWF fr1,1
+
+MOV	W,#lit-W	1	C,DC,Z	-	Move literal-W into W		SUBLW lit ('xx only)
+MOV	W,fr-W		1	C,DC,Z	-	Move fr-W into W		SUBWF fr,0
+SUB	fr,W		1	C,DC,Z	-	Subtract W from fr		SUBWF fr,1
+SUB	fr,#lit		2	C,DC,Z	W	Subtract literal from fr	MOVLW lit; SUBWF fr,1
+SUB	fr1,fr2		2	C,DC,Z	W	Subtract fr2 from fr1		MOVF fr2,0; SUBWF fr1,1
+
+AND	W,#lit		1	Z	-	AND literal into W		ANDLW lit
+AND	W,fr		1	Z	-	AND fr into W			ANDWF fr,0
+AND	fr,W		1	Z	-	AND W into fr			ANDWF fr,1
+AND	fr,#lit		2	Z	W	AND literal into fr		MOVLW lit; ANDWF fr,1
+AND	fr1,fr2		2	Z	W	AND fr2 into fr1		MOVF fr2,0; ANDWF fr,1
+
+OR	W,#lit		1	Z	-	OR literal into W		IORLW lit
+OR	W,fr		1	Z	-	OR fr into W			IORWF fr,0
+OR	fr,W		1	Z	-	OR W into fr			IORWF fr,1
+OR	fr,#lit		2	Z	W	OR literal into fr		MOVLW lit; IORWF fr,1
+OR	fr1,fr2		2	Z	W	OR fr2 into fr1			MOVF fr2,0; IORWF fr1,1
+
+XOR	W,#lit		1	Z	-	XOR literal into W		XORLW lit
+XOR	W,fr		1	Z	-	XOR fr into W			XORWF fr,0
+XOR	fr,W		1	Z	-	XOR W into fr			XORWF fr,1
+XOR	fr,#lit		2	Z	W	XOR literal into fr		MOVLW lit; XORWF fr,1
+XOR	fr1,fr2		2	Z	W	XOR fr2 into fr1		MOVF fr2,0; XORWF fr1,1
+
+CLR	W		1	Z	-	Clear W				CLRW
+CLR	fr		1	Z	-	Clear fr			CLRF fr
+
+MOV	W,++fr		1	Z	-	Move fr+1 into W		INCF fr,0
+INC	fr		1	Z	-	Increment fr			INCF fr,1
+
+MOV	W,--fr		1	Z	-	Move fr-1 into W		DECF fr,0
+DEC	fr		1	Z	-	Decrement fr			DECF fr,1
+
+MOV	W,>>fr		1	C	-	Move right-rotated fr into W	RRF fr,0
+RR	fr		1	C	-	Rotate right fr			RRF fr,1
+	
+MOV	W,<<fr		1	C	-	Move left-rotated fr into W	RLF fr,0
+RL	fr		1	C	-	Rotate left fr			RLF fr,1
+
+MOV	W,<>fr		1	-	-	Move nibble-swapped fr into W	SWAPF fr,0
+SWAP	fr		1	-	-	Swap nibbles in fr		SWAPF fr,1
+
+NOT	W		1	Z	-	Perform not on W		XORLW 0FFh
+MOV	W,/fr		1	Z	-	Move not'd fr into W		COMF fr,0
+NOT	fr		1	Z	-	Perform not on fr		COMF fr,1
+
+TEST	W		1	Z	-	Test W for zero			IORLW 0
+TEST	fr		1	Z	-	Test fr for zero		MOVF fr,1
+
+						=======================
+						bit-oriented operations
+						=======================
+
+CLRB	bit		1	-	-	Clear bit			BCF bit
+CLC			1	C	-	Clear carry			BCF 3,0
+CLZ			1	Z	-	Clear zero			BCF 3,2
+
+SETB	bit		1	-	-	Set bit				BSF bit
+STC			1	C	-	Set carry			BSF 3,0
+STZ			1	Z	-	Set zero			BSF 3,2
+
+ADDB	fr,bit		2	Z	-	Add bit into fr			BTFSC bit; INCF fr,1
+ADDB	fr,/bit		2	Z	-	Add not bit into fr		BTFSS bit; INCF fr,1
+SUBB	fr,bit		2	Z	-	Subtract bit from fr		BTFSC bit; DECF fr,1
+SUBB	fr,/bit		2	Z	-	Subtract not bit from fr	BTFSS bit; DECF fr,1
+
+MOVB	bit1,bit2	4	-	-	Move bit2 into bit1		BTFSS bit2; BCF bit1; BTFSC bit2; BSF bit1
+MOVB	bit1,/bit2	4	-	-	Move not bit2 into bit1		BTFSC bit2; BCF bit1; BTFSS bit2; BSF bit1
+
+						============================
+						inc/dec-conditional branches
+						============================
+
+MOVSZ	W,++fr		1	-	-	Move fr+1 into W, skip if zero	INCFSZ fr,0
+INCSZ	fr		1	-	-	Increment fr, skip if zero	INCFSZ fr,1
+IJNZ	fr,addr		2	-	-	Increment fr, jump if not zero	INCFSZ fr,1; GOTO addr
+
+MOVSZ	W,--fr		1	-	-	Move fr-1 into W, skip if zero	DECFSZ fr,0
+DECSZ	fr		1	-	-	Decrement fr, skip if zero	DECFSZ fr,1
+DJNZ	fr,addr		2	-	-	Decrement fr, jump if not zero	DECFSZ fr,1; GOTO addr
+
+						============================
+						compare-conditional branches
+						============================
+
+CSA	fr,#lit		3	C,DC,Z	W	Compare, skip if above		MOVLW /lit; ADDWF fr,0; BTFSS 3,0
+CSA	fr1,fr2		3	C,DC,Z	W	Compare, skip if above		MOVF fr1,0; SUBWF fr2,0; BTFSC 3,0
+CSAE	fr,#lit		3	C,DC,Z	W	Compare, skip if above or equal	MOVLW lit; SUBWF fr,0; BTFSS 3,0
+CSAE	fr1,fr2		3	C,DC,Z	W	Compare, skip if above or equal	MOVF fr2,0; SUBWF fr1,0; BTFSS 3,0
+CSB	fr,#lit		3	C,DC,Z	W	Compare, skip if below		MOVLW lit; SUBWF fr,0; BTFSC 3,0
+CSB	fr1,fr2		3	C,DC,Z	W	Compare, skip if below		MOVF fr2,0; SUBWF fr1,0; BTFSC 3,0
+CSBE	fr,#lit		3	C,DC,Z	W	Compare, skip if below or equal	MOVLW /lit; ADDWF fr,0; BTFSC 3,0
+CSBE	fr1,fr2		3	C,DC,Z	W	Compare, skip if below or equal	MOVF fr1,0; SUBWF fr2,0; BTFSS 3,0
+CSE	fr,#lit		3	C,DC,Z	W	Compare, skip if equal		MOVLW lit; SUBWF fr,0; BTFSS 3,2
+CSE	fr1,fr2		3	C,DC,Z	W	Compare, skip if equal		MOVF fr2,0; SUBWF fr1,0; BTFSS 3,2
+CSNE	fr,#lit		3	C,DC,Z	W	Compare, skip if not equal	MOVLW lit; SUBWF fr,0; BTFSC 3,2
+CSNE	fr1,fr2		3	C,DC,Z	W	Compare, skip if not equal	MOVF fr2,0; SUBWF fr1,0; BTFSC 3,2
+
+CJA	fr,#lit,addr	4	C,DC,Z	W	Compare, jump if above		MOVLW /lit; ADDWF fr,0; BTFSC 3,0; GOTO addr
+CJA	fr1,fr2,addr	4	C,DC,Z	W	Compare, jump if above		MOVF fr1,0; SUBWF fr2,0; BTFSS 3,0; GOTO addr
+CJAE	fr,#lit,addr	4	C,DC,Z	W	Compare, jump if above or equal	MOVLW lit; SUBWF fr,0; BTFSC 3,0; GOTO addr
+CJAE	fr1,fr2,addr	4	C,DC,Z	W	Compare, jump if above or equal	MOVF fr2,0; SUBWF fr1,0; BTFSC 3,0; GOTO addr
+CJB	fr,#lit,addr	4	C,DC,Z	W	Compare, jump if below		MOVLW lit; SUBWF fr,0; BTFSS 3,0; GOTO addr
+CJB	fr1,fr2,addr	4	C,DC,Z	W	Compare, jump if below		MOVF fr2,0; SUBWF fr1,0; BTFSS 3,0; GOTO addr
+CJBE	fr,#lit,addr	4	C,DC,Z	W	Compare, jump if below or equal	MOVLW /lit; ADDWF fr,0; BTFSS 3,0; GOTO addr
+CJBE	fr1,fr2,addr	4	C,DC,Z	W	Compare, jump if below or equal	MOVF fr1,0; SUBWF fr2,0; BTFSC 3,0; GOTO addr
+CJE	fr,#lit,addr	4	C,DC,Z	W	Compare, jump if equal		MOVLW lit; SUBWF fr,0; BTFSC 3,2; GOTO addr
+CJE	fr1,fr2,addr	4	C,DC,Z	W	Compare, jump if equal		MOVF fr2,0; SUBWF fr1,0; BTFSC 3,2; GOTO addr
+CJNE	fr,#lit,addr	4	C,DC,Z	W	Compare, jump if not equal	MOVLW lit; SUBWF fr,0; BTFSS 3,2; GOTO addr
+CJNE	fr1,fr2,addr	4	C,DC,Z	W	Compare, jump if not equal	MOVF fr2,0; SUBWF fr1,0; BTFSS 3,2; GOTO addr
+
+						========================
+						bit-conditional branches
+						========================
+
+SB	bit		1	-	-	Skip if bit			BTFSS bit
+SC			1	-	-	Skip if carry			BTFSS 3,0
+SZ			1	-	-	Skip if zero			BTFSS 3,2
+
+SNB	bit		1	-	-	Skip if not bit			BTFSC bit
+SNC			1	-	-	Skip if not carry		BTFSC 3,0
+SNZ			1	-	-	Skip if not zero		BTFSC 3,2
+
+JB	bit,addr	2	-	-	Jump to address if bit		BTFSC bit; GOTO addr
+JC	addr		2	-	-	Jump to address if carry	BTFSC 3,0; GOTO addr
+JZ	addr		2	-	-	Jump to address if zero		BTFSC 3,2; GOTO addr
+
+JNB	bit,addr	2	-	-	Jump to address if not bit	BTFSS bit; GOTO addr
+JNC	addr		2	-	-	Jump to address if not carry	BTFSS 3,0; GOTO addr
+JNZ	addr		2	-	-	Jump to address if not zero	BTFSS 3,2; GOTO addr
+
+						======================
+						unconditional branches
+						======================
+
+SKIP			1	-	-	Skip next instruction word	'5x: BTFSS 4,7 / 'xx: BTFSC 10,7
+
+JMP	addr		1	-	-	Jump to address			GOTO addr
+JMP	PC+W		1	C,DC,Z	-	Add W into PC(L)		ADDWF 2,1
+JMP	W		1	-	-	Move W into PC(L)		MOVWF 2
+
+CALL	addr		1	-	-	Call to address			CALL addr
+RET			1	-	-	Return from call		'5x: RETLW 0 / 'xx: RETURN
+RETW	lit,lit...	1	-	-	Return from call, literal in W	RETLW lit; RETLW lit...
+
+RETI			1	-	-	Return from interrupt		RETFIE ('xx only)
+
+LSET	addr		0+	-	-	Point to 512/2048-word page	BCF/BSF ('5x: 3,5+)/('xx: 10,3+)
+LJMP	addr		1+	-	-	Point to page and jump to addr	BCF/BSF ('5x: 3,5+)/('xx: 10,3+); GOTO addr
+LCALL	addr		1+	-	-	Point to page and call to addr	BCF/BSF ('5x: 3,5+)/('xx: 10,3+); CALL addr
+
+			Note: Skips should be followed only by single-word instructions.
+
+						==========================
+						i/o and control operations
+						==========================
+
+MOV	!port,W		1	-	-	Move W into port's TRIS		TRIS port (port=5 to 7)
+MOV	!port,#lit	2	-	W	Move literal into port's TRIS	MOVLW lit; TRIS port (port=5 to 7)
+MOV	!port,fr	2	Z	W	Move fr into port's TRIS	MOVF fr,0; TRIS port (port=5 to 7)
+
+MOV	!OPTION,W	1	-	-	Move W into OPTION		OPTION
+MOV	!OPTION,#lit	2	-	W	Move literal into OPTION	MOVLW lit; OPTION
+MOV	!OPTION,fr	2	Z	W	Move fr into OPTION		MOVF fr,0; OPTION
+
+CLR	WDT		1	TO,PD	-	Clear WDT and prescaler		CLRWDT
+SLEEP			1	TO,PD	-	Clear WDT and enter sleep mode	SLEEP
+
+NOP			1	-	-	No operation			NOP
+
+
+					M I C R O C H I P   I N S T R U C T I O N   S E T
+
+-------------------------------------------------------------------------------------------------------------------------------
+Microchip Instruction	Words	Flags	W used	Description			Parallax Equivalent
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+						======================================
+						byte-oriented file register operations
+						======================================
+
+ADDWF	fr,d	*	1	C,DC,Z	-	Add W and fr			ADD W,fr / ADD fr,W
+ANDWF	fr,d	*	1	Z	-	And W and fr			AND W,fr / AND fr,W
+CLRF	fr		1	Z	-	Clear fr			CLR fr
+CLRW			1	Z	-	Clear W				CLR W
+COMF	fr,d	*	1	Z	-	Complement fr			MOV W,/fr / NOT fr
+DECF	fr,d	*	1	Z	-	Decrement fr			MOV W,--fr / DEC fr
+DECFSZ	fr,d	*	1	-	-	Decrement fr, skip if 0		MOVSZ W,--fr / DECSZ fr
+INCF	fr,d	*	1	Z	-	Increment fr			MOV W,++fr / INC fr
+INCFSZ	fr,d	*	1	-	-	Increment fr, skip if 0		MOVSZ W,++fr / INCSZ fr
+IORWF	fr,d	*	1	Z	-	Or W and fr			OR W,fr / OR fr,W
+MOVF	fr,d	*	1	Z	-	Move fr				MOV W,fr / TEST fr
+MOVWF	fr		1	-	-	Move W to fr			MOV fr,W
+NOP			1	-	-	No operation			NOP
+RLF	fr,d	*	1	-	-	Rotate fr left through carry	MOV W,<<fr / RL fr
+RRF	fr,d	*	1	-	-	Rotate fr right through carry	MOV W,>>fr / RR fr
+SUBWF	fr,d	*	1	C,DC,Z	-	Subtract W from fr		MOV W,fr-W / SUB fr,W
+SWAPF	fr,d	*	1	Z	-	Swap nibbles of fr		MOV W,<>fr / SWAP fr
+XORWF	fr,d	*	1	Z	-	Xor W and fr			XOR W,fr / XOR fr,W
+
+						=====================================
+						bit-oriented file register operations
+						=====================================
+
+BCF	fr,b	**	1	-	-	Bit clear fr			CLRB bit
+BSF	fr,b	**	1	-	-	Bit set fr			SETB bit
+BTFSC	fr,b	**	1	-	-	Bit test fr, skip if clear	SNB bit
+BTFSS	fr,b	**	1	-	-	Bit test fr, skip if set	SB bit
+
+						==============================
+						literal and control operations
+						==============================
+
+ADDLW	lit		1	C,DC,Z	-	Add literal into W		ADD W,#lit ('xx only)
+ANDLW	lit		1	Z	-	And literal into W		AND W,#lit
+CALL	addr		1	-	-	Call to address			CALL addr
+CLRWDT			1	TO,PD	-	Clear WDT and prescaler		CLR WDT
+GOTO	addr		1	-	-	Go to address			JMP addr
+IORLW	lit		1	Z	-	Or literal into W		OR W,#lit
+MOVLW	lit		1	-	-	Move literal into W		MOV W,#lit
+OPTION			1	-	-	Move W into OPTION		MOV !OPTION,W
+RETFIE			1	-	-	Return from interrupt		RETI ('xx only)
+RETLW	lit		1	-	-	Return with literal in W	RETW lit / RET ('5x)
+RETURN			1	-	-	Return from subroutine		RET ('xx only)
+SLEEP			1	TO,PD	-	Clear WDT and enter sleep mode	SLEEP
+SUBLW	lit		1	C,DC,Z	-	Subtract W from literal		MOV W,#lit-W ('xx only)
+TRIS	port		1	-	-	Move W into port's TRIS		MOV !port,W (port=5 to 7)
+XORLW	lit		1	Z	-	Xor literal into W		XOR W,#lit
+
+						====================
+						special instructions
+						====================
+
+CLRC			1	-	-	Clear carry			CLC
+SETC			1	-	-	Set carry			STC
+CLRDC			1	-	-	Clear digit carry		CLRB DC
+SETDC			1	-	-	Set digit carry			SETB DC
+CLRZ			1	-	-	Clear zero			CLZ
+SETZ			1	-	-	Set zero			STZ
+SKPC			1	-	-	Skip if carry			SC
+SKPNC			1	-	-	Skip if not carry		SNC
+SKPDC			1	-	-	Skip if digit carry		SB DC
+SKPNDC			1	-	-	Skip if not digit carry		SNB DC
+SKPZ			1	-	-	Skip if zero			SZ
+SKPNZ			1	-	-	Skip if not zero		SNZ
+TSTF	fr		1	Z	-	Test fr				TEST fr
+MOVFW	fr		1	Z	-	Move fr into W			MOV W,fr
+NEGF	fr,d	*	1	Z	-	Negate fr			NOT fr; INC fr
+ADDCF	fr,d	*	1	Z	-	Add carry to fr			ADDB fr,C
+SUBCF	fr,d	*	1	Z	-	Subtract carry from fr		SUBB fr,C
+ADDDCF	fr,d	*	1	Z	-	Add digit carry to fr		ADDB fr,DC
+SUBDCF	fr,d	*	1	Z	-	Subtract digit carry from fr	SUBB fr,DC
+B	addr		1	-	-	Branch to address		JMP addr
+BC	addr		1	-	-	Branch if carry			JC addr
+BNC	addr		1	-	-	Branch if not carry		JNC addr
+BDC	addr		1	-	-	Branch if digit carry		JB DC,addr
+BNDC	addr		1	-	-	Branch if not digit carry	JNB DC,addr
+BZ	addr		1	-	-	Branch if zero			JZ addr
+BNZ	addr		1	-	-	Branch if not zero		JNZ addr
+
+		* alternate operands to fr,d
+
+		fr,W		= fr,0
+		fr,F		= fr,1
+		fr		= fr,1
+
+		** alternate operand to fr,b
+
+		bit		= fr.b
+
+-------------------------------------------------------------------------------------------------------------------------------
+Pre-Defined Symbols
+-------------------------------------------------------------------------------------------------------------------------------
+
+******** Dynamic Equates (always reflect current values)
+
+$		=	Current origin
+%		=	Current data EEPROM origin ('84 only)
+
+
+******** DEVICE directive equates - establish device type
+
+    Example:	DEVICE	PIC16C71,XT_OSC,WDT_ON,PWRT_OFF,PROTECT_ON
+
+PIC16C52	=	0052h			Device (select one)
+PIC16C54	=	0054h
+PIC16C54A	=	054Ah
+PIC16C55	=	0055h
+PIC16C56	=	0056h
+PIC16C57	=	0057h
+PIC16C58	=	0058h
+PIC16C58A	=	058Ah
+PIC16C61	=	0061h
+PIC16C62	=	0062h
+PIC16C62A	=	062Ah
+PIC16C63	=	0063h
+PIC16C64	=	0064h
+PIC16C64A	=	064Ah
+PIC16C65	=	0065h
+PIC16C65A	=	065Ah
+PIC16C71	=	0071h
+PIC16C72	=	0072h
+PIC16C73	=	0073h
+PIC16C73A	=	073Ah
+PIC16C74	=	0074h
+PIC16C74A	=	074Ah
+PIC16F83	=	0F83h
+PIC16F84	=	0F84h
+PIC16C84	=	0084h
+PIC16C554	=	0554h
+PIC16C556	=	0556h
+PIC16C558	=	0558h
+PIC16C620	=	0620h
+PIC16C621	=	0621h
+PIC16C622	=	0622h
+PIC16C710	=	0710h
+PIC16C711	=	0711h
+PIC16C923	=	0923h
+PIC16C924	=	0924h
+PIC14000	=	0014h			Also, select one of each specific DEVICE equates
+
+
+******** PIC16C52/54/54A/55/56/57/58/58A Equates - enabled by DEVICE PIC16C52/54/54A/55/56/57/58/58A
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)	Not valid for PIC16C52
+WDT_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0FFF7h
+
+		Register and bit equates
+
+INDF		=	00h			Indirect addressing register
+INDIRECT	=	00h			Indirect addressing register
+
+TMR0		=	01h			RTCC register
+RTCC		=	01h			RTCC register
+
+PCL		=	02h			Program counter low-byte register
+PC		=	02h			Program counter low-byte register
+
+STATUS		=	03h			Status register
+C		=	STATUS.0		Carry bit
+DC		=	STATUS.1		Digit carry bit
+Z		=	STATUS.2		Zero bit
+PD		=	STATUS.3		Power-down bit
+TO		=	STATUS.4		Time-out bit
+PA0		=	STATUS.5		Page preselect bit 0
+PA1		=	STATUS.6		Page preselect bit 1
+PA2		=	STATUS.7		Page preselect bit 2
+
+FSR		=	04h			File select register
+
+PORTA		=	05h			RA i/o register
+RA		=	05h			RA i/o register
+
+PORTB		=	06h			RB i/o register
+RB		=	06h			RB i/o register
+
+PORTC		=	07h			RC i/o register
+RC		=	07h			RC i/o register
+
+
+******** PIC12C508/509 Equates - enabled by DEVICE PIC12C508/509
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+IRC_OSC		=	0FFFEh
+XRC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)	Not valid for PIC16C52
+WDT_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0FFF7h
+
+MCLR_OFF	=	0FFEFh			Mclr pin (select one)
+MCLR_ON		=	0FFFFh
+
+		Register and bit equates
+
+INDF		=	00h			Indirect addressing register
+INDIRECT	=	00h			Indirect addressing register
+
+TMR0		=	01h			RTCC register
+RTCC		=	01h			RTCC register
+
+PCL		=	02h			Program counter low-byte register
+PC		=	02h			Program counter low-byte register
+
+STATUS		=	03h			Status register
+C		=	STATUS.0		Carry bit
+DC		=	STATUS.1		Digit carry bit
+Z		=	STATUS.2		Zero bit
+PD		=	STATUS.3		Power-down bit
+TO		=	STATUS.4		Time-out bit
+PA0		=	STATUS.5		Page preselect bit 0
+GPWUF		=	STATUS.7		GPIO reset bit
+
+FSR		=	04h			File select register
+
+OSCCAL		=	05h			Oscillator calibration register
+OSC4		=	OSCCAL.4		OSCCAL bit 4
+OSC5		=	OSCCAL.5		OSCCAL bit 5
+OSC6		=	OSCCAL.6		OSCCAL bit 6
+OSC7		=	OSCCAL.7		OSCCAL bit 7
+
+GPIO		=	06h			General port i/o register
+GP0		=	GPIO.0			GPIO bit 0
+GP1		=	GPIO.1			GPIO bit 1
+GP2		=	GPIO.2			GPIO bit 2
+GP3		=	GPIO.3			GPIO bit 3
+GP4		=	GPIO.4			GPIO bit 4
+GP5		=	GPIO.5			GPIO bit 5
+
+
+******** PIC16C61 Equates - enabled by DEVICE PIC16C61
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFF7h			Power-up timer (select one)
+PWRT_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0FFEFh
+
+Also enabled:	XX Equates
+
+
+******** PIC16C62/64/65/73/74 Equates - enabled by DEVICE PIC16C62/64/65/73/74
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFF7h			Power-up timer (select one)
+PWRT_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFBFh			Code protection (select one)
+PROTECT_HALF	=	0FFAFh
+PROTECT_3_QTR	=	0FF9Fh
+PROTECT_ON	=	0FF8Fh
+
+Also enabled:	XX Equates	6X7X Equates
+
+
+******** PIC16C62A/63/64A/65A/72/73A/74A Equates - enabled by DEVICE PIC16C62A/63/64A/65A/72/73A/74A
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+BOR_OFF		=	0FFBFh			Brown-out reset (select one)
+BOR_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_HALF	=	0EAEFh
+PROTECT_3_QTR	=	0D5DFh
+PROTECT_ON	=	0C0CFh
+
+Also enabled:	XX Equates	6X7X Equates
+
+
+******** PIC16C71 Equates - enabled by DEVICE PIC16C71
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFF7h			Power-up timer (select one)
+PWRT_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0FFEFh
+
+Also enabled:	XX Equates	71 Equates
+
+
+******** PIC16F83/F84 Equates - enabled by DEVICE PIC16F83/F84
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0C00Fh
+
+Also enabled:	XX Equates	8X Equates
+
+
+******** PIC16C84 Equates - enabled by DEVICE PIC16C84
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFF7h			Power-up timer (select one)
+PWRT_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0FFEFh
+
+Also enabled:	XX Equates	8X Equates
+
+
+******** PIC16C554 Equates - enabled by DEVICE PIC16C554
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0C0CFh
+
+		Register and bit equates
+					bank
+PCON		=	0Eh		1	Power-On-Reset detection register
+POR		=	PCON.1		1	POR flag bit
+
+Also enabled:	XX Equates
+
+
+******** PIC16C556 Equates - enabled by DEVICE PIC16C556
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_HALF	=	0D5DFh
+PROTECT_ON	=	0C0CFh
+
+		Register and bit equates
+					bank
+PCON		=	0Eh		1	Power-On-Reset detection register
+POR		=	PCON.1		1	POR flag bit
+
+Also enabled:	XX Equates
+
+
+******** PIC16C558 Equates - enabled by DEVICE PIC16C558
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_HALF	=	0EAEFh
+PROTECT_3_QTR	=	0D5DFh
+PROTECT_ON	=	0C0CFh
+
+		Register and bit equates
+					bank
+PCON		=	0Eh		1	Power-On-Reset detection register
+POR		=	PCON.1		1	POR flag bit
+
+Also enabled:	XX Equates
+
+
+******** PIC16C620 Equates - enabled by DEVICE PIC16C620
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+BOR_OFF		=	0FFBFh			Brown-out reset (select one)
+BOR_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0C0CFh
+
+Also enabled:	XX Equates	62X Equates
+
+
+******** PIC16C621 Equates - enabled by DEVICE PIC16C621
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+BOR_OFF		=	0FFBFh			Brown-out reset (select one)
+BOR_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_HALF	=	0D5DFh
+PROTECT_ON	=	0C0CFh
+
+Also enabled:	XX Equates	62X Equates
+
+
+******** PIC16C622 Equates - enabled by DEVICE PIC16C622
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+BOR_OFF		=	0FFBFh			Brown-out reset (select one)
+BOR_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_HALF	=	0EAEFh
+PROTECT_3_QTR	=	0D5DFh
+PROTECT_ON	=	0C0CFh
+
+Also enabled:	XX Equates	62X Equates
+
+
+******** PIC16C710/711 Equates - enabled by DEVICE PIC16C710/711
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+BOR_OFF		=	0FFBFh			Brown-out reset (select one)
+BOR_ON		=	0FFFFh
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0C04Fh
+
+Also enabled:	XX Equates	71 Equates
+
+
+******** PIC16C923/924 Equates - enabled by DEVICE PIC16C923/924
+
+		Specific DEVICE equates
+
+LP_OSC		=	0FFFCh			Oscillator (select one)
+XT_OSC		=	0FFFDh
+HS_OSC		=	0FFFEh
+RC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_HALF	=	0EAEFh
+PROTECT_3_QTR	=	0D5DFh
+PROTECT_ON	=	0C0CFh
+
+Also enabled:	XX Equates	6X7X Equates	92X Equates
+
+
+******** PIC14000 Equates - enabled by DEVICE PIC14000
+
+		Specific DEVICE equates
+
+HS_OSC		=	0FFFEh			Oscillator (select one)
+IRC_OSC		=	0FFFFh
+
+WDT_OFF		=	0FFFBh			Watchdog timer (select one)
+WDT_ON		=	0FFFFh
+
+PWRT_OFF	=	0FFFFh			Power-up timer (select one)
+PWRT_ON		=	0FFF7h
+
+PROTECT_OFF	=	0FFFFh			Code protection (select one)
+PROTECT_ON	=	0E1CFh
+
+Also enabled:	XX Equates	14000 Equates
+
+
+******** XX Equates
+
+		Register and bit equates
+					bank
+INDF		=	00h		0/1	Indirect addressing register
+INDIRECT	=	00h		0/1	Indirect addressing register
+
+TMR0		=	01h		0	Timer 0 register
+
+PCL		=	02h		0/1	Program counter low-byte register
+
+STATUS		=	03h		0/1	Status register
+C		=	STATUS.0	0/1	Carry bit
+DC		=	STATUS.1	0/1	Digit carry bit
+Z		=	STATUS.2	0/1	Zero bit
+PD		=	STATUS.3	0/1	Power-down bit
+TO		=	STATUS.4	0/1	Time-out bit
+RP0		=	STATUS.5	0/1	Register bank bit 0
+RP1		=	STATUS.6	0/1	Register bank bit 1
+IRP		=	STATUS.7	0/1	Indirect register bank bit
+
+FSR		=	04h		0/1	File select register
+
+PORTA		=	05h		0	RA i/o register
+RA		=	05h		0	RA i/o register
+
+PORTB		=	06h		0	RB i/o register
+RB		=	06h		0	RB i/o register
+
+PCLATH		=	0Ah		0/1	Program counter high-byte register
+
+INTCON		=	0Bh		0/1	Interrupt control register
+RBIF		=	INTCON.0	0/1	RB4-RB7 change interrupt flag bit
+INTF		=	INTCON.1	0/1	RB0/INT interrupt flag bit
+T0IF		=	INTCON.2	0/1	TMR0 overflow interrupt flag bit
+RBIE		=	INTCON.3	0/1	RB4-RB7 change interrupt enable bit
+INTE		=	INTCON.4	0/1	RB0/INT interrupt enable bit
+T0IE		=	INTCON.5	0/1	TMR0 overflow interrupt enable bit
+GIE		=	INTCON.7	0/1	Global interrupt enable bit
+
+OPTION		=	01h		1	OPTION register
+PS0		=	OPTION.0	1	Prescaler bit 0
+PS1		=	OPTION.1	1	Prescaler bit 1
+PS2		=	OPTION.2	1	Prescaler bit 2
+PSA		=	OPTION.3	1	Prescaler assignment bit
+T0SE		=	OPTION.4	1	TMR0 source edge bit
+T0CS		=	OPTION.5	1	TMR0 clock select bit
+INTEDG		=	OPTION.6	1	RB0/INT edge select bit
+RBPU		=	OPTION.7	1	RB weak pull-up enable bit
+
+TRISA		=	05h		1	RA tristate control register
+
+TRISB		=	06h		1	RB tristate control register
+
+
+******** 6X7X Equates
+
+		Register and bit equates
+					bank
+PORTC		=	07h		0	RC i/o register
+RC		=	07h		0	RC i/o register
+
+PORTD		=	08h		0	RD i/o register
+RD		=	08h		0	RD i/o register
+
+PORTE		=	09h		0	RE i/o register
+RE		=	09h		0	RE i/o register
+
+PIR1		=	0Ch		0	Peripheral interrupt flags register 1
+TMR1IF		=	PIR1.0		0	TMR1 interrupt flag bit
+TMR2IF		=	PIR1.1		0	TMR2 interrupt flag bit
+CCP1IF		=	PIR1.2		0	CCP1 interrupt flag bit
+SSPIF		=	PIR1.3		0	SSP interrupt flag bit
+TXIF		=	PIR1.4		0	ASP transmit interrupt flag bit
+RCIF		=	PIR1.5		0	ASP receive interrupt flag bit
+ADIF		=	PIR1.6		0	ADC completion interrupt flag bit
+PSPIF		=	PIR1.7		0	PSP interrupt flag bit
+
+PIR2		=	0Dh		0	Peripheral interrupt flags register 2
+CCP2IF		=	PIR2.0		0	CCP2 interrupt flag bit
+
+TMR1L		=	0Eh		0	Timer 1 low byte register
+
+TMR1H		=	0Fh		0	Timer 1 high byte register
+
+T1CON		=	10h		0	Timer 1 control register
+TMR1ON		=	T1CON.0		0	TMR1 enable bit
+TMR1CS		=	T1CON.1		0	TMR1 clock select bit
+T1SYNC		=	T1CON.2		0	TMR1 sync enable bit
+T1OSCEN		=	T1CON.3		0	TMR1 oscillator enable bit
+T1CKPS0		=	T1CON.4		0	TMR1 clock prescaler select bit 0
+T1CKPS1		=	T1CON.5		0	TMR1 clock prescaler select bit 1
+
+TMR2		=	11h		0	Timer 2 register
+
+T2CON		=	12h		0	Timer 2 control register
+T2CKPS0		=	T2CON.0		0	TMR2 clock prescaler select bit 0
+T2CKPS1		=	T2CON.1		0	TMR2 clock prescaler select bit 1
+TMR2ON		=	T2CON.2		0	TMR2 enable bit
+TOUTPS0		=	T2CON.3		0	TMR2 postscaler select bit 0
+TOUTPS1		=	T2CON.4		0	TMR2 postscaler select bit 1
+TOUTPS2		=	T2CON.5		0	TMR2 postscaler select bit 2
+TOUTPS3		=	T2CON.6		0	TMR2 postscaler select bit 3
+
+SSPBUF		=	13h		0	Synchronous Serial Port receive/transmit register
+
+SSPCON		=	14h		0	Synchronous Serial Port control register
+SSPM0		=	SSPCON.0	0	SSP mode select bit 0
+SSPM1		=	SSPCON.1	0	SSP mode select bit 1
+SSPM2		=	SSPCON.2	0	SSP mode select bit 2
+SSPM3		=	SSPCON.3	0	SSP mode select bit 3
+CKP		=	SSPCON.4	0	SSP clock polarity select bit
+SSPEN		=	SSPCON.5	0	SSP enable bit
+SSPOV		=	SSPCON.6	0	SSP receive overflow flag bit
+WCOL		=	SSPCON.7	0	SSP write collision detect bit
+
+CCPR1L		=	15h		0	Capture1/Compare1/PWM 1 low byte register
+
+CCPR1H		=	16h		0	Capture1/Compare1/PWM 1 high byte register
+
+CCP1CON		=	17h		0	Capture1/Compare1/PWM 1 control register
+CCP1M0		=	CCP1CON.0	0	CCP1 mode select bit 0
+CCP1M1		=	CCP1CON.1	0	CCP1 mode select bit 1
+CCP1M2		=	CCP1CON.2	0	CCP1 mode select bit 2
+CCP1M3		=	CCP1CON.3	0	CCP1 mode select bit 3
+CCP1Y		=	CCP1CON.4	0	CCP1 10-bit PWM low order bit 0
+CCP1X		=	CCP1CON.5	0	CCP1 10-bit PWM low order bit 1
+
+RCSTA		=	18h		0	Asynchronus Serial Port status and control register
+RCD8		=	RCSTA.0		0	ASP 9th/parity bit of received data
+OERR		=	RCSTA.1		0	ASP overrun error bit
+FERR		=	RCSTA.2		0	ASP framing error bit
+CREN		=	RCSTA.4		0	ASP continuous-receive enable bit
+SREN		=	RCSTA.5		0	ASP single-receive enable bit
+RC89		=	RCSTA.6		0	ASP receive data length bit
+SPEN		=	RCSTA.7		0	ASP enable bit
+
+TXREG		=	19h		0	Asynchronous serial port transmit register
+
+RCREG		=	1Ah		0	Asynchronous serial port receive register
+
+CCPR2L		=	1Bh		0	Capture2/Compare2/PWM 2 low byte register
+
+CCPR2H		=	1Ch		0	Capture2/Compare2/PWM 2 high byte register
+
+CCP2CON		=	1Dh		0	Capture2/Compare2/PWM 2 control register
+CCP2M0		=	CCP2CON.0	0	CCP2 mode select bit 0
+CCP2M1		=	CCP2CON.1	0	CCP2 mode select bit 1
+CCP2M2		=	CCP2CON.2	0	CCP2 mode select bit 2
+CCP2M3		=	CCP2CON.3	0	CCP2 mode select bit 3
+CCP2Y		=	CCP2CON.4	0	CCP2 10-bit PWM low order bit 0
+CCP2X		=	CCP2CON.5	0	CCP2 10-bit PWM low order bit 1
+
+ADRES		=	1Eh		0	Analog to Digital Converter result register
+
+ADCON0		=	1Fh		0	Analog to Digital Converter control register 0
+ADON		=	ADCON0.0	0	ADC power control bit
+GO_DONE		=	ADCON0.2	0	ADC go command / done flag bit
+CHS0		=	ADCON0.3	0	ADC channel select bit 0
+CHS1		=	ADCON0.4	0	ADC channel select bit 1
+CHS2		=	ADCON0.5	0	ADC channel select bit 2
+ADCS0		=	ADCON0.6	0	ADC clock select bit 0
+ADCS1		=	ADCON0.7	0	ADC clock select bit 1
+
+TRISC		=	07h		1	RC tristate control register
+
+TRISD		=	08h		1	RD tristate control register
+
+TRISE		=	09h		1	RE tristate control register
+TRISE0		=	TRISE.0		1	RE0 tristate control bit
+TRISE1		=	TRISE.1		1	RE1 tristate control bit
+TRISE2		=	TRISE.2		1	RE2 tristate control bit
+PSPMODE		=	TRISE.4		1	PSP mode bit
+IBOV		=	TRISE.5		1	PSP input buffer overflow flag bit
+OBF		=	TRISE.6		1	PSP output buffer full flag bit
+IBF		=	TRISE.7		1	PSP input buffer full flag bit
+
+PIE1		=	0Ch		1	Peripheral interrupt enable register 1
+TMR1IE		=	PIE1.0		1	TMR1 interrupt enable bit
+TMR2IE		=	PIE1.1		1	TMR2 interrupt enable bit
+CCP1IE		=	PIE1.2		1	CCP1 interrupt enable bit
+SSPIE		=	PIE1.3		1	SSP interrupt enable bit
+TXIE		=	PIE1.4		1	ASP transmit interrupt enable bit
+RCIE		=	PIE1.5		1	ASP receive interrupt enable bit
+ADIE		=	PIE1.6		1	ADC interrupt enable bit
+PSPIE		=	PIE1.7		1	PSP interrupt enable bit
+
+PIE2		=	0Dh		1	Peripheral interrupt enable register 2
+CCP2IE		=	PIE2.0		1	CCP2 interrupt enable bit
+
+PCON		=	0Eh		1	Power-On-Reset detection register
+POR		=	PCON.1		1	POR flag bit
+
+PR2		=	12h		1	Timer 2 period register
+
+SSPADD		=	13h		1	Synchronous Serial Port I2C address register
+
+SSPSTAT		=	14h		1	Synchronous Serial Port status register
+BF		=	SSPSTAT.0	1	SSP buffer full flag bit
+UA		=	SSPSTAT.1	1	SSP 10-bit I2C update address flag bit
+RW		=	SSPSTAT.2	1	SSP I2C read/write status bit
+S		=	SSPSTAT.3	1	SSP I2C start flag bit
+P		=	SSPSTAT.4	1	SSP I2C stop flag bit
+DA		=	SSPSTAT.5	1	SSP I2C data/address flag bit
+
+TXSTA		=	18h		1	Asynchronous Serial Port transmit status and control register
+TXD8		=	TXSTA.0		1	ASP 9th bit of transmit data
+TRMT		=	TXSTA.1		1	ASP transmit shift register empty
+BRGH		=	TXSTA.2		1	ASP high baud rate select bit
+SYNC		=	TXSTA.4		1	ASP mode bit
+TXEN		=	TXSTA.5		1	ASP transmit enable bit
+TX89		=	TXSTA.6		1	ASP transmit data length bit
+CSRC		=	TXSTA.7		1	ASP clock source select bit
+
+SPBRG		=	19h		1	Asynchronous Serial Port baud rate register
+
+ADCON1		=	1Fh		1	Analog to Digital Converter control register 1
+PCFG0		=	ADCON1.0	1	RA port configuration bit 0
+PCFG1		=	ADCON1.1	1	RA port configuration bit 1
+PCFG2		=	ADCON1.2	1	RA port configuration bit 2
+
+
+******** 71 Equates
+
+		Register and bit equates
+					bank
+ADCON0		=	08h		0	Analog to Digital Converter control register 0
+ADON		=	ADCON0.0	0	ADC power control bit
+ADIF		=	ADCON0.1	0	ADC interrupt flag bit
+GO_DONE		=	ADCON0.2	0	ADC go command / done flag bit
+CHS0		=	ADCON0.3	0	ADC channel select bit 0
+CHS1		=	ADCON0.4	0	ADC channel select bit 1
+ADCS0		=	ADCON0.6	0	ADC clock select bit 0
+ADCS1		=	ADCON0.7	0	ADC clock select bit 1
+
+ADRES		=	09h		0/1	Analog to Digital Converter result register
+
+ADIE		=	INTCON.6	0/1	Analog to Digital Converter interrupt enable bit
+
+ADCON1		=	08h		1	Analog to Digital Converter control register 1
+PCFG0		=	ADCON1.0	1	RA port configuration bit 0
+PCFG1		=	ADCON1.1	1	RA port configuration bit 1
+
+
+******** 8X Equates
+
+		Register and bit equates
+					bank
+EEDATA		=	08h		0	EEPROM data register
+
+EEADR		=	09h		0	EEPROM address register
+
+EEIE		=	INTCON.6	0/1	EEPROM interrupt enable bit
+
+EECON1		=	08h		1	EEPROM control register 1
+RD		=	EECON1.0	1	EEPROM read control bit
+WR		=	EECON1.1	1	EEPROM write control bit
+WREN		=	EECON1.2	1	EEPROM write enable bit
+WRERR		=	EECON1.3	1	EEPROM write error flag bit
+EEIF		=	EECON1.4	1	EEPROM interrupt flag bit
+
+EECON2		=	09h		1	EEPROM control register 2
+
+
+******** 62X Equates
+
+		Register and bit equates
+					bank
+PIR1		=	0Ch		0	Peripheral interrupt register
+CMIF		=	PIR1.6		0	Comparator interrupt flag bit
+
+CMCON		=	1Fh		0	Comparator control register
+CM0		=	CMCON.0		0	Comparator mode bit 0
+CM1		=	CMCON.1		0	Comparator mode bit 1
+CM2		=	CMCON.2		0	Comparator mode bit 2
+CIS		=	CMCON.3		0	Comparator input switch bit
+C1OUT		=	CMCON.6		0	Comparator 1 output bit
+C2OUT		=	CMCON.7		0	Comparator 2 output bit
+
+PIE1		=	0Ch		1	Peripheral interrupt enable register
+CMIE		=	PIE1.6		1	Comparator interrupt enable bit
+
+PCON		=	0Eh		1	Reset identification register
+BO		=	PCON.0		1	Brown-out detect bit
+POR		=	PCON.1		1	Power-on detect bit
+
+VRCON		=	1Fh		1	Voltage reference control register
+VR0		=	VRCON.0		1	Voltage reference select bit 0
+VR1		=	VRCON.1		1	Voltage reference select bit 1
+VR2		=	VRCON.2		1	Voltage reference select bit 2
+VR3		=	VRCON.3		1	Voltage reference select bit 3
+VRR		=	VRCON.5		1	Voltage range select bit
+VROE		=	VRCON.6		1	Voltage reference output enable bit
+VREN		=	VRCON.7		1	Voltage reference enable bit
+
+
+******** 92X Equates
+
+		Register and bit equates
+					bank
+LCDIF		=	PIR1.7		0	LCD interrupt flag bit
+
+LCDIE		=	PIE.7		1	LCD interrupt enable bit
+
+CKE		=	SSPSTAT.6	1	SPI clock edge select bit
+SMP		=	SSPSTAT.7	1	SPI data input sample phase bit
+
+PORTF		=	07h		2	RF i/o register
+RF		=	07h		2	RF i/o register
+
+PORTG		=	08h		2	RG i/o register
+RG		=	08h		2	RG i/o register
+
+LCDSE		=	0Dh		2	LCD segment enable register
+SE0		=	LCDSE.0		2	LCD segment enable bit
+SE5		=	LCDSE.1		2	LCD segment enable bit
+SE9		=	LCDSE.2		2	LCD segment enable bit
+SE12		=	LCDSE.3		2	LCD segment enable bit
+SE16		=	LCDSE.4		2	LCD segment enable bit
+SE20		=	LCDSE.5		2	LCD segment enable bit
+SE27		=	LCDSE.6		2	LCD segment enable bit
+SE29		=	LCDSE.7		2	LCD segment enable bit
+
+LCDPS		=	0Eh		2	LCD frame clock prescaler register
+LP0		=	LCDPS.0		2	LCD frame clock prescaler bit 0
+LP1		=	LCDPS.1		2	LCD frame clock prescaler bit 1
+LP2		=	LCDPS.2		2	LCD frame clock prescaler bit 2
+LP3		=	LCDPS.3		2	LCD frame clock prescaler bit 3
+
+LCDCON		=	0Fh		2	LCD control register
+LMUX0		=	LCDCON.0	2	LCD multiplex select bit 0
+LMUX1		=	LCDCON.1	2	LCD multiplex select bit 1
+CS0		=	LCDCON.2	2	LCD clock select bit 0
+CS1		=	LCDCON.3	2	LCD clock select bit 1
+SLPEN		=	LCDCON.6	2	LCD sleep enable bit
+LCDEN		=	LCDCON.7	2	LCD drive enable bit
+
+LCDD00		=	10h		2	LCD data register 0
+LCDD01		=	11h		2	LCD data register 1
+LCDD02		=	12h		2	LCD data register 2
+LCDD03		=	13h		2	LCD data register 3
+LCDD04		=	14h		2	LCD data register 4
+LCDD05		=	15h		2	LCD data register 5
+LCDD06		=	16h		2	LCD data register 6
+LCDD07		=	17h		2	LCD data register 7
+LCDD08		=	18h		2	LCD data register 8
+LCDD09		=	19h		2	LCD data register 9
+LCDD10		=	1Ah		2	LCD data register 10
+LCDD11		=	1Bh		2	LCD data register 11
+LCDD12		=	1Ch		2	LCD data register 12
+LCDD13		=	1Dh		2	LCD data register 13
+LCDD14		=	1Eh		2	LCD data register 14
+LCDD15		=	1Fh		2	LCD data register 15
+
+TRISF		=	07h		3	RF tristate control register
+
+TRISG		=	08h		3	RG tristate control register
+
+
+******** 14000 Equates
+
+		Register and bit equates
+					bank
+PORTC		=	07h		0	RC i/o register
+RC		=	07h		0	RC i/o register
+
+PORTD		=	08h		0	RD i/o register
+RD		=	08h		0	RD i/o register
+
+PORTE		=	09h		0	RE i/o register
+RE		=	09h		0	RE i/o register
+
+PIR1		=	0Ch		0	Peripheral interrupt flags register
+OVFIF		=	PIR1.0		0	ADC counter-overflow interrupt flag bit
+ADCIF		=	PIR1.1		0	ADC completion interrupt flag bit
+RCIF		=	PIR1.2		0	Port C interrupt-on-change flag bit
+I2CIF		=	PIR1.3		0	I2C interrupt flag bit
+PBIF		=	PIR1.4		0	Pushbutton interrupt flag bit
+WUIF		=	PIR1.7		0	Wake-up-on-current-flow interrupt flag bit
+
+ADTMRL		=	0Eh		0	ADC timer low byte register
+
+ADTMRH		=	0Fh		0	ADC timer high byte register
+
+I2CBUF		=	13h		0	I2C receive/transmit register
+
+I2CCON		=	14h		0	I2C control register
+I2CM0		=	I2CCON.0	0	I2C mode select bit 0
+I2CM1		=	I2CCON.1	0	I2C mode select bit 1
+I2CM2		=	I2CCON.2	0	I2C mode select bit 2
+I2CM3		=	I2CCON.3	0	I2C mode select bit 3
+CKP		=	I2CCON.4	0	I2C clock polarity select bit
+I2CEN		=	I2CCON.5	0	I2C enable bit
+I2COV		=	I2CCON.6	0	I2C receive overflow flag bit
+WCOL		=	I2CCON.7	0	I2C write collision detect bit
+
+ADCAPL		=	15h		0	ADC capture low byte register
+
+ADCAPH		=	16h		0	ADC capture high byte register
+
+ADCON0		=	1Fh		0	Analog to Digital Converter control register 0
+ADZERO		=	ADCON0.0	0	ADC zero control bit
+ADRST		=	ADCON0.1	0	ADC reset control bit
+AMUXOE		=	ADCON0.2	0	Analog multiplexer output enable bit
+ADCS0		=	ADCON0.4	0	ADC channel select bit 0
+ADCS1		=	ADCON0.5	0	ADC channel select bit 1
+ADCS2		=	ADCON0.6	0	ADC channel select bit 2
+ADCS3		=	ADCON0.7	0	ADC channel select bit 3
+
+TRISC		=	07h		1	RC tristate control register
+
+TRISD		=	08h		1	RD tristate control register
+
+PIE1		=	0Ch		1	Peripheral interrupt enable register 1
+OVFIE		=	PIE1.0		1	ADC counter-overflow interrupt enable bit
+ADCIE		=	PIE1.1		1	ADC completion interrupt enable bit
+RCIE		=	PIE1.2		1	Port C interrupt-on-change enable bit
+I2CIE		=	PIE1.3		1	I2C interrupt enable bit
+PBIE		=	PIE1.4		1	Pushbutton interrupt enable bit
+WUIE		=	PIE1.7		1	Wake-up-on-current-flow interrupt enable bit
+
+PCON		=	0Eh		1	Power control register
+LVD		=	PCON.0		1	Low-voltage-detect flag bit
+POR		=	PCON.1		1	Power-on-reset flag bit
+
+SLPCON		=	0Fh		1	Sleep control register
+ADOFF		=	SLPCON.0	1	ADC power control bit
+TEMPOFF		=	SLPCON.1	1	Temperature sensor power control bit
+CWUOFF		=	SLPCON.2	1	Current-flow-detect power control bit
+OSCOFF		=	SLPCON.3	1	Oscillator power control bit
+BIASOFF		=	SLPCON.4	1	Bias power control bit
+REFOFF		=	SLPCON.5	1	Reference power control bit
+HIBEN		=	SLPCON.7	1	Hibernate mode enable bit
+
+I2CADD		=	13h		1	I2C address register
+
+I2CSTAT		=	14h		1	I2C status register
+BF		=	I2CSTAT.0	1	I2C Buffer full flag bit
+UA		=	I2CSTAT.1	1	I2C 10-bit update address flag bit
+RW		=	I2CSTAT.2	1	I2C Read/write status bit
+S		=	I2CSTAT.3	1	I2C Start flag bit
+P		=	I2CSTAT.4	1	I2C Stop flag bit
+DA		=	I2CSTAT.5	1	I2C Data/address flag bit
+
+LDACA		=	1Bh		1	DAC A register
+LDASEL0		=	LDACA.0		1	DAC A bit 0
+LDASEL1		=	LDACA.1		1	DAC A bit 1
+LDASEL2		=	LDACA.2		1	DAC A bit 2
+LDASEL3		=	LDACA.3		1	DAC A bit 3
+LDASEL4		=	LDACA.4		1	DAC A bit 4
+LDASEL5		=	LDACA.5		1	DAC A bit 5
+LDASEL6		=	LDACA.6		1	DAC A bit 6
+LDASEL7		=	LDACA.7		1	DAC A bit 7
+
+LDACB		=	1Ch		1	DAC B register
+LDBSEL0		=	LDACB.0		1	DAC B bit 0
+LDBSEL1		=	LDACB.1		1	DAC B bit 1
+LDBSEL2		=	LDACB.2		1	DAC B bit 2
+LDBSEL3		=	LDACB.3		1	DAC B bit 3
+LDBSEL4		=	LDACB.4		1	DAC B bit 4
+LDBSEL5		=	LDACB.5		1	DAC B bit 5
+LDBSEL6		=	LDACB.6		1	DAC B bit 6
+LDBSEL7		=	LDACB.7		1	DAC B bit 7
+
+CHGCON		=	1Dh		1	Charge control register
+CPOLA		=	CHGCON.0	1	Charge control A polarity bit
+CCAEN		=	CHGCON.1	1	Charge control A function enable bit
+CCOMPA		=	CHGCON.2	1	Charge control A comparator output bit
+CPOLB		=	CHGCON.4	1	Charge control B polarity bit
+CCBEN		=	CHGCON.5	1	Charge control B function enable bit
+CCOMPB		=	CHGCON.6	1	Charge control B comparator output bit
+
+MISC		=	1Eh		1	Miscellaneous bits register
+OSC1		=	MISC.0		1	OSC1 input port bit
+OSC2		=	MISC.1		1	OSC2 output port bit
+INCLKEN		=	MISC.2		1	Oscillator output select bit
+SMBUS		=	MISC.3		1	SMBus compatibility select bit
+I2CSEL		=	MISC.4		1	I2C port select bit
+SPGNDA		=	MISC.5		1	Serial port ground A select bit
+SPGNDB		=	MISC.6		1	Serial port ground B select bit
+SMHOG		=	MISC.7		1	SMHOG enable bit
+
+ADCON1		=	1Fh		1	Analog to Digital Converter control register 1
+ACFG0		=	ADCON1.0	1	ADC configuration bit 0
+ACFG1		=	ADCON1.1	1	ADC configuration bit 1
+ACFG2		=	ADCON1.2	1	ADC configuration bit 2
+ACFG3		=	ADCON1.3	1	ADC configuration bit 3
+ADDAC0		=	ADCON1.4	1	ADC current DAC select bit 0
+ADDAC1		=	ADCON1.5	1	ADC current DAC select bit 1
+ADDAC2		=	ADCON1.6	1	ADC current DAC select bit 2
+ADDAC3		=	ADCON1.7	1	ADC current DAC select bit 3
+

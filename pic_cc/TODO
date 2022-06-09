@@ -1,0 +1,21 @@
+TODO
+----
+
+        - Debug/optimize the code generator.
+        - Add adequate support for other assemblers besides picasm 1.06.
+	- Re-implement 16-bit ints. Right now only (unsigned) 8-bit chars
+are available for PICs. Very limiting sometimes...
+        - Add a good set of I/O routines, for bit handling, etc...
+        - Change function definitions from K&R to ANSI style.
+	- Add some test code for the new EEPROM R/W routines.
+        - Add support for other PIC family members besides the PIC16x84. This
+basically involves writing different 12x/16x/17x/14000 .h files, which can
+possibly be invoked using a compiler switch. A stack can be emulated in
+software for those PIC MCUs with a small hardware stack. Microchip has an
+Application Note explaining how to do this.
+        - Improve the documentation. A man page would be welcome, as well as
+some information about the compiler internal workings (I just got started on
+that).
+        - Your comments and suggestions are welcomed.
+
+Andrew D. Balsa 15/11/98

@@ -1,0 +1,4 @@
+The EEPROM access include files haven't been tested (the xnitpic simulator
+doesn't handle EEPROM simulation yet). YMMV.
+
+Andrew D. Balsa - 14/11/98

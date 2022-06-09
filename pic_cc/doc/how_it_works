@@ -1,0 +1,47 @@
+Disclaimer
+==========
+
+I know very little about C compilers (but I am willing to learn). The
+following information was gathered by looking at the Small C source code.
+
+This Small C compiler used to be able to compile itself. I don't know if
+this is still the case.
+
+Files
+=====
+
+The main file for the Small C compiler is called (as expected) main.c. It
+parses the command line. If a foo.c source filename is not provided, it will
+print a short usage message and exit. Unfortunately the command line
+switches are not documented.
+
+The file code{processor}.c is the code generator file which is tailored to the
+specific instruction and register set of each target processor. E.g.
+codepic.c is the code generator for PIC16x84 MCUs. Basically what this file
+does is translate the VM instructions to the target architecture mnemonics.
+
+Since the VM is particularly simple this is a relatively straightforward job.
+
+io.c: some file I/O routines.
+
+preproc.c is a minimal cpp. I added the file postproc.c to handle the
+creation of files compatible with various PIC assemblers. Right now only
+picasm 1.06 is supported. 
+
+data.c: compiler global variables.
+data.h: function definitions.
+
+error.c: spits out compilation error messages.
+
+lex.c: routines to enforce some basic C syntax rules.
+
+More to come...
+
+An excellent book on how compilers work and in particular about this Small
+C compiler was written by Hendrix: The Small C Handbook (please check, I am
+not too sure about this reference).
+
+Another piece of documentation that would come in handy would be a reprint
+of the original Dr. Dobbs article (May 1980 issue).
+
+Andrew D. Balsa - 12/11/98 

@@ -1,0 +1,31 @@
+A little bit of history about this small C compiler:
+
+1979 :	the original Small C compiler by Ron Cain
+	Targets: unknown.
+	Compiles itself?
+
+1980 :	Version 2 - published in Dr. Dobbs May 1980.
+
+1986 :	Version 3 - modified and extended by Chris Lewis.
+	Targets: 6809, 68000, 8080, VAX.
+	Compiles itself.
+	Source size: around 150Kb
+
+1995 :	PIC code generator by John Favata <favata@cs.buffalo.edu>
+	Target: Parallax PIC assembler (pseudo 8051 syntax)
+
+1996 :	Ken Yap <ken@syd.dit.csiro.au> writes a code generator for Z80.
+	Puts together a nice package with linker, optimizer, etc...
+
+1997 :	Favata's code generator modified by Ian Stedman <ICStedman@techie.com>
+	Unfinished, unfortunately.
+	Target: Microchip PIC assembler
+
+1998 :	New PIC code generator by Andrew D. Balsa <andrebalsa@altern.org>
+	All changes are aimed at making this package usable under GNU/Linux 
+	(but note that this is still WIP).
+	Target: Microchip PIC assembler i.e. picasm 1.06 by Timo Rossi.
+	pic_cc should compile OK under gcc, and produce reasonable assembler
+	code for the files under /tests.
+
+Andrew D. Balsa - 04/11/98

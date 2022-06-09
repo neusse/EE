@@ -1,0 +1,39 @@
+FILES	 - this file.
+COPYING  - GNU/GPL license.
+HISTORY  - evolution of this Small C Compiler.
+TODO	 - (lots of) things to do to improve this package.
+README	 - usage information.
+
+README_FIRST	- a warning message.
+
+pasm.txt	- Parallax assembler and Microchip equivalent mnemonics.
+
+pic_cc-0.3.lsm  - package description file for GNU/Linux archive
+
+pic_tools.html	- links on freely available PIC tools.
+
+/doc	 - a very humble attempt to document this compiler.
+
+/src	 - the C source for the compiler, K&R original style.
+	   Correctly compiles (with a few warnings) under gcc.
+
+/orig    - The original Small C compiler for 8080, 6809, 68000 and VAX
+	   (version 3.0 by Chris Lewis), Ken Yap's neat Z80 package,
+	   and John Favata's pic_cc.
+
+/tests	 - Small C code snippets that should compile OK to standard Microchip
+	   PIC assembler code.
+
+/pic_lib - various libraries:
+
+/pic_lib/mlibpic.h - mult/div library (8 bits)
+/pic_lib/slibpic.h - shift library (8 bits)
+/pic_lib/glibpic.h - compare library (8 bits)
+
+/pic_io  - i/o routines:
+
+/pic_io/ee_read.c  - read a byte from EEPROM (16x84 only)
+/pic_io/ee_write.c - write a byte to EEPROM (16x84 only)
+
+
+Andrew D. Balsa - 02/11/98

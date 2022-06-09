@@ -1,0 +1,18 @@
+Begin3
+Title:		Small C compiler for Microchip PIC MCUs
+Version:	0.4
+Entered-date:	15NOV98
+Description:	A version of Ron Cain's Small C compiler with a code
+		generator for Microchip PIC16x84 MCUs. Generates
+		assembler code compatible with picasm 1.06 by Timo Rossi. 
+Keywords:	PIC Microchip C compiler
+Author:		(Ron Cain)
+Maintained-by:	andrebalsa@altern.org (Andrew Derrick Balsa)
+Primary-site:	sunsite.unc.edu /pub/Linux/apps/circuits
+		500Kb pic_cc-0.4.tar.gz
+		564 pic_cc-0.4.lsm
+Alternate-site: 
+Original-site:	
+Platforms:	GNU/Linux.
+Copying-policy: GPL
+End

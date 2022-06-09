@@ -1,0 +1,40 @@
+This Small C compiler assumes a virtual machine with the following
+characteristics:
+
+Register set
+============
+
+1 - A primary register which really looks like an accumulator, or what we
+would call in modern microprocessors a "general purpose register".
+
+2 - A secondary register, similar to the primary register. Note that dyadic
+operations always leave their result in primary.
+
+3 - A single stack pointer. The stack is used to pass parameters.
+
+4 - A temporary register which is only used to hold intermediate values.
+
+Instruction set
+===============
+
+Nothing special here. The compiler uses the usual operators: AND, OR, XOR,
+1's complement, 2's complement, logical complement, +, -, *, /, arithmetic
+shift left and right.
+
+It uses indirect addressing, and stack handling instructions.
+
+BTW it also requires pointers to be of the same size as integers. 
+
+Memory and performance requirements
+===================================
+
+AFAIK this Small C felt quite at home on machines with 64Kb of RAM, kind of
+the 4MHz Z80 boxes of nearly 20 years ago. It could recompile itself then.
+
+Nowadays this kind of trick is not of much use, as this Small C compiler is
+used to cross-compile for targets with very little RAM (e.g. PICs).
+Executable performance is decent enough for non-critical applications
+(better than 10K C lines per second). Run-time code overhead is very small,
+but note that compilation is not very efficient.
+
+Andrew D. Balsa - 02/11/98

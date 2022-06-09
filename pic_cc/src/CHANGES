@@ -1,0 +1,56 @@
+31/10/98	- begun working on John Favata's original source.
+		- Converted filenames to lower case.
+		- Ran most files through dos2unix.
+		- Fixed file 16c84.h.
+		- New Makefile.
+		- code generator: jmp converted to goto.
+		- code generator: ret converted to return.
+		- assembler output file suffix is now .asm.
+		- stack handling code in runtime file 16c84.h fixed.
+		- code generator: putmem fixed.
+		- code generator: getmem fixed.
+		- code generator: used macro in 16c84.h to circumvent
+immediate value loading problem.
+		- picasm being a single-pass assembler, variables must
+appear at the top of the compiler's output code. I added a file postproc.c
+to handle this. The intermediate assembler output file has suffix .s, the
+final file has suffix .asm.
+		- Wow! File simple.c compiles to correct code that picasm
+assembles without complaints!
+
+01/11/98
+		- code generator: ginc and gdec fixed.
+		- code generator: gor, gand, gxor, gadd fixed.
+		- code generator: gneg, glneg, gcom fixed.
+		- code generator: getloc, modstk fixed.
+		- Wow! File simple1.c compiles and assembles OK!
+
+02/11/98
+		- code generator: testjump fixed.
+		- code generator: gaslint fixed.
+		- code generator: gsub fixed.
+		- mul and div (mlibpic.h) fixed. Changed the algorithms to
+those in Microchip AN-617/AN-526. Note that mul is 8x8 bit, with 8-bit (LSB)
+result...
+		- new 16f84.h file.
+
+03/11/98
+		- arithmetic shift routines fixed (slibpic.h).
+		- compare routines fixed (glibpic.h).
+
+04/11/98
+		- various tests. Package seems usable.
+
+05/11/98
+		- testing with nitpic (an X Window PIC simulator under
+GNU/GPL). Found a file conversion utility from inhx8m to .pt (a special,
+non-standard input file format used by nitpic). Found two small bugs in
+nitpic and fixed them.
+
+06-12/11/98
+		- more testing with nitpic; fixed various buglets. The
+compiler now correctly compiles all the test programs in /tests.
+		- fixed main.c for correct handling of strings (see file
+test6.c).
+
+Andrew D. Balsa - 12/11/98

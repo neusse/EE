@@ -1,0 +1,85 @@
+			
+			***  README  2/20/95 ***
+
+
+This package contains the source code for the PIC-C compiler:
+
+\source  directory contains the port of smallC to PIC16C84
+
+\source\orig\ part1 part2 part3 are the original source code. 
+
+The original source has been modified in various ways to generate
+code for the PIC16C84. It is not the original smallc with a
+new code generator. It can no longer compile itself..........
+
+
+The files: 
+\pic_rt\16c84.h 
+\pic_rt\(MSG)libpic.h 
+are run-time and library routines are are loaded as needed 
+
+
+The files in:
+\pic_lib
+are various useful I/O type code for pics
+
+
+/*********Compiling Compiler**********/
+
+To compile PIC-C compiler: 
+    compile all of the *.c files (except test.c) and link to pic_cc.exe
+
+(warning: files may contain ^M character (DOS files), remove them
+if you are using a UNIX system...ie. dos2unix)
+
+
+/*********Using Compiler**************/
+
+To compile c source <c_file.c> to pic code <output file: c_file.s>: 
+
+   pic_cc c_file.c
+
+Assemble code (make sure all of the \pic_rt files are in the current directory):
+
+   pasmx c_file.s /L
+
+Simulate code:
+
+   psim c_file
+
+
+(special thanks to Parallax for their PIC tools)
+
+
+Try the compiler on the files\tests\test(0-7).c!
+
+
+
+/*********NEW ADDITIONS***********/
+
+Static strings are supported (great for nice LCD displays)
+(see test files)
+
+
+/*********THINGS TO DO************/
+
+Nice compliment of library routines!
+
+
+/*********BUG REPORTING***********/
+
+If you find a bug in the output of the compiler:
+
+	1) Verify carefully that it is a compiler bug... 8-)
+
+	2) Find the smallest code fragment that produces the bug
+
+	3) (optional) Try and fix the compiler yourself 
+
+	4) email the bug report (and fix, if possible) to:
+	   favata@cs.buffalo.edu
+
+
+Happy PIC_CCing
+John Favata   
+
