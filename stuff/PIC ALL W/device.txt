@@ -1,0 +1,264 @@
+;------------------------------------------------------------------------------
+;  P16PRO and PICALL DEVICE.INI Ver 3.8 (c) by Bojan Dobaj 1995-2003 May
+;------------------------------------------------------------------------------
+;The file DEVICE.INI contains the definitions of the PIC types supported by the 
+;programmer (Maximum 130 different PICs can be defined). To add a new PIC type
+;edit the file and copy one of the existing definitions, the entries must then
+;be corrected for the new device. If you are unsure of the meaning of any of the
+;entries then copy a similar device and change the length. 
+;If the new PIC has unsupported Configurations Bits, then just ignore this and 
+;set this bits as 1 and in the new Fuses definition and include Configuration 
+;word to your HEX file / source file. For details how to include Configuration
+;Word to your HEX file look at FAQ - HEX Files. 
+;BTW including Fuses to HEX file is the right way.
+;
+;Maximum 130 different PICs can be defined in DOS version and 160 in windows
+;PROG  - Program data size
+;DATA  - Data size
+;ALG   - agorithm type:  1=E2PROM
+;                        2=EPROM and OTP
+;                        3=PIC16C52 to PIC16C58 (only with PICALL hardware)
+;                        4=PIC12X5xx - 12bit 
+;                        5=new Flash PICs
+;rev   - programming algorithm subrevision 
+;FUSES - fuses type
+;WAR   - show warning before programming with CP on
+;PINS  - number of pins: for positioning window
+;MAXPC - maximal number of programming cycles
+;OVER  - number of over-programming cycles
+;        if on end is an "x" this mean number of this cycles is multiplayed
+;        with numbers of cycles on which the programming was succesfull.
+;CAL/rev - if 1 this PIC includes calibration word on last programming location
+;         2 and more defines programing specification sub_revision
+;VPP   - which programming voltage should be used (VPP1 or VVP2)
+;CRC   - for CRC calclulation algoritm (future use)
+;*     - before PIC type mean that this PIC was not yet tested with
+;        P16PRO or PICALL, but it should work anyway. If you succesfully
+;        programmed this PIC with P16PRO or PICALL then please let me know.
+;        My email address is: bojan.dobaj@inxm.net
+;----------------------------------------------------------------------------
+;----------------------------------------------------------------------------
+; There can be up to 40 different fuses types.
+; You can use following to define them:
+; OSC0, OSC1, OSC2, WDTE, PWRTE, BODEN MPEEN, NEW, NEW1, NEW2, DP, CP0, CP1, 0, -, X
+; OSC0 to OSC2 can be only on bits 0 to 2
+; If some bit has negated function then you must put / before it:
+; for example /PWRTE
+; all 14 bits must be defined
+; NEW, NEW1, NEW can be maximal 7 character each
+;----------------------------------------------------------------------------
+;BIT NR. 13  12  11  10  9   8   7     6     5   4   3      2    1    0
+;----------------------------------------------------------------------------
+Fuses 1  -   -   -   -   -   -   -     -     -   CP0 PWRTE  WDTE OSC1 OSC0
+Fuses 2  -   -   -   -   -   -   -     0     CP1 CP0 PWRTE  WDTE OSC1 OSC0
+Fuses 3  CP0 CP0 CP0 CP0 CP0 CP0 CP0   BODEN CP0 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 4  CP0 CP0 CP0 CP0 CP0 CP0 CP0   -     CP0 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 5  CP1 CP0 CP1 CP0 CP1 CP0 -     BODEN CP1 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 6  CP1 CP0 CP1 CP0 CP1 CP0 -     -     CP1 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 7  CP0 CP0 CP0 CP0 CP0 CP0 CP0   CP0   CP0 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 8  CP0 CP0 CP0 CP0 CP0 CP0 DP    CP0   CP0 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 9  -   -   -   -   -   -   -     -     -   -   CP0    WDTE OSC1 OSC0
+Fuses 10 CP1 CP0 CP1 CP0 CP1 CP0 MPEEN BODEN CP1 CP0 /PWRTE WDTE OSC1 OSC0 P P
+Fuses 11 -   -   CP0 CP0 CP0 CP0 CP0   CP0   CP0 MCLRE CP0  WDTE OSC1 OSC0
+Fuses 12 CP1 CP0 CP1 CP0 CP1 CP0 MCLRE CP1  CP0 /PWRTE WDTE OSC2 OSC1 OSC0
+Fuses 13 -   -   CP0 CP0 CP0 CP0 CP0   CP0  MCLRE CP0  WDTE OSC2 OSC1 OSC0
+Fuses 14 CP1 CP0 /DEB -   WRT CPD LVP   BODEN CP1 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 15 CPC CP0 CP0 CP0 CP0 CPC CPC   -    CP0  CP0 /PWRTE WDTE -    OSC0
+Fuses 16 CP1 CP0 CP1 CP0 CP1 CP0 -     BODEN CP1 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 17 CP1 CP0 NEW1 NEW CP1 CP0 -    BODEN CP1 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 18 CP0 CP0 NEW1 NEW CP0 CP0 - BODEN MCLRE /PWRTE WDTE OSC2 OSC1 OSC0
+Fuses 19 -   -   -    -   -   -   - BODEN -      CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 20 CP1 CP0 CP1 CP0 - CPD LVP  BODEN MCLRE OSC2 /PWRTE WDTE OSC1 OSC0
+Fuses 21 CP0 CP0 /DEB -   WRT CPD LVP  BODEN CP0 CP0 /PWRTE WDTE OSC1 OSC0
+Fuses 22 NEW1 NEW 0 0  0   CPD CP0 BODEN MCLRE /PWRTE  WDTE OSC2 OSC1 OSC0
+Fuses 23 CP0 - /DEB NEW1 NEW CPD LVP BODEN -   -     /PWRTE WDTE OSC1 OSC0
+Fuses 24 CP0 -  -   -    - CPD  LVP BODEN MCLRE OSC2 /PWRTE WDTE OSC1 OSC0
+Fuses 25 CP NEW /DEB NEW2 NEW1 CPD LVP  BODEN MCLRE OSC2 /PWRTE WDTE OSC1 OSC0
+;------------------------------------------------------------------------------
+; You can change/add up to 26 types in DOS and 60 in windows version PICALLW
+; (1 to 25 too, but be carefull)
+;------------------------------------------------------------------------------
+Fuses 26 -   -   -   -   -   -   NEW2   /NEW1  NEW CP0 /PWRTE WDTE OSC1 OSC0
+;**********************************************************************************
+;DEVICE     PROG DATA  ALG FUS PINS MAXPC P.DELAY CAL  rev VPP  CRC NEW  NEW1 NEW2
+;----------------------------------------------------------------------------------
+;
+PIC16F83    512    64   1   7   18    1     10     0    0    1   0
+PIC16CR83   512    64   1   8   18    1     10     0    0    1   0
+PIC16C84    1024   64   1   1   18    1     10     0    0    1   0
+PIC16F84    1024   64   1   7   18    1     10     0    0    1   0
+PIC16F84A   1024   64   1   7   18    1      2     0    1    1   0
+PIC16CR84   1024   64   1   8   18    1     10     0    0    1   0
+;
+PIC16F627   1024   128  1   20  18    1      4     0    1    1   0
+PIC16F627A  1024   128  1   24  18    1      2     0    1    1   0
+PIC16F628   2048   128  1   20  18    1      2     0    1    1   0
+PIC16F628A  2048   128  1   24  18    1      2     0    1    1   0
+PIC16F648A  4096   256  1   24  18    1      2     0    1    1   0
+;------------------------------------------------------------------------------------
+;do not change the PICs definition above
+;------------------------------------------------------------------------------------
+PIC16F818   1024   128  1   25  18    4      2     0    3    1   0 CCPMX WRT0 WRT1
+PIC16F819   2048   256  1   25  18    4      2     0    3    1   0 CCPMX WRT0 WRT1
+;
+PIC16F870   2048   64   1   21  28    1      2     0    1    2   0
+PIC16F871   2048   64   1   21  40    1      2     0    1    2   0
+PIC16F872   2048   64   1   21  28    1      2     0    1    2   0
+PIC16F873   4096   128  1   14  28    1      2     0    1    2   0
+PIC16F874   4096   128  1   14  40    1      2     0    1    2   0
+PIC16F876   8192   256  1   14  28    1      2     0    1    2   0
+PIC16F877   8192   256  1   14  40    1      2     0    1    2   0
+;
+PIC16F873A  4096   128  1   23  28    8      1     0    3    2  0  WRT0 WRT1
+PIC16F874A  4096   128  1   23  40    8      1     0    3    2  0  WRT0 WRT1
+PIC16F876A  8192   256  1   23  28    8      1     0    3    2  0  WRT0 WRT1
+PIC16F877A  8192   256  1   23  40    8      1     0    3    2  0  WRT0 WRT1
+;
+PIC16F73    4096   0    5   19  28    1      1     0    0    2   0
+PIC16F74    4096   0    5   19  40    1      1     0    0    2   0
+PIC16F76    8192   0    5   19  28    1      1     0    0    2   0
+PIC16F77    8192   0    5   19  40    1      1     0    0    2   0
+;
+PIC12F629   1024   128  1   22  8     1      8     1    2    1   0  BG1  BG0
+PIC12F675   1024   128  1   22  8     1      8     1    2    1   0  BG1  BG0
+;-----------------------------------------------------------------------------------
+;DEVICE     PROG   DATA ALG FUS PINS  MAXPC  OVER  CAL  WAR  VPP  CRC NEW  NEW1 NEW2
+;-----------------------------------------------------------------------------------
+*PIC16C432  2048   0    2   16  18    8      11x   0    1    1    0
+;PIC16C432 is actualy 20PIN, but can be treated as 18
+;
+PIC16C505   1024   0    4   13  14    8      11x   1    1    1    0
+PIC12C508   512    0    4   11  8     25     3     1    1    1    0
+PIC12C508A  512    0    4   11  8     8      11x   1    1    1    0
+PIC12C509   1024   0    4   11  8     25     3     1    1    1    0
+PIC12C509A  1024   0    4   11  8     8      11x   1    1    1    0
+PIC12C518   512    0    4   11  8     25     3     1    1    1    0
+PIC12C519   1024   0    4   11  8     25     3     1    1    1    0
+;
+PIC12C671   1024   0    2   12  8     25     3     1    1    1    0
+PIC12CE673  1024   0    2   12  8     25     3     1    1    1    0
+PIC12C672   2048   0    2   12  8     25     3     1    1    1    0
+PIC12CE674  2048   0    2   12  8     25     3     1    1    1    0
+;
+PIC14000    4096   0    2   15  28    25     3     0    1    1    0
+;
+PIC16C52    384    0    3   9   18    25     3     0    0    1    0
+PIC16C54    512    0    3   9   18    25     3     0    0    1    0
+PIC16C54C   512    0    3   9   18    25     3     0    0    1    0
+PIC16C55    512    0    3   9   28    25     3     0    0    1    0
+PIC16C56    1024   0    3   9   18    25     3     0    0    1    0
+PIC16C56C   1024   0    3   9   18    25     3     0    0    1    0
+PIC16C57    2048   0    3   9   28    25     3     0    0    1    0
+PIC16C57C   2048   0    3   9   28    25     3     0    1    1    0
+PIC16C58    2048   0    3   9   18    25     3     0    0    1    0
+;
+PIC16C554   512    0    2   6   18    25     3     0    1    1    0
+PIC16C556   1024   0    2   6   18    25     3     0    1    1    0
+PIC16C558   2048   0    2   6   18    25     3     0    1    1    0
+;
+PIC16C61    1024   0    2   1   18    25     3     0    0    1    0
+PIC16C62    2048   0    2   2   28    25     3     0    0    2    0
+PIC16C62A   2048   0    2   5   28    25     3     0    1    2    0
+PIC16C62B   2048   0    2   5   28    25     3     0    1    2    0
+PIC16CR62   2048   0    2   5   28    25     3     0    1    2    0
+PIC16C63    4096   0    2   5   28    25     3     0    1    2    0
+PIC16C63A   4096   0    2   5   28    25     3     0    1    2    0
+PIC16C64    2048   0    2   2   40    25     3     0    0    2    0
+PIC16C64A   2048   0    2   5   40    25     3     0    1    2    0
+PIC16C64B   2048   0    2   5   40    25     3     0    1    2    0
+PIC16CR64   2048   0    2   5   40    25     3     0    1    2    0
+PIC16C65    4096   0    2   2   40    25     3     0    0    2    0
+PIC16C65A   4096   0    2   5   40    25     3     0    1    2    0
+PIC16C65B   4096   0    2   5   40    25     3     0    1    2    0
+PIC16C66    8192   0    2   5   28    25     3     0    1    2    0
+PIC16C67    8192   0    2   5   40    25     3     0    1    2    0
+;
+PIC16C620   512    0    2   5   18    25     3     0    1    1    0
+PIC16C620A  512    0    2   5   18    25     3     0    1    1    0
+PIC16C621   1024   0    2   5   18    25     3     0    1    1    0
+PIC16C621A  1024   0    2   5   18    25     3     0    1    1    0
+PIC16C622   2048   0    2   5   18    25     3     0    1    1    0
+PIC16C622B  2048   0    2   5   18    25     3     0    1    1    0
+PIC16CE623  512    0    2   5   18    25     3     0    1    1    0
+PIC16CE624  1024   0    2   5   18    25     3     0    1    1    0
+PIC16CE625  2048   0    2   5   18    25     3     0    1    1    0
+;
+PIC16C710   512    0    2   3   18    25     3     0    1    1    0
+PIC16C71    1024   0    2   1   18    25     3     0    0    1    0
+PIC16C711   1024   0    2   3   18    25     3     0    1    1    0
+PIC16C712   1024   0    2   16  18    25     3     0    1    1    0
+PIC16C716   2048   0    2   16  18    25     3     0    1    1    0
+PIC16C72    2048   0    2   5   28    25     3     0    1    2    0
+PIC16C72A   2048   0    2   5   28    25     3     0    1    2    0
+PIC16C73    4096   0    2   2   28    25     3     0    0    2    0
+PIC16C73A   4096   0    2   5   28    25     3     0    1    2    0
+PIC16C73B   4096   0    2   5   28    25     3     0    1    2    0
+PIC16C74    4096   0    2   2   40    25     3     0    0    2    0
+PIC16C74A   4096   0    2   5   40    25     3     0    1    2    0
+PIC16C74B   4096   0    2   5   40    25     3     0    1    2    0
+PIC16C76    8192   0    2   5   28    25     3     0    1    2    0
+PIC16C77    8192   0    2   5   40    25     3     0    1    2    0
+;
+PIC16C717-18PIN 2048 0  2   18  18    25     3x    0    1    1    0  BORV0  BORV1
+PIC16C717-20PIN 2048 0  2   18  20    25     3x    0    1    1    0  BORV0  BORV1
+PIC16C770   2048   0    2   18  20    25     3x    0    1    1    0  BORV0  BORV1
+PIC16C771   4096   0    2   18  20    25     3x    0    1    1    0  BORV0  BORV1
+PIC16C781   1024   0    2   18  20    25     3x    0    1    1    0  BORV0  BORV1
+PIC16C782   2048   0    2   18  20    25     3x    0    1    1    0  BORV0  BORV1
+;
+PIC16C773   4096   0    2   17  28    25     3     0    1    2    0  BORV0  BORV1
+PIC16C774   4096   0    2   17  40    25     3     0    1    2    0  BORV0  BORV1
+;
+PIC16C745   8192   0    2   6   28    25     3     0    1    2    0
+PIC16C765   8192   0    2   6   40    25     3     0    1    2    0
+;
+PIC16C923   4096   0    2   6   64    25     3     0    1    2    0
+PIC16C924   4096   0    2   6   64    25     3     0    1    2    0
+;
+;------------------------------------------------------------------------------
+;For 16 bit word PICs P16Pro automaticly generates both parity bits (PO and PE)
+;Following PICs have 16bit word
+;------------------------------------------------------------------------------
+PIC16C715   2048   0   2   10   18    25    3     0    1    1     0
+PIC16C642   4096   0   2   10   28    25    3     0    1    2     0
+PIC16C662   4096   0   2   10   40    25    3     0    1    2     0
+;------------------------------------------------------------------------------
+; Here is an example of defining a new PIC
+; XXXXX and YYYYY can be up to 7 character
+; don't use TAB key between coloums, use SPACE key
+;------------------------------------------------------------------------------------
+;DEVICE     PROG   DATA ALG FUS PINS  MAXPC  OVER  CAL  WAR  VPP  CRC NEW  NEW1 NEW2
+;-----------------------------------------------------------------------------------
+PIC_NEW      1024   0   2   26   18    8    11x    0    1    1    0  XXXXX   YYYYY  ZZZZZ
+;
+;
+;
+;----------------------------------------------------------------------------------------------------------
+;----------------------------------------------------------------------------------------------------------
+;Fuses for PIC18xxx
+; CONFIG1...CONFIG7 at addresses 0x300000 ... 0x300007
+;BIT NR.   default  15   14    13     12    11     10     9      8      7      6 5 4 3     2     1    0
+;----------------------------------------------------------------------------------------------------------
+Fuses 41 1 2700     -    -     /OSCEN -  -      FOSC2  FOSC1  FOSC0  -      - - - -     -     -     -
+Fuses 41 2 0F0F     -    -     -      -  WDTPS2 WDTPS1 WDTPS0 WDTEN  -      - - - BORV1 BORV2 BOREN /PWRTE
+Fuses 41 3 0100     -    -     -      -  -      -      -      CCP2MX -      - - - -     -     -     -
+Fuses 41 4 0085     -    -     -      -  -      -      -      -      /BKBUG - - - -     LVP   -     STVREN
+Fuses 41 5 C00F     CPD  CPB   -      -  -      -      -      -      -      - - - CP3   CP2   CP1   CP0
+Fuses 41 6 E00F     WRTD WRTB  WRTC   -  -      -      -      -      -      - - - WRT3  WRT2  WRT1  WRT0
+Fuses 41 7 400F     -    EBTRB -      -  -      -      -      -      -      - - - EBTR3 EBTR2 EBTR1 EBTR0
+;----------------------------------------------------------------------------------------------------------
+Fuses 42 1 FC7F     -    -     OSCEN  MCLRE -      FOSC2  FOSC1  FOSC0 - TR1 TW1 CP1 DP TR0 TW0   CP0
+Fuses 42 2 FFFF     1    -     STVRE  WDTLE WDTPS2 WDTPS1 WDTPS0 WDTE  - -   -   -   -  -   BOREN PWRTE
+;----------------------------------------------------------------------------------------------------------
+;----------------------------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------
+;DEVICE     PROG   DATA ALG FUSnr PINS FUSES P.DELAY CAL  WAR  VPP  CRC
+;-----------------------------------------------------------------------
+PIC18F242   8192   256  10  7     28    41      1     0    0    2   0
+PIC18F248   8192   256  10  7     28    41      1     0    0    2   0
+PIC18F252  16384   256  10  7     28    41      1     0    0    2   0
+PIC18F258  16384   256  10  7     28    41      1     0    0    2   0
+PIC18F442   8192   256  10  7     40    41      1     0    0    2   0
+PIC18F448   8192   256  10  7     28    41      1     0    0    2   0
+PIC18F452  16384   256  10  7     40    41      1     0    0    2   0
+PIC18F458  16384   256  10  7     40    41      1     0    0    2   0

@@ -1,0 +1,150 @@
+body {
+  margin: 7px 3px 7px 3px;
+  padding: 0;
+  background: #fff none;
+  color: #000;
+  text-align: left;
+}
+body, td, th {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  line-height: 1.3;
+  font-size: x-small;
+  voice-family: "\"}\"";
+  voice-family:inherit;
+  font-size: small;
+}
+h6 {
+  page-break-after: always; 
+}
+html>body {
+  font-size: small;
+}
+#a {
+  padding: 0;
+  width: 770px;
+  margin-right: auto;
+  margin-left: auto;
+ 
+}  
+#a b {
+  background: #FF6600;
+  color: #fff;
+}
+#b {
+  height: 80px;
+  background: #FF6600 url("img/hb.jpg");
+  color: #fff;
+  }
+#b h1 {
+   display: none;
+}
+#b strong {
+   position: relative;
+   background: #FF6600;
+   color: #fff;
+   border-top: solid 2px #00FF66;
+  border-left: solid 2px #00FF66;
+  border-right: solid 2px #00FF66;
+  border-bottom: solid 2px #00FF66;   
+}
+#c {
+  border-top: solid 2px #00FF66;
+  border-left: solid 2px #00FF66;
+  border-right: solid 2px #FF6600;
+  border-bottom: solid 2px #FF6600;
+}
+#c td {
+  padding: 0;
+}
+#d {
+  width: solid 640px;
+}
+#d .inn {
+  padding: 0.3em;  
+}
+#d td {
+  padding: 3px;
+  border: solid 1px #000000;
+}
+#d table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+ border: solid 1px #000000; 
+}
+#d h2 {
+  margin: 0 0 0 0;
+  text-align: center;  
+}
+#d h1 {
+  margin: 0 0 0 0;
+  text-align: center;  
+}
+#d h3 {
+  margin: 0 0 0 0;
+  text-align: center;  
+}
+#d b {
+  background: #FF6600;
+  color: #fff;
+}
+#d h5 {
+  margin: 0 0 0 0;
+  text-align: center;  
+  }
+#d h6 {
+  margin: 0 0 0 0;
+  text-align: left;  
+  page-break-after: always;  
+}
+#d p {
+  margin: 0;
+  padding-left: 0em; 
+  text-align: left;  
+}
+#d ul {
+  margin: 0;
+  padding-left: 1.1em; 
+  text-align: left;
+  font-family: arial;  
+}
+#d ol {
+  margin: 0;
+  padding-left: 1.8em; 
+  text-align: left;
+  font-family: arial;   
+}
+#d dir {
+  text-align: right;
+  font-family: arial;   
+} 
+#d u {
+  padding-left: 1.1em;
+}
+#d hr {
+  border-top: solid 1px #FF6600;
+}
+#e {
+  background: #fff;
+  border-right: solid 2px #FF6600;
+  width: 124px;  
+}
+#e .inn {
+  padding: 0.0em 0.0em 0.2em 0.2em;
+  font-family: helvetica;
+}
+#e h4 {
+  margin: 0 0 0 0;
+  background: #FF6600;
+  color: #fff;
+  text-align: center;
+}
+#e b {
+  background: #FF6600;
+  color: #fff;
+}
+#e ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Kate, the KDE Advanced Text Editor">
+<title>lightstrip.c</title>
+</head><body style="background: rgb(99, 99, 99) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+<pre><span style="font-style: italic; color: rgb(130, 162, 130);">//Lightstrip Controller</span>
+<span style="font-style: italic; color: rgb(130, 162, 130);">//Adam Greig, 2008-06-04</span>
+<span style="font-style: italic; color: rgb(130, 162, 130);">//CC BY-SA-NC 3.0</span>
+
+<span style="font-weight: bold; color: rgb(255, 207, 175);">#define F_CPU 1200000UL</span>
+
+<span style="font-weight: bold; color: rgb(255, 207, 175);">#include </span><span style="color: rgb(255, 207, 175);">&lt;avr/interrupt.h&gt;</span>
+<span style="font-weight: bold; color: rgb(255, 207, 175);">#include </span><span style="color: rgb(255, 207, 175);">&lt;avr/delay.h&gt;</span>
+
+<span style="font-style: italic; color: rgb(130, 162, 130);">//Converge - how fast the average will converge to the current value. Default: 10</span>
+<span style="font-weight: bold; color: rgb(255, 207, 175);">#define CONVERGE 10</span>
+<span style="font-style: italic; color: rgb(130, 162, 130);">//Peak - what multiple of the average will be considered a peak. Default: 1.3</span>
+<span style="font-weight: bold; color: rgb(255, 207, 175);">#define PEAK 1.3</span>
+
+<span style="color: rgb(255, 204, 204);">int</span><span style="color: rgb(189, 202, 205);"> main() {</span>
+<span style="color: rgb(189, 202, 205);">	</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="font-style: italic; color: rgb(130, 162, 130);">//Initialise registers. Note that the compiler optimises each to an integer, so the 0s just make life easier.</span>
+<span style="color: rgb(189, 202, 205);">	ADMUX	= (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;REFS0)	| (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADLAR)	| (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;MUX1)	| (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;MUX0);</span>
+<span style="color: rgb(189, 202, 205);">	ADCSRA	= (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADEN)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADSC)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADATE)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADIF)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADIE)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADPS2)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADPS1)	| (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADPS0);</span>
+<span style="color: rgb(189, 202, 205);">	DIDR0	= (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADC0D)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADC1D)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADC2D )	| (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADC3D);</span>
+<span style="color: rgb(189, 202, 205);">	DDRB	= (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;PB0)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;PB1)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;PB2)	| (</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;PB3)	| (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;PB4);</span>
+<span style="color: rgb(189, 202, 205);">	</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="font-style: italic; color: rgb(130, 162, 130);">//Initialise ADC, ignore first result</span>
+<span style="color: rgb(189, 202, 205);">	ADCSRA	|= (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADSC);</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="color: rgb(240, 223, 175);">while</span><span style="color: rgb(189, 202, 205);">( ADCSRA &amp; (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADSC) ) {}</span>
+<span style="color: rgb(189, 202, 205);">	</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="font-style: italic; color: rgb(130, 162, 130);">//Store duty cycle, background average, current result, difference between result and average.</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="color: rgb(255, 204, 204);">unsigned</span><span style="color: rgb(189, 202, 205);"> </span><span style="color: rgb(255, 204, 204);">char</span><span style="color: rgb(189, 202, 205);"> duty;</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="color: rgb(255, 204, 204);">unsigned</span><span style="color: rgb(189, 202, 205);"> </span><span style="color: rgb(255, 204, 204);">char</span><span style="color: rgb(189, 202, 205);"> avg;</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="color: rgb(255, 204, 204);">unsigned</span><span style="color: rgb(189, 202, 205);"> </span><span style="color: rgb(255, 204, 204);">char</span><span style="color: rgb(189, 202, 205);"> result;</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="color: rgb(255, 204, 204);">signed</span><span style="color: rgb(189, 202, 205);"> </span><span style="color: rgb(255, 204, 204);">char</span><span style="color: rgb(189, 202, 205);"> diff;</span>
+<span style="color: rgb(189, 202, 205);">	</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="font-style: italic; color: rgb(130, 162, 130);">//Main loop</span>
+<span style="color: rgb(189, 202, 205);">	</span><span style="color: rgb(240, 223, 175);">for</span><span style="color: rgb(189, 202, 205);">( ;; ) {</span>
+<span style="color: rgb(189, 202, 205);">		</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="font-style: italic; color: rgb(130, 162, 130);">//Take a reading</span>
+<span style="color: rgb(189, 202, 205);">		ADCSRA	|= (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADSC);</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="color: rgb(240, 223, 175);">while</span><span style="color: rgb(189, 202, 205);">( ADCSRA &amp; (</span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;ADSC) ) {}</span>
+<span style="color: rgb(189, 202, 205);">		result	= ADCH;</span>
+<span style="color: rgb(189, 202, 205);">		</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="font-style: italic; color: rgb(130, 162, 130);">//Find the difference and converge the average</span>
+<span style="color: rgb(189, 202, 205);">		diff = result - avg;</span>
+<span style="color: rgb(189, 202, 205);">		avg += diff / CONVERGE;</span>
+<span style="color: rgb(189, 202, 205);">		</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="font-style: italic; color: rgb(130, 162, 130);">//Determine if it's a peak</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="color: rgb(240, 223, 175);">if</span><span style="color: rgb(189, 202, 205);">( result &gt; avg * PEAK )</span>
+<span style="color: rgb(189, 202, 205);">			duty = (</span><span style="color: rgb(148, 210, 213);">100</span><span style="color: rgb(189, 202, 205);">*result)/avg;</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="color: rgb(240, 223, 175);">else</span>
+<span style="color: rgb(189, 202, 205);">			duty = </span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">;</span>
+<span style="color: rgb(189, 202, 205);">		</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="font-style: italic; color: rgb(130, 162, 130);">//Execute the duty cycle</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="color: rgb(240, 223, 175);">if</span><span style="color: rgb(189, 202, 205);"> (duty != </span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);"> )</span>
+<span style="color: rgb(189, 202, 205);">			PORTB	= </span><span style="color: rgb(148, 210, 213);">1</span><span style="color: rgb(189, 202, 205);">&lt;&lt;PB4;</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="color: rgb(240, 223, 175);">for</span><span style="color: rgb(189, 202, 205);">( </span><span style="color: rgb(255, 204, 204);">int</span><span style="color: rgb(189, 202, 205);"> j=</span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">; j&lt;duty; j++ )</span>
+<span style="color: rgb(189, 202, 205);">			asm( </span><span style="color: rgb(204, 147, 147);">"nop</span><span style="color: rgb(255, 207, 175);">\n\t</span><span style="color: rgb(204, 147, 147);">"</span><span style="color: rgb(189, 202, 205);"> </span><span style="color: rgb(204, 147, 147);">"nop</span><span style="color: rgb(255, 207, 175);">\n\t</span><span style="color: rgb(204, 147, 147);">"</span><span style="color: rgb(189, 202, 205);"> </span><span style="color: rgb(204, 147, 147);">"nop</span><span style="color: rgb(255, 207, 175);">\n\t</span><span style="color: rgb(204, 147, 147);">"</span><span style="color: rgb(189, 202, 205);"> :: );</span>
+<span style="color: rgb(189, 202, 205);">		PORTB	= </span><span style="color: rgb(148, 210, 213);">0</span><span style="color: rgb(189, 202, 205);">&lt;&lt;PB4;</span>
+<span style="color: rgb(189, 202, 205);">		</span><span style="color: rgb(240, 223, 175);">for</span><span style="color: rgb(189, 202, 205);">( </span><span style="color: rgb(255, 204, 204);">int</span><span style="color: rgb(189, 202, 205);"> j=</span><span style="color: rgb(148, 210, 213);">100</span><span style="color: rgb(189, 202, 205);">; j&gt;duty; j-- )</span>
+<span style="color: rgb(189, 202, 205);">			asm( </span><span style="color: rgb(204, 147, 147);">"nop</span><span style="color: rgb(255, 207, 175);">\n\t</span><span style="color: rgb(204, 147, 147);">"</span><span style="color: rgb(189, 202, 205);"> </span><span style="color: rgb(204, 147, 147);">"nop</span><span style="color: rgb(255, 207, 175);">\n\t</span><span style="color: rgb(204, 147, 147);">"</span><span style="color: rgb(189, 202, 205);"> </span><span style="color: rgb(204, 147, 147);">"nop</span><span style="color: rgb(255, 207, 175);">\n\t</span><span style="color: rgb(204, 147, 147);">"</span><span style="color: rgb(189, 202, 205);"> :: );</span>
+<span style="color: rgb(189, 202, 205);">	}</span>
+<span style="color: rgb(189, 202, 205);">}</span>
+</pre></body></html>

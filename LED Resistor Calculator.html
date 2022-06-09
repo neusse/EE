@@ -1,0 +1,374 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+ 
+
+<title>LED Resistor Calculator</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta name="description" content="LED Resistor Calculator">
+  <link rel="stylesheet" type="text/css" href="LED%20Resistor%20Calculator_files/style.css" media="all">
+  </head><body>
+<!-- FreeFind Begin No Index -->
+<center>
+<div id="a"><strong><font color="red"></font></strong>
+<div id="b"><h1>Calculate LED Resistance Online zz.led.resistor.calculator</h1><strong>Sun, 27 Sep 2009 12:43 GMT</strong> &nbsp; <a href="http://china.hebeiltd.com.cn/"><img src="LED%20Resistor%20Calculator_files/SimplifiedChinese.gif" alt="Simplified Chinese" height="18" width="55" border="0"></a></div>
+  <table width="770">
+    <tbody><tr>
+      <td width="702" align="left">
+        
+<a href="http://ledz.com/?p=contacts">Contacts</a>
+<a href="http://ledz.com/?p=info">How to/FAQ</a>
+<a href="http://ledz.com/?p=pricelists">Pricelists</a>
+<a href="http://ledz.com/?p=product"><strong>Catalogue</strong></a>
+<a href="http://ledz.com/?p=sitemap">Sitemap</a>
+<a href="http://ledz.com/?p=stocklot">Action sale</a><br>                              </td>
+      
+    </tr>
+  </tbody></table>
+<table id="c" width="770"><tbody><tr> 
+<td id="e" valign="top">
+
+
+<h4>Navigation</h4> 
+<div class="inn">
+
+<a href="http://ledz.com/?p=contacts">Contacts</a><br>
+<a href="http://ledz.com/?p=info">How to/FAQ</a><br>
+<a href="http://ledz.com/?p=pricelists">Pricelists</a><br>
+<a href="http://ledz.com/?p=product"><strong>Catalogue</strong></a><br>
+<a href="http://ledz.com/?p=sitemap">Sitemap</a><br>
+<a href="http://ledz.com/?p=stocklot">Action sale</a><br></div>
+
+<h4>How to buy_</h4>
+ <div class="inn">
+<strong>Minimum order US$25 mixed OK</strong><br>
+<i>Minimum order for countries where we have established a <a href="http://ledz.com/?p=distributors">distributor</a> is $199</i><br><br>
+All our Products are <strong>RoHs compliant</strong> !<br><br>
+For <strong>how to order</strong>, delivery time, guarantees etc.
+read our <strong><a href="http://ledz.com/?p=info">"how&nbsp;to's"</a></strong>. 
+
+</div>  
+  
+<h4>About us</h4>
+ <div class="inn">
+
+ <small>Our group is <strong>Chinese Manufacturer</strong> which owns
+  <strong>3 factories and 4 workshops</strong>:<br>
+Export items:<br>
+1. <strong>LED diodes</strong><br>
+2. <strong>Cooling modules</strong><br>
+3. <strong>Heatsinks</strong><br>
+4. <strong>LCD modules</strong><br>
+Domestic market:<br>
+5. <strong>Multimeters</strong><br>
+6. <strong>Connectors + cables</strong><br> 
+7. <strong>Switches</strong><br>
+Factories are located in <strong>Jiangsu</strong> and <strong>Zhejiang</strong> provinces in China.
+</small></div>
+
+
+</td>
+
+<td id="d" valign="top">
+
+
+<!-- FreeFind End No Index -->
+
+<script type="text/javascript">
+function checkNumeric(objName,minval, maxval,comma,period,hyphen)
+{
+	var numberfield = objName;
+	if (chkNumeric(objName,minval,maxval,comma,period,hyphen) == false)
+	{
+		numberfield.select();
+		zyxf(numberfield)  ;
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+function chkNumeric(objName,minval,maxval,comma,period,hyphen)
+{
+var checkOK = "0123456789" + comma + period + hyphen;
+var checkStr = objName;
+var allValid = true;
+var decPoints = 0;
+var allNum = "";
+
+for (i = 0;  i < checkStr.value.length;  i++)
+{
+ch = checkStr.value.charAt(i);
+for (j = 0;  j < checkOK.length;  j++)
+if (ch == checkOK.charAt(j))
+break;
+if (j == checkOK.length)
+{
+allValid = false;
+break;
+}
+if (ch != ",")
+allNum += ch;
+}
+if (!allValid)
+{	
+alertsay = "Please enter only these values \""
+alertsay = alertsay + checkOK + "\" to this field."
+alert(alertsay);
+return (false);
+}
+
+var chkVal = allNum;
+var prsVal = parseInt(allNum);
+if (chkVal != "" && !(prsVal >= minval && prsVal <= maxval))
+{
+alertsay = "Please enter a value greater than or "
+alertsay = alertsay + "equal to \"" + minval + "\" and less than or "
+alertsay = alertsay + "equal to \"" + maxval + "\" to this field."
+alert(alertsay);
+return (false);
+}
+}
+
+function Round3Dec(InputVal)
+{
+  return Math.round(InputVal * 1000) / 1000;
+}
+
+function NextHigherStandardResistor(Resistor_Ohms)
+{
+  var	Power10;
+  var	Units;
+  Power10 = 1;
+  while (Resistor_Ohms > 8.2)
+  {
+    Power10 *= 10;
+    Resistor_Ohms /= 10;
+  }
+  if (Resistor_Ohms < 1.0)
+    Resistor_Ohms = 1.0;
+  else if (Resistor_Ohms < 1.2)
+    Resistor_Ohms = 1.2;
+  else if (Resistor_Ohms < 1.5)
+    Resistor_Ohms = 1.5;
+  else if (Resistor_Ohms < 1.8)
+    Resistor_Ohms = 1.8;
+  else if (Resistor_Ohms < 2.2)
+    Resistor_Ohms = 2.2;
+  else if (Resistor_Ohms < 2.7)
+    Resistor_Ohms = 2.7;
+  else if (Resistor_Ohms < 3.3)
+    Resistor_Ohms = 3.3;
+  else if (Resistor_Ohms < 3.9)
+    Resistor_Ohms = 3.9;
+  else if (Resistor_Ohms < 4.7)
+    Resistor_Ohms = 4.7;
+  else if (Resistor_Ohms < 5.6)
+    Resistor_Ohms = 5.6;
+  else if (Resistor_Ohms < 6.8)
+    Resistor_Ohms = 6.8;
+  else
+    Resistor_Ohms = 8.2;
+
+  if (Power10 >= 1000000)
+  {
+    Units = " Mega-ohm";
+    Power10 /= 1000000;
+  }
+  else if (Power10 >= 1000)
+  {
+    Units = " Kilo-ohm";
+    Power10 /= 1000;
+  }
+  else
+  {
+    Units = " Ohm";
+  }
+
+  Resistor_Ohms *= Power10;
+  return "" + Round3Dec(Resistor_Ohms) + Units;
+}
+
+function compute (obj) {
+with (Math) {
+
+var	ResultText = "";
+var bErrors;
+va1=eval(obj.voltagea1.value);
+va2=eval(obj.voltagea2.value);
+ia3=eval(obj.currenta3.value);
+
+if (obj.name!="single")
+  ledcount=eval(obj.leds.value);
+
+  if (isNaN(va1))
+  {
+    ResultText += "Error: supply voltage is not numeric.\n";
+    bErrors = true;
+  }
+  if (isNaN(va2))
+  {
+    ResultText += "Error: forward voltage is not numeric.\n";
+    bErrors = true;
+  }
+  if (isNaN(ia3))
+  {
+    ResultText += "Error: led current is not numeric.\n";
+    bErrors = true;
+  }
+
+
+if (!bErrors)
+  {
+  if(obj.name=="series")
+    aa1 = (va1 - va2*ledcount) / (ia3 / 1000);
+  else if(obj.name=="parallel")
+    aa1 = (va1 - va2) / (ia3*ledcount / 1000);
+  else
+  	aa1 = (va1 - va2) / (ia3 / 1000);
+	
+    obj.resistor.value =Round3Dec(aa1);
+
+    obj.match.value =NextHigherStandardResistor(aa1);
+
+  if(obj.name=="series")
+    aa2 = (va1 - va2*ledcount) * (ia3 / 1000);
+  else if(obj.name=="parallel")
+	aa2 = (va1 - va2) * (ia3*ledcount / 1000);
+  else	
+    aa2 = (va1 - va2) * (ia3 / 1000);
+
+    obj.watts.value =Round3Dec(aa2);
+
+    obj.safe.value =Round3Dec(aa2*100/60);  //derate
+
+if(aa1<0)
+alert("Leds need more voltage than supply can offer.\nLower the amount of leds or check the given supply voltage.");
+
+  }
+else
+  {
+  alertsay = ResultText; 
+  alert(alertsay);
+  return (false);
+  }
+}	
+}
+
+//-->
+
+</script>
+
+
+<h1>LED Resistor Calculator</h1>
+<center><h3><a href="#single">Single led</a> - <a href="#series">Leds in series</a> - <a href="#parallel">Leds in parallel</a></h3>
+Voltage drop is usually 1.9~2.1V for AlGaInP, 3.1~3.5 for InGaN and 1.2V for Infrared.
+<br>Current is usualy 20mA, for UFO LEDs current is:  30mA for InGaN and 50mA for AlGaInP.<br>
+Supply Voltage - depends what you have at disposal. Usuall is 6V or 12V source.
+</center>
+
+<table><tbody><tr>
+<td colspan="2">
+<a name="single"></a>
+<br><strong><big>Single led:</big></strong>
+</td></tr><tr><td>
+<img src="LED%20Resistor%20Calculator_files/single.gif" alt="Single led with single resistor" width="299">
+</td><td>
+<form name="single">
+<font color="#ff0000">Supply Voltage</font>
+<br>&nbsp;<input name="voltagea1" cols="10" size="5" onblur="checkNumeric(this,0,250,'','.','');" type="text"><strong> VOLTS</strong><br>
+<font color="#009900">Voltage Drop Across LED</font>
+<br>&nbsp;<input name="voltagea2" cols="10" size="5" onblur="checkNumeric(this,0,150,'','.','');" type="text"><strong> VOLTS</strong><br>
+<font color="#0000ff">Desired LED Current</font>
+<br>&nbsp;<input name="currenta3" cols="10" size="5" onblur="checkNumeric(this,1,500,'','.','');" type="text"><strong> MILLIAMPS</strong><br><br>
+<input name="leds" value="1" cols="2" size="2" maxlength="3" type="hidden">
+<input value="Click To Calculate" onclick="compute(this.form)" type="button">
+<br><br>
+<font color="#d2c712">Calculated Limiting Resistor</font>
+<br>&nbsp;<input name="resistor" cols="10" size="6" readonly="true" type="text"><strong> OHMS</strong><br>
+Nearest higher rated 10% resistor 
+<br>&nbsp;<input name="match" cols="10" size="10" readonly="true" type="text"><br>
+Calculated Resistor Wattage 
+<br>&nbsp;<input name="watts" cols="10" size="6" readonly="true" type="text"><strong> WATTS</strong><br>
+Safe pick is a resistor with <br>power rating of
+<br>&nbsp;<input name="safe" cols="10" size="6" readonly="true" type="text"><strong> WATTS</strong><br>
+</form>
+</td></tr>
+<tr><td colspan="2">
+<a name="series"></a>
+<br><strong><big>Leds in series:</big></strong>
+</td></tr><tr><td>
+<img src="LED%20Resistor%20Calculator_files/one_res_many_leds_series.gif" alt="Several leds in series with one resistor" width="359">
+</td><td>
+<form name="series">
+<font color="#ff0000">Supply Voltage</font>
+<br><input name="voltagea1" cols="10" size="5" onblur="checkNumeric(this,0,32,'','.','');" type="text"><strong> VOLTS</strong><br>
+<font color="#009900">Voltage Drop Across LED</font>
+<br>&nbsp;<input name="voltagea2" cols="10" size="5" onblur="checkNumeric(this,0,32,'','.','');" type="text"><strong> VOLTS</strong><br>
+<font color="#0000ff">Desired LED Current</font>
+<br>&nbsp;<input name="currenta3" cols="10" size="5" onblur="checkNumeric(this,1,500,'','.','');" type="text"><strong> MILLIAMPS</strong><br>
+How many leds connected
+<br>&nbsp;<input name="leds" value="2" cols="2" size="2" maxlength="3" onblur="checkNumeric(this,2,32,'','','');" type="text"><br><br>
+<input value="Click To Calculate" onclick="compute(this.form)" type="button">
+<br><br>
+<font color="#d2c712">Calculated Limiting Resistor</font>
+<br>&nbsp;<input name="resistor" cols="10" size="6" readonly="true" type="text"><strong> OHMS</strong><br>
+Nearest higher rated 10% resistor 
+<br>&nbsp;<input name="match" cols="10" size="10" readonly="true" type="text"><br>
+Calculated Resistor Wattage 
+<br>&nbsp;<input name="watts" cols="10" size="6" readonly="true" type="text"><strong> WATTS</strong><br>
+Safe pick is a resistor with <br>power rating of 
+<br>&nbsp;<input name="safe" cols="10" size="6" readonly="true" type="text"><strong> WATTS</strong>
+</form>
+</td></tr>
+<tr><td colspan="2">
+<a name="parallel"></a>
+<br><strong><big>Leds in parallel:</big></strong>
+</td></tr><tr><td>
+<img src="LED%20Resistor%20Calculator_files/single_res_many_leds.gif" alt="Several leds connected parallel with one resistor" width="358">
+</td><td>
+<form name="parallel">
+<font color="#ff0000">Supply Voltage</font>
+<br>&nbsp;<input name="voltagea1" cols="10" size="5" onblur="checkNumeric(this,0,32,'','.','');" type="text"><strong> VOLTS</strong><br>
+<font color="#009900">Voltage Drop Across LED</font>
+<br>&nbsp;<input name="voltagea2" cols="10" size="5" onblur="checkNumeric(this,0,32,'','.','');" type="text"><strong> VOLTS</strong><br>
+<font color="#0000ff">Desired LED Current</font>
+<br>&nbsp;<input name="currenta3" cols="10" size="5" onblur="checkNumeric(this,1,500,'','.','');" type="text"><strong> MILLIAMPS</strong><br>
+How many leds connected
+<br>&nbsp;<input name="leds" value="2" cols="2" size="2" maxlength="3" onblur="checkNumeric(this,2,32,'','','');" type="text"><br><br>
+<input value="Click To Calculate" onclick="compute(this.form)" type="button">
+<br><br>
+<font color="#d2c712">Calculated Limiting Resistor</font>
+<br>&nbsp;<input name="resistor" cols="10" size="6" readonly="true" type="text"><strong> OHMS</strong><br>
+Nearest higher rated 10% resistor 
+<br>&nbsp;<input name="match" cols="10" size="10" readonly="true" type="text"><br>
+Calculated Resistor Wattage 
+<br>&nbsp;<input name="watts" cols="10" size="6" readonly="true" type="text"><strong> WATTS</strong><br>
+Safe pick is a resistor with <br>power rating of 
+<br>&nbsp;<input name="safe" cols="10" size="6" readonly="true" type="text"><strong> WATTS</strong>
+</form>
+</td></tr></tbody></table>
+This LED resistance calculator is licensed from metku.net<!-- FreeFind Begin No Index -->
+
+
+</td></tr></tbody></table>
+
+
+<a href="http://ledz.com/?p=contacts">Contacts</a>
+<a href="http://ledz.com/?p=info">How to/FAQ</a>
+<a href="http://ledz.com/?p=pricelists">Pricelists</a>
+<a href="http://ledz.com/?p=product"><strong>Catalogue</strong></a>
+<a href="http://ledz.com/?p=sitemap">Sitemap</a>
+<a href="http://ledz.com/?p=stocklot">Action sale</a><br></div>
+</center>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="LED%20Resistor%20Calculator_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-63783-3");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body></html>
