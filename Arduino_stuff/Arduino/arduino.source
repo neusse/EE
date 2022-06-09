@@ -1,0 +1,61 @@
+int ledPin = 9;
+int val;
+
+void setup()
+{
+  Serial.begin( 9600 );
+  pinMode( ledPin, OUTPUT );
+}
+
+void loop()
+{
+  if( Serial.available() )
+  {
+    val = Serial.read();
+    analogWrite( ledPin, val );
+  }
+}
+
+
+
+
+
+import processing.serial.*;
+
+Serial port;
+HScrollbar bar;
+
+void setup()
+{
+  //i should probably make a better way of
+  //keeping the getPos() in bounds (0 - 255)
+  //but im lazy
+  size( 260, 150 );
+  noStroke();
+  frameRate( 10 );
+  
+  //create new scrollbar
+  bar = new HScrollbar( 10, 70, width - 20, 10, 1 );
+  
+  println( Serial.list() );
+  
+  //connect to COM3 at 9600 baud
+  //ARDUINO HAS TO BE PLUGGED IN FOR THIS TO WORK
+  port = new Serial( this, Serial.list()[0], 9600 );
+}
+
+void draw()
+{
+  background( 204 );
+  fill( 255 );
+  
+  //need to add a label saying what it does.
+  bar.update();
+  bar.display();
+  
+  //what we need to do is send the position of the scrollbar
+  //over the Serial connection to the Arduino, so that it can
+  //use it as an analog input; thus emulating a potentiometer
+  
+  port.write( (int)bar.getPos() );
+}
