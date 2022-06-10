@@ -1,0 +1,66 @@
+/**
+ * Base on: https://bootsnipp.com/snippets/ypNAe
+ */
+$.fn.extend({
+	treed: function (o) {
+		
+		var openedClass = 'fa-minus-square';
+		var closedClass = 'fa-plus-square';
+		var activeSelector = '.active';
+		
+		if (typeof o != 'undefined'){
+			if (typeof o.openedClass != 'undefined'){
+				openedClass = o.openedClass;
+			}
+			if (typeof o.closedClass != 'undefined'){
+				closedClass = o.closedClass;
+			}
+			if (typeof o.activeSelector != 'undefined'){
+				activeSelector = o.activeSelector;
+			}
+		};
+		
+		//initialize each of the top levels
+		var tree = $(this);
+		tree.addClass('tree tree-root');
+
+		tree.find('li').has('ul').each(function () {
+			var branch = $(this); //li with children ul
+			branch.prepend("<i class='indicator far " + closedClass + "'></i>");
+			branch.addClass('branch');
+			branch.on('click', function (e) {
+				if (this == e.target) {
+					var icon = $(this).children('i:first');
+					icon.toggleClass(openedClass + " " + closedClass);
+					$(this).children().children().toggle();
+				}
+			})
+			//branch.children().children().toggle();
+		});
+		
+		//fire event from the dynamically added icon
+		tree.find('.branch .indicator').each(function(){
+			$(this).on('click', function () {
+				$(this).closest('li').click();
+			});
+		});
+		
+		var activeItem = tree.find(activeSelector);
+		
+		if (activeItem.length > 0) {
+			activeItem = $(activeItem[0]);
+			if (activeItem.hasClass('branch')) activeItem.click();
+			if (!activeItem.parent('ul').hasClass('tree-root')) {
+				activeItem.parents('.branch').click();
+			}
+		}
+		
+		// //fire event to open branch if the li contains an anchor instead of text
+		// tree.find('.branch>a').each(function () {
+		// 	$(this).on('click', function (e) {
+		// 		$(this).closest('li').click();
+		// 		e.preventDefault();
+		// 	});
+		// });
+	}
+});

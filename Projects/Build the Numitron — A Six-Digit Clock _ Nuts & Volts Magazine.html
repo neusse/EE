@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<!-- saved from url=(0075)https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.hs-cta-wrapper p, .hs-cta-wrapper div { margin: 0; padding: 0; } a#cta_button_2436516_92e4c9b5-f239-4437-b38f-bbd2e40963d4 {
+  -webkit-font-smoothing:antialiased !important; 
+  cursor:pointer !important; 
+  -moz-user-select:none !important; 
+  -webkit-user-select:none !important; 
+  -o-user-select:none !important; 
+  user-select:none !important; 
+  display:inline-block !important; 
+  font-weight:bold !important; 
+  text-align:center !important; 
+  text-decoration:none !important; 
+  font-family:sans-serif !important; 
+  border-radius:8px !important; 
+  background-color:rgb(42,199,53) !important; 
+  background-image:-webkit-linear-gradient(top, rgb(42,199,53), rgb(31,149,39)) !important; 
+  background-image :-moz-linear-gradient(top, rgb(42,199,53), rgb(31,149,39)) !important; 
+  box-shadow:inset 0px 1px rgb(52,248,66) !important; 
+  -webkit-box-shadow:inset 0px 1px rgb(52,248,66) !important; 
+  -moz-box-shadow:inset 0px 1px rgb(52,248,66) !important; 
+  color:rgb(255, 255, 255) !important; 
+  border:2px solid rgb(21,99,26) !important; 
+  border-bottom:8px solid rgb(21,99,26) !important; 
+  text-shadow:0px -1px rgb(12,59,15) !important; 
+  position:relative !important; 
+  line-height:1.5em !important; 
+  padding:6px 18px !important; 
+}
+a#cta_button_2436516_92e4c9b5-f239-4437-b38f-bbd2e40963d4:hover {
+background-color:rgb(46,218,58) !important; 
+background-image:-webkit-linear-gradient(top, rgb(46,218,58), rgb(31,149,39)) !important; 
+background-image :-moz-linear-gradient(top, rgb(46,218,58), rgb(31,149,39)) !important; 
+color:rgb(255,255,255) !important; 
+}
+a#cta_button_2436516_92e4c9b5-f239-4437-b38f-bbd2e40963d4:active, #cta_button_2436516_92e4c9b5-f239-4437-b38f-bbd2e40963d4:active:hover {
+background-color:rgb(31,149,39) !important; 
+box-shadow:inset 0px 1px 10px rgba(0, 0, 0, 0.5) !important; 
+-webkit-box-shadow:inset 0px 1px 10px rgba(0, 0, 0, 0.5) !important; 
+-moz-box-shadow:inset 0px 1px 10px rgba(0, 0, 0, 0.5) !important; 
+color:rgb(244,244,244) !important; 
+margin-top:6px !important; 
+border-bottom:2px solid rgb(21,99,26) !important; 
+}
+
+a#cta_button_2436516_92e4c9b5-f239-4437-b38f-bbd2e40963d4:before {
+display:block !important; 
+position:absolute !important; 
+top:-8px !important; 
+bottom:-2px !important; 
+left:-2px !important; 
+right:-2px !important; 
+content:"" !important; 
+}
+
+</style>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="google-site-verification" content="">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="robots" content="">
+<meta name="geo.position" content="">
+<meta name="geo.placename" content="">
+<meta name="geo.region" content="">
+<meta property="og:description" content="This six-digit, beautifully designed timepiece showcases cold war era components — Numitrons instead of Nixie tubes — along with modern LEDs and a Microchip PIC.">
+<meta property="og:site_name" content="Nuts and Volts Magazine">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="fb:app_id" content="189861571400754">
+<meta property="og:url" content="https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock">
+<meta property="og:title" content="Build the Numitron — A Six-Digit Clock">
+<meta property="og:image" content="https://www.nutsvolts.com/uploads/articles/NV_0916_Dijk_Social.jpg">
+<title>Build the Numitron — A Six-Digit Clock | Nuts &amp; Volts Magazine</title>
+<meta name="description" content="Nuts &amp; Volts Magazine is written for the hands-on electronics hobbyist, design engineer, technician, and experimenter.">
+<meta name="keywords" content="">
+<meta name="robots" content="index,follow,archive">
+<meta name="geo.position" content=",">
+<meta name="geo.placename" content="">
+<meta name="geo.region" content="">
+
+
+<link rel="stylesheet" href="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/bootstrap.min.css">
+<link rel="stylesheet" href="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/font-awesome.min.css">
+<link href="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/css" rel="stylesheet" type="text/css">
+
+<link href="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/style.css" rel="stylesheet">
+<script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/collectedforms.js.download" type="text/javascript" id="CollectedForms-2436516" crossorigin="anonymous" data-leadin-portal-id="2436516" data-leadin-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="2436516" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/leadflows.js.download" type="text/javascript" id="LeadFlows-2436516" crossorigin="anonymous" data-leadin-portal-id="2436516" data-leadin-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="2436516" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/2436516.js.download" type="text/javascript" id="cookieBanner-2436516" data-cookieconsent="ignore" data-hs-ignore="true" data-loader="hs-scriptloader" data-hsjs-portal="2436516" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/2436516.js(1).download" type="text/javascript" id="hs-analytics"></script><script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/sdk.js.download" async="" crossorigin="anonymous"></script><script async="" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/analytics.js.download"></script><script id="facebook-jssdk" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/sdk.js(1).download"></script><script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/jquery.min.js.download" type="text/javascript"></script>
+
+<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+<script type="text/javascript" async="" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/embed.js(1).download"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.63860eb743c7d9d2adf0fa435788abe7.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.33bc87b2c4f9324203cc85b7dd1d0492.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.39ef974e33e97bdc315c595632f05d3c.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"><style type="text/css" data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget css:fb.css.customer_chat_plugin_iframe">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}
+.fb_mpn_mobile_landing_page_slide_out{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_out_from_left{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out_from_left;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_up{animation-duration:500ms;animation-name:fb_mpn_landing_page_slide_up;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_in{animation-duration:300ms;animation-name:fb_mpn_bounce_in;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out{animation-duration:300ms;animation-name:fb_mpn_bounce_out;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out_v2{animation-duration:300ms;animation-name:fb_mpn_fade_out;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_v2{animation-duration:300ms;animation-name:fb_bounce_in_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_from_left{animation-duration:300ms;animation-name:fb_bounce_in_from_left;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_v2{animation-duration:300ms;animation-name:fb_bounce_out_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_from_left{animation-duration:300ms;animation-name:fb_bounce_out_from_left;transition-timing-function:ease-in}.fb_invisible_flow{display:inherit;height:0;overflow-x:hidden;width:0}@keyframes fb_mpn_landing_page_slide_out{0%{margin:0 12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;margin:0 24px;width:60px}}@keyframes fb_mpn_landing_page_slide_out_from_left{0%{left:12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;left:12px;width:60px}}@keyframes fb_mpn_landing_page_slide_up{0%{bottom:0;opacity:0}100%{bottom:24px;opacity:1}}@keyframes fb_mpn_bounce_in{0%{opacity:.5;top:100%}100%{opacity:1;top:0}}@keyframes fb_mpn_fade_out{0%{bottom:30px;opacity:1}100%{bottom:0;opacity:0}}@keyframes fb_mpn_bounce_out{0%{opacity:1;top:0}100%{opacity:.5;top:100%}}@keyframes fb_bounce_in_v2{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}50%{transform:scale(1.03, 1.03);transform-origin:bottom right}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}}@keyframes fb_bounce_in_from_left{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}50%{transform:scale(1.03, 1.03);transform-origin:bottom left}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}}@keyframes fb_bounce_out_v2{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}}@keyframes fb_bounce_out_from_left{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}}@keyframes slideInFromBottom{0%{opacity:.1;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}@keyframes slideInFromBottomDelay{0%{opacity:0;transform:translateY(100%)}97%{opacity:0;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}</style><script type="text/javascript" async="" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/cta-loaded.js.download"></script><style type="text/css" id="LeadinColors-173754">.leadinModal-173754 .leadinModal-content {
+  border-color: #FF5550 !important;
+}
+.leadinModal-173754 .leadinModal input:focus {
+  box-shadow: 0 0 0 2px #cc4440 !important;
+}
+.leadinModal-173754 .leadin-button-primary {
+  background: #FF5550 !important;
+  color: #FFFFFF !important;
+}
+.leadinModal-173754 .back-button {
+  border: 1px solid #FF5550 !important;
+}
+.leadinModal-173754 .leadin-button-primary:hover {
+  background: #cc4440 !important;
+}
+.leadinModal-173754 .leadin-button-primary-border {
+  border: 1px solid #FFFFFF !important;
+}
+.leadinModal-173754 .leadin-button-secondary {
+  background: #FFFFFF !important;
+  color: #FF5550 !important;
+}
+.leadinModal-173754 .leadin-button-secondary.leadin-dismiss-button {
+  color: #FFFFFF !important;
+  background: #FF5550 !important;
+  border: 1.25px solid #FFFFFF !important;
+}
+.leadinModal-173754 .leadin-button-secondary:hover {
+  color: #cc4440 !important;
+}
+.leadinModal-173754.leadinModal-theme-top.leadinModal-preview.leadinModal-v3 .leadinModal-close:before,
+.leadinModal-173754.leadinModal-theme-bottom-right-corner.leadinModal-preview.leadinModal-v3 .leadinModal-close:before,
+.leadinModal-173754.leadinEmbedded-theme-default.leadinModal-preview.leadinModal-v3 .leadinModal-close:before,
+.leadinModal-173754.leadinModal-theme-bottom-left-corner.leadinModal-preview.leadinModal-v3 .leadinModal-close:before {
+  color: #FFFFFF !important;
+}
+.leadinModal-173754.leadinModal-theme-top.leadinModal-preview.leadinModal-v3 .leadinModal-content,
+.leadinModal-173754.leadinModal-theme-bottom-right-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content,
+.leadinModal-173754.leadinEmbedded-theme-default.leadinModal-preview.leadinModal-v3 .leadinModal-content,
+.leadinModal-173754.leadinModal-theme-bottom-left-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content {
+  background: #FF5550 !important;
+}
+.leadinModal-173754.leadinModal-theme-top.leadinModal-preview.leadinModal-v3 .leadinModal-content h4,
+.leadinModal-173754.leadinModal-theme-bottom-right-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content h4,
+.leadinModal-173754.leadinEmbedded-theme-default.leadinModal-preview.leadinModal-v3 .leadinModal-content h4,
+.leadinModal-173754.leadinModal-theme-bottom-left-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content h4 {
+  color: #FFFFFF !important;
+}
+.leadinModal-173754.leadinModal-theme-top.leadinModal-preview.leadinModal-v3 .leadinModal-content p,
+.leadinModal-173754.leadinModal-theme-top.leadinModal-preview.leadinModal-v3 .leadinModal-content .secondary-dismiss,
+.leadinModal-173754.leadinModal-theme-bottom-right-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content p,
+.leadinModal-173754.leadinModal-theme-bottom-right-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content .secondary-dismiss,
+.leadinModal-173754.leadinEmbedded-theme-default.leadinModal-preview.leadinModal-v3 .leadinModal-content p,
+.leadinModal-173754.leadinEmbedded-theme-default.leadinModal-preview.leadinModal-v3 .leadinModal-content .secondary-dismiss,
+.leadinModal-173754.leadinModal-theme-bottom-left-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content p,
+.leadinModal-173754.leadinModal-theme-bottom-left-corner.leadinModal-preview.leadinModal-v3 .leadinModal-description-body {
+  color: #FFFFFF !important;
+}
+.leadinModal-173754.leadinModal-theme-top.leadinModal-preview.leadinModal-v3 .leadinModal-content ul,
+.leadinModal-173754.leadinModal-theme-bottom-right-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content ul,
+.leadinModal-173754.leadinEmbedded-theme-default.leadinModal-preview.leadinModal-v3 .leadinModal-content ul,
+.leadinModal-173754.leadinModal-theme-bottom-left-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content ul {
+  color: #FFFFFF !important;
+}
+.leadinModal-173754.leadinModal-theme-top.leadinModal-preview.leadinModal-v3 .leadinModal-content li,
+.leadinModal-173754.leadinModal-theme-bottom-right-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content li,
+.leadinModal-173754.leadinEmbedded-theme-default.leadinModal-preview.leadinModal-v3 .leadinModal-content li,
+.leadinModal-173754.leadinModal-theme-bottom-left-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content li {
+  color: #FFFFFF !important;
+}
+.leadinModal-173754.leadinModal-theme-top.leadinModal-preview.leadinModal-v3 .leadinModal-content ol,
+.leadinModal-173754.leadinModal-theme-bottom-right-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content ol,
+.leadinModal-173754.leadinEmbedded-theme-default.leadinModal-preview.leadinModal-v3 .leadinModal-content ol,
+.leadinModal-173754.leadinModal-theme-bottom-left-corner.leadinModal-preview.leadinModal-v3 .leadinModal-content ol {
+  color: #FFFFFF !important;
+}</style><style id="lead-flows-style" type="text/css">.lf-date-picker.pika-single{z-index:9999;display:block;position:relative;color:#333;background:#fff;border:1px solid #ccc;border-bottom-color:#bbb;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;*zoom:1}.lf-date-picker.pika-single:after,.lf-date-picker.pika-single:before{content:" ";display:table}.lf-date-picker.pika-single:after{clear:both}.lf-date-picker.pika-single.is-hidden{display:none}.lf-date-picker.pika-single.is-bound{position:absolute;box-shadow:0 5px 15px -5px rgba(0,0,0,.5)}.lf-date-picker .pika-lendar{float:left;width:240px;margin:8px}.lf-date-picker .pika-title{position:relative;text-align:center}.lf-date-picker .pika-title select{cursor:pointer;position:absolute;z-index:9998;margin:0;left:0;top:5px;filter:alpha(opacity=0);opacity:0}.lf-date-picker .pika-label{display:inline-block;*display:inline;position:relative;z-index:9999;overflow:hidden;margin:0;padding:5px 3px;font-size:14px;line-height:20px;font-weight:700;background-color:#fff}.lf-date-picker .pika-next,.lf-date-picker .pika-prev{display:block;cursor:pointer;position:relative;outline:none;border:0;padding:0;width:20px;height:30px;text-indent:20px;white-space:nowrap;overflow:hidden;background-color:transparent;background-position:50%;background-repeat:no-repeat;background-size:75% 75%;opacity:.5;*position:absolute;*top:0}.lf-date-picker .pika-next:hover,.lf-date-picker .pika-prev:hover{opacity:1}.lf-date-picker .pika-next.is-disabled,.lf-date-picker .pika-prev.is-disabled{cursor:default;opacity:.2}.lf-date-picker .is-rtl .pika-next,.lf-date-picker .pika-prev{float:left;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAUklEQVR42u3VMQoAIBADQf8Pgj+OD9hG2CtONJB2ymQkKe0HbwAP0xucDiQWARITIDEBEnMgMQ8S8+AqBIl6kKgHiXqQqAeJepBo/z38J/U0uAHlaBkBl9I4GwAAAABJRU5ErkJggg==");*left:0}.lf-date-picker .is-rtl .pika-prev,.lf-date-picker .pika-next{float:right;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAU0lEQVR42u3VOwoAMAgE0dwfAnNjU26bYkBCFGwfiL9VVWoO+BJ4Gf3gtsEKKoFBNTCoCAYVwaAiGNQGMUHMkjGbgjk2mIONuXo0nC8XnCf1JXgArVIZAQh5TKYAAAAASUVORK5CYII=");*right:0}.lf-date-picker .pika-select{display:inline-block;*display:inline}.lf-date-picker .pika-table{width:100%;border-collapse:collapse;border-spacing:0;border:0}.lf-date-picker .pika-table td,.lf-date-picker .pika-table th{width:14.285714285714286%;padding:0}.lf-date-picker .pika-table th{color:#999;font-size:12px;line-height:25px;font-weight:700;text-align:center}.lf-date-picker .pika-table abbr{border-bottom:none;cursor:help}.lf-date-picker .pika-button{cursor:pointer;display:block;-moz-box-sizing:border-box;box-sizing:border-box;outline:none;border:0;margin:0;width:100%;padding:5px;color:#666;font-size:12px;line-height:15px;text-align:right;background:#f5f5f5}.is-today .lf-date-picker .pika-button{color:#3af;font-weight:700}.is-selected .lf-date-picker .pika-button{color:#fff;font-weight:700;background:#3af;box-shadow:inset 0 1px 3px #178fe5;border-radius:3px}.is-disabled .lf-date-picker .pika-button{pointer-events:none;cursor:default;color:#999;opacity:.3}.lf-date-picker .pika-button:hover{color:#fff!important;background:#ff8000!important;box-shadow:none!important;border-radius:3px!important}.lf-date-picker .pika-week{font-size:11px;color:#999}.leadinModal .leadin-button{-webkit-border-radius:.25em;-moz-border-radius:.25em;-ms-border-radius:.25em;-o-border-radius:.25em;border-radius:.25em;-webkit-appearance:none;cursor:pointer;font-size:1em;font-weight:700;line-height:1;padding:1em 1.5em;width:100%;text-decoration:none}.leadinModal a.leadin-button{display:inline-block;text-align:center}@media only screen and (max-width:768px){.leadinModal.leadinModal-v3 .leadin-button-wrapper{margin-bottom:1rem}}.leadinModal.leadinModal-v3 .leadin-button{display:inline-block;padding:.7em 1.7em;font-weight:400}@media only screen and (max-width:768px){.leadinModal.leadinModal-v3 .leadin-button{padding:.5em 1.7em;font-size:18px}}@media only screen and (max-width:768px){.leadinModal.leadinModal-v3 .back-button{padding:.45rem!important}}@media only screen and (max-width:768px){.leadinModal.leadinModal-v3 .next-button{margin-bottom:1rem}}.leadin-button-extra-padding{padding:.7em 1.7em!important}.leadinModal .leadin-footer-wrapper{display:block!important;clear:both;text-align:center}.leadinModal-v3 .leadin-footer-wrapper{background-color:#fff;padding:.5em;border-top:1px solid #ddd}.leadinModal .leadinModal-close{position:absolute;top:0;right:0;cursor:pointer;z-index:1000}.leadinModal .leadinModal-close,.leadinModal .leadinModal-close:before{-webkit-border-radius:.33em;-moz-border-radius:.33em;-ms-border-radius:.33em;-o-border-radius:.33em;border-radius:.33em}.leadinModal .leadinModal-close:before{display:inline-block!important;content:"\00D7";font-size:25px;font-weight:400;line-height:25px;width:40px;height:40px;text-align:right;color:#bbb;background:transparent;padding-top:6px;padding-right:12px}.leadinModal .leadinModal-close:active:before,.leadinModal .leadinModal-close:hover:before{color:#777}.leadinModal-v3 .leadinModal-close:before,.leadinModal-v3 .leadinModal-close:hover:before{color:#7a7676}.leadinModal .leadinModal-overlay{position:fixed;top:0;right:0;bottom:0;left:0;background:#000;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";animation:leadinModal-fadein .5s;-webkit-animation:leadinModal-fadein .5s;-moz-animation:leadinModal-fadein .5s;-ms-animation:leadinModal-fadein .5s;-o-animation:leadinModal-fadein .5s;-webkit-backface-visibility:hidden;background-color:rgba(0,0,0,.4)}.leadinModal .leadinModal-overlay.leadinModal-closing{animation:leadinModal-fadeout .5s;-webkit-animation:leadinModal-fadeout .5s;-moz-animation:leadinModal-fadeout .5s;-ms-animation:leadinModal-fadeout .5s;-o-animation:leadinModal-fadeout .5s;-webkit-backface-visibility:hidden}.leadinModal.leadinModal-v3 .leadinModal-overlay{filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";background-color:rgba(0,0,0,.7)}.leadinModal .leadin-close-button,.leadinModal .leadin-footer-link{display:inline!important;text-decoration:none;color:#0091ae}.leadinModal .leadin-close-button:hover,.leadinModal .leadin-footer-link:hover{background:none;text-decoration:underline!important;font-weight:400}.leadinModal .leadin-footer-link-microcopy{color:#7c98b6}.leadinModal .leadin-close-button{background:transparent;text-decoration:underline;cursor:pointer}.leadinModal .leadin-close-button:focus{outline:thin dotted}.leadinModal a.secondary-dismiss{text-align:center;margin-top:1.5em;display:block}.leadinModal .leadin-footer-sprocket{width:18px;margin-right:3px;vertical-align:middle}.leadinModal-v3 .leadin-footer-link-wrapper{font-size:.93em;vertical-align:middle}.leadinModal-v3 .leadin-footer-sprocket{width:18px;margin-right:3px;vertical-align:middle}.leadinModal-v3 .leadin-footer-link,.leadinModal-v3 .leadinModal .leadin-close-button,.leadinModal .leadinModal-v3 .leadin-close-button{color:#0091ae}.leadinModal-v3 .leadin-footer-link-microcopy{color:#7c98b6}@media only screen and (max-width:768px){.leadinModal-v3 .leadin-footer-link,.leadinModal-v3 .leadinModal .leadin-close-button,.leadinModal .leadinModal-v3 .leadin-close-button{font-size:1em}}.leadinModal-testing-mode .leadinModal-content-wrapper{position:relative}.leadinModal-testing-mode .leadinModal-content-wrapper:after{content:"PREVIEW";position:absolute;left:20px;top:-20px;font-size:10px;line-height:20px;font-family:system-ui,serif;background:#6a78d1;color:#fff;padding:0 8px;border-radius:4px 4px 0 0}.leadinModal-testing-mode.leadinModal-theme-top .leadinModal-content-wrapper:after{top:auto;bottom:-20px;border-radius:0 0 4px 4px}@keyframes leadinModal-fadein{0%{opacity:0}to{opacity:1}}@-webkit-keyframes leadinModal-fadein{0%{opacity:0}to{opacity:1}}@-moz-keyframes leadinModal-fadein{0%{opacity:0}to{opacity:1}}@-ms-keyframes leadinModal-fadein{0%{opacity:0}to{opacity:1}}@-o-keyframes leadinModal-fadein{0%{opacity:0}to{opacity:1}}@keyframes leadinModal-fadeout{0%{opacity:1}to{opacity:0}}@-webkit-keyframes leadinModal-fadeout{0%{opacity:1}to{opacity:0}}@-moz-keyframes leadinModal-fadeout{0%{opacity:1}to{opacity:0}}@-ms-keyframes leadinModal-fadeout{0%{opacity:1}to{opacity:0}}@-o-keyframes leadinModal-fadeout{0%{opacity:1}to{opacity:0}}@keyframes leadinModal-rotation{0%{transform:rotate(0deg);-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);-o-transform:rotate(0deg)}to{transform:rotate(359deg);-webkit-transform:rotate(359deg);-moz-transform:rotate(359deg);-ms-transform:rotate(359deg);-o-transform:rotate(359deg)}}@-webkit-keyframes leadinModal-rotation{0%{transform:rotate(0deg);-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);-o-transform:rotate(0deg)}to{transform:rotate(359deg);-webkit-transform:rotate(359deg);-moz-transform:rotate(359deg);-ms-transform:rotate(359deg);-o-transform:rotate(359deg)}}@-moz-keyframes leadinModal-rotation{0%{transform:rotate(0deg);-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);-o-transform:rotate(0deg)}to{transform:rotate(359deg);-webkit-transform:rotate(359deg);-moz-transform:rotate(359deg);-ms-transform:rotate(359deg);-o-transform:rotate(359deg)}}@-ms-keyframes leadinModal-rotation{0%{transform:rotate(0deg);-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);-o-transform:rotate(0deg)}to{transform:rotate(359deg);-webkit-transform:rotate(359deg);-moz-transform:rotate(359deg);-ms-transform:rotate(359deg);-o-transform:rotate(359deg)}}@-o-keyframes leadinModal-rotation{0%{transform:rotate(0deg);-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);-o-transform:rotate(0deg)}to{transform:rotate(359deg);-webkit-transform:rotate(359deg);-moz-transform:rotate(359deg);-ms-transform:rotate(359deg);-o-transform:rotate(359deg)}}.leadinModal,.leadinModal *,.leadinModal :after,.leadinModal :before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border:0;margin:0;padding:0}.leadinModal{position:fixed;top:0;right:0;bottom:0;left:0;overflow:visible;-webkit-overflow-scrolling:touch;z-index:9999;font-size:16px}.leadinModal.leadinModal-hidden{display:none}.leadinModal .leadinModal-content{*zoom:1;-webkit-box-shadow:0 0 5px rgba(0,0,0,.25);-moz-box-shadow:0 0 5px rgba(0,0,0,.25);box-shadow:0 0 5px rgba(0,0,0,.25);position:relative;padding:1em 1.5em;margin:0 auto;background:#fff;max-width:100%;width:30em;font-size:16px;overflow:auto;max-height:70%}.leadinModal .leadinModal-content:after{content:"";display:table;clear:both}.leadinModal .leadinModal-content h1,.leadinModal .leadinModal-content h2,.leadinModal .leadinModal-content h3,.leadinModal .leadinModal-content h4,.leadinModal .leadinModal-content h5,.leadinModal .leadinModal-content h6,.leadinModal .leadinModal-content input,.leadinModal .leadinModal-content li,.leadinModal .leadinModal-content option,.leadinModal .leadinModal-content p,.leadinModal .leadinModal-content select,.leadinModal .leadinModal-content ul{line-height:1.5;text-transform:none;letter-spacing:0;margin:0}.leadinModal .leadinModal-content h1,.leadinModal .leadinModal-content h2,.leadinModal .leadinModal-content h3,.leadinModal .leadinModal-content h4,.leadinModal .leadinModal-content h5,.leadinModal .leadinModal-content h6{color:#444;font-size:1.3em;font-weight:600;margin-bottom:.6em}.leadinModal .leadinModal-content .secondary-dismiss,.leadinModal .leadinModal-content input[type=checkbox],.leadinModal .leadinModal-content input[type=email],.leadinModal .leadinModal-content input[type=number],.leadinModal .leadinModal-content input[type=tel],.leadinModal .leadinModal-content input[type=text],.leadinModal .leadinModal-content li,.leadinModal .leadinModal-content p,.leadinModal .leadinModal-content select,.leadinModal .leadinModal-content textarea,.leadinModal .leadinModal-content ul{color:#666;font-size:1em;font-weight:400}.leadinModal .leadinModal-content label{color:#666}.leadinModal .leadinModal-content li,.leadinModal .leadinModal-content p,.leadinModal .leadinModal-content ul{margin-bottom:.6em}.leadinModal .leadinModal-content li,.leadinModal .leadinModal-content ol,.leadinModal .leadinModal-content ul{list-style-position:inside}.leadinModal .leadinModal-content input[type=email],.leadinModal .leadinModal-content input[type=file],.leadinModal .leadinModal-content input[type=number],.leadinModal .leadinModal-content input[type=tel],.leadinModal .leadinModal-content input[type=text],.leadinModal .leadinModal-content select,.leadinModal .leadinModal-content textarea{-webkit-border-radius:.25em;-moz-border-radius:.25em;-ms-border-radius:.25em;-o-border-radius:.25em;border-radius:.25em;width:100%;padding:.5em;border:1px solid #ddd;height:2.6em;resize:vertical}.leadinModal .leadinModal-content input[type=checkbox]{cursor:pointer;display:initial;line-height:normal;position:relative;margin-right:.5em;top:-1px}.leadinModal .leadinModal-content input[type=file]{padding:initial;border:initial;line-height:initial;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none}.leadinModal .leadinModal-content input:-moz-placeholder{color:#bfbfbf}.leadinModal .leadinModal-content input::-webkit-input-placeholder{color:#bfbfbf}.leadinModal.leadinModal-v3.leadinModal-preview .leadinModal-content{border-width:0}.leadinModal.leadinModal-v3 .leadinModal-content{font-size:14px}.leadinModal.leadinModal-v3 .leadin-form-wrapper{margin-top:0;padding-top:1.5em}.leadinModal.leadinModal-v3 .leadin-thank-you-wrapper{padding:0}.leadinModal.leadinModal-v3 .thank-you-message{font-size:16px;margin-bottom:21px}.leadinModal.leadinModal-v3 .thank-you-message,.leadinModal.leadinModal-v3 .thank-you-message *{text-align:center}.leadinModal.leadinModal-v3 .thank-you-message a{color:#00a4bd;text-decoration:underline}.leadinModal.leadinModal-v3 .thank-you-message a.leadin-button{text-decoration:none}.leadinModal.leadinModal-v3 .thank-you-message .continue-url-wrapper{margin:auto;width:53%;word-wrap:break-word}.leadinModal.leadinModal-v3 .thank-you-button{text-align:center}.leadinModal.leadinModal-v3.leadinModal-thanks .leadinModal-content .leadinModal-content-wrapper .leadin-content-body{padding:2em 2.5em}.leadinModal.leadinModal-v0 .dyno-image img,.leadinModal.leadinModal-v1 .dyno-image img,.leadinModal.leadinModal-v2 .dyno-image img{display:block;margin:0 auto;margin-right:15px}.leadinModal.leadinModal-v0 .leadin-message-wrapper h4,.leadinModal.leadinModal-v0 .leadin-message-wrapper p,.leadinModal.leadinModal-v1 .leadin-message-wrapper h4,.leadinModal.leadinModal-v1 .leadin-message-wrapper p,.leadinModal.leadinModal-v2 .leadin-message-wrapper h4,.leadinModal.leadinModal-v2 .leadin-message-wrapper p{margin-left:122px}.leadinModal.leadinModal-v0 .leadin-preview-wrapper-no-image .advance-wrapper,.leadinModal.leadinModal-v0 .leadin-preview-wrapper-no-image .leadin-form-wrapper,.leadinModal.leadinModal-v0 .leadin-preview-wrapper-no-image h4,.leadinModal.leadinModal-v0 .leadin-preview-wrapper-no-image ol,.leadinModal.leadinModal-v0 .leadin-preview-wrapper-no-image p,.leadinModal.leadinModal-v0 .leadin-preview-wrapper-no-image ul,.leadinModal.leadinModal-v1 .leadin-preview-wrapper-no-image .advance-wrapper,.leadinModal.leadinModal-v1 .leadin-preview-wrapper-no-image .leadin-form-wrapper,.leadinModal.leadinModal-v1 .leadin-preview-wrapper-no-image h4,.leadinModal.leadinModal-v1 .leadin-preview-wrapper-no-image ol,.leadinModal.leadinModal-v1 .leadin-preview-wrapper-no-image p,.leadinModal.leadinModal-v1 .leadin-preview-wrapper-no-image ul,.leadinModal.leadinModal-v2 .leadin-preview-wrapper-no-image .advance-wrapper,.leadinModal.leadinModal-v2 .leadin-preview-wrapper-no-image .leadin-form-wrapper,.leadinModal.leadinModal-v2 .leadin-preview-wrapper-no-image h4,.leadinModal.leadinModal-v2 .leadin-preview-wrapper-no-image ol,.leadinModal.leadinModal-v2 .leadin-preview-wrapper-no-image p,.leadinModal.leadinModal-v2 .leadin-preview-wrapper-no-image ul{margin-left:0!important}.leadinModal.leadinModal-v3 .dyno-image img{display:block;margin:0 auto}.leadinModal.leadinModal-v3 h1,.leadinModal.leadinModal-v3 h2,.leadinModal.leadinModal-v3 h3,.leadinModal.leadinModal-v3 h4,.leadinModal.leadinModal-v3 h5,.leadinModal.leadinModal-v3 h6,.leadinModal.leadinModal-v3 p{line-height:1.4}.leadinModal.leadinModal-v3 .leadin-preview-wrapper{display:block}.leadinModal.leadinModal-v3 .leadin-form-wrapper{margin-bottom:0}.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image .advance-wrapper,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image .leadin-form-wrapper,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image h4,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image ol,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image p,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image ul{margin-left:0!important}@media only screen and (max-width:768px){.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image .advance-wrapper,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image .leadin-form-wrapper,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image h4,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image ol,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image p,.leadinModal.leadinModal-v3 .leadin-preview-wrapper-no-image ul{width:100%!important}}@media only screen and (max-width:768px){.leadinModal.leadinModal-v3 .dyno-image{width:80px!important;margin-right:20px!important}.leadinModal.leadinModal-v3 .dyno-image img{max-width:80px;max-height:80px}.leadinModal.leadinModal-v3 .leadin-form-wrapper{padding-top:0}.leadinModal.leadinModal-v3 h1,.leadinModal.leadinModal-v3 h2,.leadinModal.leadinModal-v3 h3,.leadinModal.leadinModal-v3 h4,.leadinModal.leadinModal-v3 h5,.leadinModal.leadinModal-v3 h6{font-size:20px}.leadinModal.leadinModal-v3 p{font-size:16px}}.leadinModal-hide-outline:focus{outline:none}.leadin-button:after{height:0}@keyframes leadinModal-flyin{0%{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}to{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}}@-webkit-keyframes leadinModal-flyin{0%{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}to{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}}@-moz-keyframes leadinModal-flyin{0%{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}to{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}}@-ms-keyframes leadinModal-flyin{0%{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}to{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}}@-o-keyframes leadinModal-flyin{0%{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}to{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}}@keyframes leadinModal-flyout{0%{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}}@-webkit-keyframes leadinModal-flyout{0%{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}}@-moz-keyframes leadinModal-flyout{0%{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}}@-ms-keyframes leadinModal-flyout{0%{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}}@-o-keyframes leadinModal-flyout{0%{opacity:1;transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{opacity:0;transform:translateY(-40px);-webkit-transform:translateY(-40px);-moz-transform:translateY(-40px);-ms-transform:translateY(-40px);-o-transform:translateY(-40px)}}.leadinModal.leadinModal-theme-default{padding-top:200px}@media only screen and (max-height:700px){.leadinModal.leadinModal-theme-default{max-height:94%;padding-top:50px}}.leadinModal.leadinModal-theme-default.leadinModal-closing .leadinModal-content,.leadinModal.leadinModal-theme-default.leadinModal-hiding .leadinModal-content{animation:leadinModal-flyout .5s;-webkit-animation:leadinModal-flyout .5s;-moz-animation:leadinModal-flyout .5s;-ms-animation:leadinModal-flyout .5s;-o-animation:leadinModal-flyout .5s;-webkit-backface-visibility:hidden}.leadinModal.leadinModal-theme-default .leadinModal-content{animation:leadinModal-flyin .5s;-webkit-animation:leadinModal-flyin .5s;-moz-animation:leadinModal-flyin .5s;-ms-animation:leadinModal-flyin .5s;-o-animation:leadinModal-flyin .5s;-webkit-backface-visibility:hidden;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px;border-radius:5px;border-top-width:5px;border-top-style:solid}@media only screen and (max-height:750px){.leadinModal.leadinModal-theme-default .leadinModal-content{overflow:auto}}@media only screen and (max-width:640px){.leadinModal.leadinModal-theme-default.leadinModal-v0 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-default.leadinModal-v1 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-default.leadinModal-v2 .leadin-message-wrapper p{display:inline-block;margin:0;margin-top:15px}}.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadinModal-content{border-top-width:0;background-color:#ebebeb;padding:0;width:40em}.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-content-body #leadin-content-form-wrapper,.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-content-body .leadin-preview-wrapper{padding:3em 3.5em}.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadinModal-close{top:0;right:0}.leadinModal.leadinModal-theme-default.leadinModal-v3 .dyno-image{display:inline-block;vertical-align:top;float:left;width:100px;margin-right:22px;margin-bottom:15px}.leadinModal.leadinModal-theme-default.leadinModal-v3 .clearfix-preview-wrapper{clear:both}.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-form h4,.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-form ol,.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-form p,.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-form ul,.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-preview h4,.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-preview ol,.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-preview p,.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-preview ul{margin-left:122px}.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-preview h4{margin-bottom:.6em}.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-preview .advance-wrapper{margin-left:122px}.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-preview .leadin-button{padding:.7em 1.7em}.leadinModal.leadinModal-theme-default.leadinModal-v3.leadinModal-form .leadin-form-wrapper{padding-top:0;margin-left:122px}@media only screen and (max-width:768px){.leadinModal.leadinModal-theme-default.leadinModal-v3{margin-top:30px;margin-left:10px;margin-right:10px}.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-content-body{padding:1.5em 1.25em!important}.leadinModal.leadinModal-theme-default.leadinModal-v3 .clearfix-image,.leadinModal.leadinModal-theme-default.leadinModal-v3 .clearfix-image-description{clear:both}.leadinModal.leadinModal-theme-default.leadinModal-v3 #leadin-content-form-wrapper,.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-preview-wrapper{padding:0!important}.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-message-wrapper,.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-preview-wrapper{margin-bottom:0}.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-message-wrapper h4,.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-preview-wrapper h4{margin-left:100px;margin-right:21px}.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-message-wrapper ol,.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-message-wrapper ul,.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-preview-wrapper ol,.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-preview-wrapper p,.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-preview-wrapper ul{margin-left:0;margin-top:10px}.leadinModal.leadinModal-theme-default.leadinModal-v3 .advance-wrapper{margin-left:0!important}.leadinModal.leadinModal-theme-default.leadinModal-v3 .leadin-form-wrapper{margin:0!important}}@keyframes leadinModal-slideup{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:0}2%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@-webkit-keyframes leadinModal-slideup{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:0}2%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@-moz-keyframes leadinModal-slideup{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:0}2%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@-ms-keyframes leadinModal-slideup{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:0}2%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@-o-keyframes leadinModal-slideup{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:0}2%{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@keyframes leadinModal-slidedown{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px)}}@-webkit-keyframes leadinModal-slidedown{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px)}}@-moz-keyframes leadinModal-slidedown{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px)}}@-ms-keyframes leadinModal-slidedown{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px)}}@-o-keyframes leadinModal-slidedown{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(800px);-webkit-transform:translateY(800px);-moz-transform:translateY(800px);-ms-transform:translateY(800px);-o-transform:translateY(800px)}}.leadinModal.leadinModal-theme-bottom-left-corner,.leadinModal.leadinModal-theme-bottom-right-corner{top:auto;bottom:0;overflow:visible}.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-overlay,.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-overlay{display:none}.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-closing .leadinModal-content,.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-hiding .leadinModal-content,.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-closing .leadinModal-content,.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-hiding .leadinModal-content{animation:leadinModal-slidedown .5s;-webkit-animation:leadinModal-slidedown .5s;-moz-animation:leadinModal-slidedown .5s;-ms-animation:leadinModal-slidedown .5s;-o-animation:leadinModal-slidedown .5s;-webkit-backface-visibility:hidden}.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-content,.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-content{animation:leadinModal-slideup .5s;-webkit-animation:leadinModal-slideup .5s;-moz-animation:leadinModal-slideup .5s;-ms-animation:leadinModal-slideup .5s;-o-animation:leadinModal-slideup .5s;-webkit-backface-visibility:hidden;bottom:0;border-top-width:5px;border-top-style:solid;position:fixed}@media only screen and (max-width:768px){.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-content,.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-content{overflow:auto}}.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-content{-webkit-border-radius:5px 0 0 0;-moz-border-radius:5px 0 0 0;-ms-border-radius:5px 0 0 0;-o-border-radius:5px 0 0 0;border-radius:5px 0 0 0;right:0;left:auto}.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-content{-webkit-border-radius:0 5px 0 0;-moz-border-radius:0 5px 0 0;-ms-border-radius:0 5px 0 0;-o-border-radius:0 5px 0 0;border-radius:0 5px 0 0;left:0;right:auto}@media only screen and (max-width:640px){.leadinModal-v0.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-content,.leadinModal-v0.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-content,.leadinModal-v1.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-content,.leadinModal-v1.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-content,.leadinModal-v2.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-content,.leadinModal-v2.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-content{-webkit-border-radius:0;-moz-border-radius:0;-ms-border-radius:0;-o-border-radius:0;border-radius:0}}@media only screen and (max-width:768px){.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-content,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-content{-webkit-border-radius:0;-moz-border-radius:0;-ms-border-radius:0;-o-border-radius:0;border-radius:0}}@media only screen and (max-width:640px){.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-v0 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-v1 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-v2 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-v0 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-v1 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-v2 .leadin-message-wrapper p{display:inline-block;margin:0;margin-top:15px}}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .leadinModal-close,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-close,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-close{top:0;right:0}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .dyno-image,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .dyno-image,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .dyno-image{vertical-align:top;float:left;width:100px;margin-right:22px}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .leadinModal-content,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-content,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-content{padding:0;width:30em}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .leadin-content-body .leadin-preview-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .leadin-content-body .leadin-preview-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .leadin-content-body .leadin-preview-wrapper{padding:1em 1.5em;padding-bottom:1.5em}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .leadin-message-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .leadin-message-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .leadin-message-wrapper{margin-bottom:0}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .clearfix-image-form,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .clearfix-image-form,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .clearfix-image-form{clear:both}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner h4{margin-right:21px}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .clearfix-preview-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .clearfix-preview-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .clearfix-preview-wrapper{clear:both}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper .advance-wrapper,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper ol,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper p,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper ul,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper .advance-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper ol,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper ul,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper .advance-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper ol,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper ul{margin-left:122px}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper h4{margin-bottom:.6em}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper .leadin-button,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper .leadin-button,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper .leadin-button{padding:.7em 1.7em}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form .advance-wrapper,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form h4,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form ol,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form p,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form ul,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form .advance-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form ol,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form ul,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form .advance-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form ol,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form ul{margin-left:122px}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form .dyno-image,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form .dyno-image,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form .dyno-image{float:left}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form .leadin-preview-wrapper p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form .leadin-preview-wrapper p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form .leadin-preview-wrapper p{padding-right:21px}@media only screen and (min-width:768px){.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form p{margin-bottom:0}}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form .leadinModal-content,.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-thanks .leadinModal-content,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form .leadinModal-content,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-thanks .leadinModal-content,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form .leadinModal-content,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-thanks .leadinModal-content{background-color:#ebebeb;border-bottom-width:4px}@media only screen and (max-width:768px){.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .dyno-image,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .dyno-image,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .dyno-image{margin-bottom:15px}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .leadinModal-content,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .leadinModal-content,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .leadinModal-content{width:100%}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default .clearfix-image-description,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner .clearfix-image-description,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner .clearfix-image-description{clear:both}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper .dyno-image,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper .dyno-image,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper .dyno-image{display:inline-block;float:left}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper h4{margin-left:100px;margin-bottom:0}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper p{display:inline-block;width:100%;margin-left:0;margin-bottom:5px;margin-top:12px}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-preview .leadin-preview-wrapper .advance-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-preview .leadin-preview-wrapper .advance-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-preview .leadin-preview-wrapper .advance-wrapper{margin:0!important}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form h4,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form h4{margin-left:100px;margin-bottom:0}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form p{margin-left:0}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form .leadin-content-body,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form .leadin-content-body,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form .leadin-content-body{padding:1.5em 1.25em}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form .leadin-content-body #leadin-content-form-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form .leadin-content-body #leadin-content-form-wrapper,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form .leadin-content-body #leadin-content-form-wrapper{padding:0!important}.leadinModal-v3.leadinModal.leadinEmbedded-theme-default.leadinModal-form .leadin-message-wrapper p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-left-corner.leadinModal-form .leadin-message-wrapper p,.leadinModal-v3.leadinModal.leadinModal-theme-bottom-right-corner.leadinModal-form .leadin-message-wrapper p{margin-top:10px}}#leadin-content-form-wrapper{padding:1em 1.5em;padding-bottom:1.5em}@keyframes leadinModal-dropin{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:0}2%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@-webkit-keyframes leadinModal-dropin{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:0}2%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@-moz-keyframes leadinModal-dropin{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:0}2%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@-ms-keyframes leadinModal-dropin{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:0}2%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@-o-keyframes leadinModal-dropin{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:0}1%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:0}2%{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px);opacity:1}to{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);opacity:1}}@keyframes leadinModal-dropout{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px)}}@-webkit-keyframes leadinModal-dropout{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px)}}@-moz-keyframes leadinModal-dropout{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px)}}@-ms-keyframes leadinModal-dropout{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px)}}@-o-keyframes leadinModal-dropout{0%{transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0)}to{transform:translateY(-800px);-webkit-transform:translateY(-800px);-moz-transform:translateY(-800px);-ms-transform:translateY(-800px);-o-transform:translateY(-800px)}}@keyframes leadinModal-pulse{0%{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}70%{-webkit-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);-moz-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25)}to{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}}@-webkit-keyframes leadinModal-pulse{0%{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}70%{-webkit-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);-moz-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25)}to{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}}@-moz-keyframes leadinModal-pulse{0%{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}70%{-webkit-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);-moz-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25)}to{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}}@-ms-keyframes leadinModal-pulse{0%{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}70%{-webkit-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);-moz-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25)}to{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}}@-o-keyframes leadinModal-pulse{0%{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}70%{-webkit-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);-moz-box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25);box-shadow:inset 0 0 0 300px hsla(0,0%,100%,.25)}to{-webkit-box-shadow:inset 0 0 0 300px transparent;-moz-box-shadow:inset 0 0 0 300px transparent;box-shadow:inset 0 0 0 300px transparent}}.leadinModal.leadinModal-theme-top{bottom:auto;max-height:50%;overflow:auto}.leadinModal.leadinModal-theme-top .leadinModal-overlay{display:none}.leadinModal.leadinModal-theme-top.leadinModal-formless,.leadinModal.leadinModal-theme-top.leadinModal-formless .leadinModal-content{overflow:visible}.leadinModal.leadinModal-theme-top.leadinModal-closing .leadinModal-content,.leadinModal.leadinModal-theme-top.leadinModal-hiding .leadinModal-content{animation:leadinModal-dropout .5s;-webkit-animation:leadinModal-dropout .5s;-moz-animation:leadinModal-dropout .5s;-ms-animation:leadinModal-dropout .5s;-o-animation:leadinModal-dropout .5s;-webkit-backface-visibility:hidden}.leadinModal.leadinModal-theme-top .leadinModal-content{animation:leadinModal-dropin .5s;-webkit-animation:leadinModal-dropin .5s;-moz-animation:leadinModal-dropin .5s;-ms-animation:leadinModal-dropin .5s;-o-animation:leadinModal-dropin .5s;-webkit-backface-visibility:hidden;cursor:pointer;width:100%;padding:0;-webkit-border-radius:0;-moz-border-radius:0;-ms-border-radius:0;-o-border-radius:0;border-radius:0;border-bottom-width:5px;border-bottom-style:solid;overflow:hidden}.leadinModal.leadinModal-theme-top .leadinModal-content .secondary-dismiss{display:inline}.leadinModal.leadinModal-theme-top .leadinModal-content-wrapper{padding:.5em 0;margin:0 auto}.leadinModal.leadinModal-theme-top .leadinModal-content-wrapper #leadin-content-form-wrapper{margin:auto;max-width:1024px;padding:2em 2.5em}.leadinModal.leadinModal-theme-top.leadinModal-v0.leadinModal-form .leadinModal-content-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v1.leadinModal-form .leadinModal-content-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v2.leadinModal-form .leadinModal-content-wrapper{padding:1.5em 0}.leadinModal.leadinModal-theme-top.leadinModal-v0.leadinModal-form .leadin-form-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v1.leadinModal-form .leadin-form-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v2.leadinModal-form .leadin-form-wrapper{margin:0}.leadinModal.leadinModal-theme-top.leadinModal-v0.leadinModal-form .leadin-message-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v1.leadinModal-form .leadin-message-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v2.leadinModal-form .leadin-message-wrapper{width:54%;float:left;margin-right:4%}.leadinModal.leadinModal-theme-top.leadinModal-v0.leadinModal-form .leadin-form-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v1.leadinModal-form .leadin-form-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v2.leadinModal-form .leadin-form-wrapper{width:42%;float:left;margin-top:0;padding-top:0}@media only screen and (max-width:640px){.leadinModal.leadinModal-theme-top.leadinModal-v0 .leadin-close-button,.leadinModal.leadinModal-theme-top.leadinModal-v0 .leadin-footer-link,.leadinModal.leadinModal-theme-top.leadinModal-v1 .leadin-close-button,.leadinModal.leadinModal-theme-top.leadinModal-v1 .leadin-footer-link,.leadinModal.leadinModal-theme-top.leadinModal-v2 .leadin-close-button,.leadinModal.leadinModal-theme-top.leadinModal-v2 .leadin-footer-link{position:relative;top:11px}.leadinModal.leadinModal-theme-top.leadinModal-v0.leadinModal-thanks .leadin-close-button,.leadinModal.leadinModal-theme-top.leadinModal-v0.leadinModal-thanks .leadin-footer-link,.leadinModal.leadinModal-theme-top.leadinModal-v1.leadinModal-thanks .leadin-close-button,.leadinModal.leadinModal-theme-top.leadinModal-v1.leadinModal-thanks .leadin-footer-link,.leadinModal.leadinModal-theme-top.leadinModal-v2.leadinModal-thanks .leadin-close-button,.leadinModal.leadinModal-theme-top.leadinModal-v2.leadinModal-thanks .leadin-footer-link{top:0}.leadinModal.leadinModal-theme-top.leadinModal-v0 .leadin-message-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v1 .leadin-message-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v2 .leadin-message-wrapper{width:initial!important;float:none!important}.leadinModal.leadinModal-theme-top.leadinModal-v0 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-top.leadinModal-v1 .leadin-message-wrapper p,.leadinModal.leadinModal-theme-top.leadinModal-v2 .leadin-message-wrapper p{display:inline-block;margin:0;margin-top:15px}.leadinModal.leadinModal-theme-top.leadinModal-v0 .leadin-form-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v1 .leadin-form-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v2 .leadin-form-wrapper{width:initial!important;float:none!important}}.leadinModal.leadinModal-theme-top.leadinModal-v3 .leadinModal-close{top:7px;right:14px}.leadinModal.leadinModal-theme-top.leadinModal-v3 .dyno-image{vertical-align:top;float:left;width:100px;margin-right:22px}.leadinModal.leadinModal-theme-top.leadinModal-v3 .leadinModal-content-wrapper{padding:.6em 0}.leadinModal.leadinModal-theme-top.leadinModal-v3 .leadinModal-content-wrapper .leadin-content-body{width:100%}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview .leadinModal-content{overflow:visible}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview h4{font-size:16px;padding-top:4px}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview .advance-wrapper{padding-top:1px}@media only screen and (min-width:768px){.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview .advance-wrapper{vertical-align:middle}}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview .leadin-preview-wrapper{display:table}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview .leadin-preview-wrapper h4{text-align:right}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview .leadin-button{padding:.5em 1.7em}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form .leadinModal-content,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-thanks .leadinModal-content{background-color:#ebebeb;border-width:0;border-bottom-width:4px;border-style:solid}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form .leadinModal-content-wrapper,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-thanks .leadinModal-content-wrapper{padding:0;max-width:none}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form .leadin-content-body,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-thanks .leadin-content-body{margin:0 auto}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form h4,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form ol,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form p,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form ul{display:block;margin-left:122px}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form .leadin-content-body-clear{*zoom:1}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form .leadin-content-body-clear:after{content:"";display:table;clear:both}@media only screen and (min-width:768px){.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form .leadin-message-wrapper{width:54%;float:left;margin-right:4%}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form .leadin-form-wrapper{width:42%;float:left;margin-top:0;padding-top:0}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form .next-button{float:right}}@media only screen and (max-width:768px){.leadinModal.leadinModal-theme-top.leadinModal-v3 .leadinModal-content{width:100%}.leadinModal.leadinModal-theme-top.leadinModal-v3 h4{font-size:20px!important;display:inline-block}.leadinModal.leadinModal-theme-top.leadinModal-v3 .advance-wrapper{display:inline-block;width:100%}.leadinModal.leadinModal-theme-top.leadinModal-v3 .leadin-message-wrapper p{display:inline-block!important;width:100%;margin-left:0;margin-top:1em}.leadinModal.leadinModal-theme-top.leadinModal-v3 .dyno-image{margin-bottom:15px}.leadinModal.leadinModal-theme-top.leadinModal-v3 .leadin-message-wrapper{margin-bottom:0}.leadinModal.leadinModal-theme-top.leadinModal-v3 .clearfix-image-form{clear:both}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview .leadinModal-content-wrapper{padding:1em 1.5em;padding-bottom:1.5em}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview h4{margin-bottom:10px;text-align:left!important}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview .leadin-preview-wrapper{display:block!important}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview .secondary-dismiss{display:block}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview h4{margin-left:100px;margin-right:21px;margin-bottom:0}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview ol,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview p,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-preview ul{margin-left:0!important;margin-top:0}.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-form .leadinModal-content,.leadinModal.leadinModal-theme-top.leadinModal-v3.leadinModal-thanks .leadinModal-content{border-width:0;border-top-width:5px}}.leadin-preview-wrapper{padding:1em 1.5em;padding-bottom:1.5em}[data-hubspot-embedded-flow]{padding:15px}.leadinEmbedded-theme-default.leadinModal,.leadinEmbedded-theme-default.leadinModal .leadinModal-content{position:static}.leadinEmbedded-theme-default.leadinModal .leadinModal-close,.leadinEmbedded-theme-default.leadinModal .leadinModal-overlay{display:none}.leadinEmbedded-theme-default.leadinModal.leadinModal-thanks .thank-you-message{margin-bottom:0}.leadinEmbedded-theme-default.leadinModal.leadinModal-form{padding-top:200px;position:fixed;top:0;left:0;width:100%;height:100%}@media only screen and (max-height:700px){.leadinEmbedded-theme-default.leadinModal.leadinModal-form{padding-top:50px}}.leadinEmbedded-theme-default.leadinModal.leadinModal-form .leadinModal-content{position:relative}.leadinEmbedded-theme-default.leadinModal.leadinModal-form .leadinModal-overlay{display:block;z-index:-1}.leadinEmbedded-theme-default.leadinModal.leadinModal-form .leadinModal-close{display:block;position:absolute;top:7px;right:14px}@media only screen and (max-width:768px){.leadinEmbedded-theme-default.leadinModal .leadinModal-content{max-width:95%}.leadinEmbedded-theme-default.leadinModal.leadinModal-form{padding-top:20px}}.leadinModal .leadin-preview-wrapper{max-width:1000px;margin:0 auto;display:table}.leadinModal .leadin-preview-wrapper h4{margin:0}.leadinModal .leadin-preview-wrapper .advance-wrapper .leadin-button{margin-top:10px}.leadinModal .leadin-message-wrapper{margin-bottom:1em}.leadinModal .leadin-message-wrapper.hide{display:none}.leadinModal .dyno-image{display:table-cell;width:122px;vertical-align:middle;float:left}.leadinModal .dyno-image img{max-width:100px;height:auto;width:auto}.leadinModal-v0 .leadinModal .dyno-image,.leadinModal-v1 .leadinModal .dyno-image,.leadinModal-v2 .leadinModal .dyno-image{width:115px}.leadinModal .leadin-form-wrapper{margin-bottom:1em;margin-top:1.5em}.leadinModal .leadin-form-wrapper.hide{display:none}.leadinModal .leadin-form-wrapper .submission-error{color:#f33f33;font-size:.8em;font-weight:initial;margin-left:.3em;margin-top:12px}.leadinModal .leadin-form-wrapper .submission-error.hide{display:none}.leadinModal .next-button{margin-top:1rem}.leadinModal .next-button.hide{display:none}.leadinModal .back-button{width:10%;min-width:10%!important;max-width:10%;font-weight:bolder!important;padding:.45rem!important;font-size:18px;float:left}.leadinModal .button-with-gdpr{width:87%}.leadinModal .gdpr-options{margin-bottom:.5em!important}.leadinModal .gdpr-options.hide{display:none}.leadinModal .gdpr-options .gdpr-checkbox{color:unset!important;margin-bottom:1rem}.leadinModal .gdpr-options .gdpr-checkbox input{display:initial;visibility:inherit!important;left:0!important}.leadinModal .gdpr-options .gdpr-checkbox .gdpr-label{display:inline;margin-left:.3rem;font-weight:400!important}.leadinModal .gdpr-options .gdpr-checkbox .gdpr-label p{display:inline}.leadinModal .form-fields.hide{display:none}.leadinModal .gdpr-options p{margin-left:0!important}.leadinModal .gdpr-options .gdpr-consent-error{display:block;margin-left:0!important}.leadinModal .leadin-input-wrapper label{display:block;font-weight:600;padding-top:.8em;font-size:1em;float:none}.leadinModal .leadin-input-wrapper label .leadin-resubscribe-link{display:block;font-weight:400;margin-top:7px;text-decoration:underline}.leadinModal .leadin-input-wrapper label .leadin-resubscribe-link:empty{display:none}.leadinModal .leadin-input-wrapper label .resubscribe-check{display:block;margin-top:7px}.leadinModal .leadin-input-wrapper label .resubscribe-check:empty{display:none}.leadinModal .leadin-input-wrapper .error-text{font-size:.8em;font-weight:initial;color:#f33f33;margin-left:.3em}.leadinModal .leadin-input-wrapper .error-text:empty{display:none}.leadinModal .leadin-input-wrapper .mailcheck-suggestion{color:#818181;font-weight:400;float:right;margin-left:1em;font-size:.8em;position:relative;top:.2em}.leadinModal .leadin-input-wrapper .mailcheck-suggestion:empty{display:none}.leadinModal .leadin-input-wrapper .mailcheck-suggestion a{color:#222;font-weight:700}.leadinModal .leadin-input-wrapper input[type=email],.leadinModal .leadin-input-wrapper input[type=number],.leadinModal .leadin-input-wrapper input[type=tel],.leadinModal .leadin-input-wrapper input[type=text],.leadinModal .leadin-input-wrapper select,.leadinModal .leadin-input-wrapper textarea{margin:.3em 0 0;cursor:pointer}.leadinModal .leadin-input-wrapper input[type=checkbox].input-error,.leadinModal .leadin-input-wrapper input[type=email].input-error,.leadinModal .leadin-input-wrapper input[type=number].input-error,.leadinModal .leadin-input-wrapper input[type=tel].input-error,.leadinModal .leadin-input-wrapper input[type=text].input-error,.leadinModal .leadin-input-wrapper select.input-error,.leadinModal .leadin-input-wrapper textarea.input-error{-webkit-box-shadow:inset 0 0 3px 1px #f33f33;-moz-box-shadow:inset 0 0 3px 1px #f33f33;box-shadow:inset 0 0 3px 1px #f33f33}.leadinModal .leadin-input-wrapper input[type=file]{margin:.3em 0 0;background:#ebebeb}.leadinModal .leadin-input-wrapper #leadin-recaptcha.input-error iframe{-webkit-box-shadow:0 0 3px 1px #f33f33;-moz-box-shadow:0 0 3px 1px #f33f33;box-shadow:0 0 3px 1px #f33f33}.leadinModal .leadin-button-wrapper{padding-top:1em;text-align:center}.leadinModal .leadin-button-wrapper.hide{display:none}.leadinModal .leadin-button-wrapper button.calendar-button{display:inline-block;width:100%;box-sizing:border-box}.leadinModal .leadin-button-wrapper button.calendar-button .caret{position:relative;padding-right:15px}.leadinModal .leadin-button-wrapper button.calendar-button .caret:after{content:"";position:absolute;top:8px;left:6px;border-top:5px solid;border-left:5px solid transparent;border-right:5px solid transparent}.leadinModal .leadin-button-wrapper .dropdown-wrapper{margin:auto;text-align:left;position:relative;width:100%}.leadinModal .leadin-button-wrapper .dropdown-wrapper .dropdown-content{display:none;position:absolute;z-index:1111;width:100%;background-color:#fff;padding-top:.4em;padding-bottom:.4em;box-shadow:0 1px 24px 0 rgba(0,0,0,.08);border:1px solid #cbd6e2}.leadinModal .leadin-button-wrapper .dropdown-wrapper .dropdown-content a.dropdown-calendar-link{color:#33475b;line-height:1.5em;padding:12px 16px;text-decoration:none;display:block;text-align:left;font-size:.875em}.leadinModal .leadin-button-wrapper .dropdown-wrapper .dropdown-content a.dropdown-calendar-link:hover{background-color:#e5f5f8}.leadinModal .leadin-button-wrapper .dropdown-wrapper .show{display:inline-block}.leadinModal .leadin-button-wrapper .dropup-wrapper{bottom:144px;position:relative;text-align:left;width:100%}.leadinModal .leadin-button-wrapper .dropup-wrapper .dropup-content{display:none;position:absolute;z-index:1111;width:100%;background-color:#fff;padding-top:.4em;padding-bottom:.4em;box-shadow:0 1px 24px 0 rgba(0,0,0,.08);border:1px solid #cbd6e2}.leadinModal .leadin-button-wrapper .dropup-wrapper .dropup-content a.dropup-calendar-link{color:#33475b;line-height:1.5em;padding:12px 16px;text-decoration:none;display:block;text-align:left;font-size:.875em}.leadinModal .leadin-button-wrapper .dropup-wrapper .dropup-content a.dropup-calendar-link:hover{background-color:#e5f5f8}.leadinModal .leadin-button-wrapper .dropup-wrapper .show{display:inline-block}.leadinModal .recaptcha-bind{padding-top:1em}.leadinModal .recaptcha-bind.hide{display:none}.leadinModal .leadin-thank-you-wrapper{text-align:center;padding:1em 2em}.leadinModal-theme-top .leadin-preview-wrapper .dyno-image{display:none}.leadinModal-theme-top .leadin-preview-wrapper h4{display:table-cell;padding-right:20px}.leadinModal-theme-top .leadin-preview-wrapper .advance-wrapper{display:table-cell;vertical-align:middle;margin:0}.leadinModal-theme-top .leadin-preview-wrapper .advance-wrapper .leadin-button{padding:.3em .5em;margin:0}@media only screen and (min-width:1024px){.leadinModal-theme-top .continue-url-wrapper{width:100%}.leadinModal-theme-top .thank-you-limited-width{width:20%!important}.leadinModal-theme-top .callout-special-font{font-family:system-ui,serif}}@media only screen and (min-width:640px) and (max-width:1024px){.leadinModal-theme-top .continue-url-wrapper{width:100%}.leadinModal-theme-top .thank-you-limited-width{width:27%!important}.leadinModal-theme-top .callout-special.font{font-family:system-ui,serif}}.leadinModal-theme-top.leadinModal-v2 .leadin-thank-you-wrapper{padding-bottom:1em}@media only screen and (min-width:640px){.leadinModal-theme-top.leadinModal-v2 .leadin-message-wrapper{width:40%;float:left;margin-right:4%}.leadinModal-theme-top.leadinModal-v2 .leadin-form-wrapper{width:56%;float:left}}.leadinModal-theme-top.leadinModal-v3 .leadin-thank-you-wrapper{padding-bottom:1em}@media only screen and (min-width:992px){.leadinModal-theme-top.leadinModal-v3 .leadin-message-wrapper{width:40%;float:left;margin-right:4%}.leadinModal-theme-top.leadinModal-v3 .leadin-form-wrapper{width:56%;float:left}}.leadinModal-v2 .leadin-preview-wrapper .dyno-image{padding-top:0}.leadinModal-v2 .leadin-preview-wrapper .advance-wrapper,.leadinModal-v2 .leadin-preview-wrapper h4{margin-left:115px}.leadinModal-v2 .leadin-preview-wrapper .advance-wrapper .leadin-button{padding:.5em .7em}.leadinModal-reset a,.leadinModal-reset button,.leadinModal-reset div,.leadinModal-reset form,.leadinModal-reset h1,.leadinModal-reset h2,.leadinModal-reset h3,.leadinModal-reset h4,.leadinModal-reset h5,.leadinModal-reset h6,.leadinModal-reset img,.leadinModal-reset label,.leadinModal-reset p,.leadinModal-reset span{background:none 0 0 auto repeat scroll padding-box transparent;background-color:transparent;background-image:none;border:0 none transparent;clear:none;clip:auto;cursor:auto;filter:none;float:none;height:auto;left:auto;letter-spacing:auto;line-height:auto;list-style:disc outside none;margin:0;overflow:visible;padding:0;page-break-after:auto;page-break-before:auto;position:static;transform:none;text-align:start;text-indent:auto;text-transform:none;top:auto;vertical-align:baseline;visibility:initial;width:auto;word-break:normal;word-spacing:normal;word-wrap:normal;z-index:auto}.leadinModal-reset button,.leadinModal-reset div,.leadinModal-reset form,.leadinModal-reset h1,.leadinModal-reset h2,.leadinModal-reset h3,.leadinModal-reset h4,.leadinModal-reset h5,.leadinModal-reset h6,.leadinModal-reset img,.leadinModal-reset label,.leadinModal-reset p,.leadinModal-reset span{color:inherit;text-decoration:none}.leadinModal-reset a,.leadinModal-reset button,.leadinModal-reset img,.leadinModal-reset label,.leadinModal-reset span{display:inline}.leadinModal-reset div,.leadinModal-reset form,.leadinModal-reset h1,.leadinModal-reset h2,.leadinModal-reset h3,.leadinModal-reset h4,.leadinModal-reset h5,.leadinModal-reset h6,.leadinModal-reset p{display:block}.leadinModal-reset button{text-align:center}.leadinModal-reset a,.leadinModal-reset button{cursor:pointer}
+
+</style></head>
+<body id="" class="clickup-chrome-ext_installed">
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div>
+<script type="text/javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3634699-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<div role="navigation">
+<header class="nav-first py-3">
+<div class="container">
+<div class="row flex-nowrap justify-content-between align-items-center">
+<div class="col-33">
+<button class="navbar-toggler pull-xs-left" id="navbarSideButton" type="button"><i class="fa fa-bars"></i> Menu</button>
+<a href="https://nutsvolts.texterity.com/nutsvolts/current" target="_blank" class="d-none d-md-inline-block" style="margin-left: 20px;">Digital Edition</a>
+</div>
+<div class="col-33 text-center">
+<a href="https://www.nutsvolts.com/"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/nutsvolts-logo.png" class="img-fluid nav-brand" alt="Logo Thing main logo"><br>
+<small class="d-none d-md-block" style="color: black">Everything for Electronics</small>
+</a>
+</div>
+<div class="col-33 d-flex justify-content-end align-items-center">
+<div class="subscribe">
+<ul class="nav-mega navbar-nav mr-auto">
+<li class="dropdown">
+<a class="nav-link dropdown-toggle" href="https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subscription</a>
+<div class="dropdown-menu mega-menu">
+<div class="p-3">
+<h4>Subscribe to Nuts &amp; Volts</h4>
+<p><em><strong>It's easy - </strong></em>Just click the "Subscribe" link below to review your options and place your order.</p>
+</div>
+<div class="pl-3 pr-3 pb-3">
+<a class="btn btn-danger w-100" href="https://www.nutsvolts.com/subscribe-to-nuts-volts">"Subscribe" To Nuts &amp; Volts</a>
+</div>
+<div class="p-3">
+<h4>Current Subscribers</h4>
+<p><em><strong>Manage Your Account - </strong></em>click the "Access" link below to find out more and Log In.</p>
+</div>
+<div class="pl-3 pr-3 pb-3">
+<a class="btn btn-danger w-100" href="https://www.nutsvolts.com/attention-subscribers">"Access" Your Account</a>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="nav-social d-none d-lg-block">
+<a href="https://www.nutsvolts.com/search"><i class="fa fa-search fa-lg"></i></a>
+<a href="https://www.facebook.com/pages/NutsVolts-Magazine/76329669411" target="_blank"><i class="fa fa-facebook-f fa-lg"></i></a>
+<a href="https://www.youtube.com/channel/UCYaa34QJP7miqPihaX_h_3g?nohtml5=False" target="_blank"><i class="fa fa-youtube fa-lg"></i></a>
+<a href="https://twitter.com/nutsvolts" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="tagline text-center d-block d-md-none">
+<small>Everything for Electronics</small>
+</div>
+<div class="nav-second py-1 mb-2 d-none d-md-block">
+<ul class="nav justify-content-center w-100 nav-fill">
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/learn-electronics">Learn Electronics</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/projects">Projects</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/reviews">Reviews</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/high-voltage">High Voltage</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/science">Science</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/microcontrollers">Microcontrollers</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/vintage-electronics">Vintage Electronics</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/wireless">Radio/Wireless</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/ideas-tips">Ideas/Tips/Inspiration</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/most-popular">Most Popular</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/history-of-electronics">History of Electronics</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="https://www.nutsvolts.com/magazine/category/test-equipment">Test Equipment</a>
+</li>
+</ul>
+</div>
+
+<ul class="navbar-side" id="navbarSide">
+<li>
+<ul id="close-block" class="list-unstyled">
+<li>
+<a href="https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock#" class="close"><i class="fa fa-times"></i></a>
+</li>
+</ul>
+<ul id="nav-second" class="list-unstyled d-block d-md-none">
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/learn-electronics">Learn Electronics</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/projects">Projects</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/reviews">Reviews</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/high-voltage">High Voltage</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/science">Science</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/microcontrollers">Microcontrollers</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/vintage-electronics">Vintage Electronics</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/wireless">Radio/Wireless</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/ideas-tips">Ideas/Tips/Inspiration</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/most-popular">Most Popular</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/history-of-electronics">History of Electronics</a>
+</li>
+<li class="navbar-side-item">
+<a class="side-link" href="https://www.nutsvolts.com/magazine/category/test-equipment">Test Equipment</a>
+</li>
+</ul>
+<div class="navbar nav-border-top">
+<ul id="nav-core" class="navbar-nav">
+<li class="navbar-side-item">
+<a href="https://store.nutsvolts.com/" target="_blank" class="side-link">Store</a>
+</li>
+<li class="navbar-side-item dropdown">
+<a class="nav-link dropdown-toggle side-link" href="https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock#" id="drop-magazine" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+The Magazine
+<span class="plus-minus">
+<i class="fa fa-stack-1x fa-plus"></i>
+</span>
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="https://www.nutsvolts.com/magazine">The Magazine</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/about">About Nuts &amp; Volts</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/magazine/issues">Back Issues</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/videos">Videos</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/advertise">Advertising</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/writers-guidelines">Writers Guidelines</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/magazine/downloads">Downloads</a>
+</div>
+</li>
+<li class="navbar-side-item">
+<a href="https://www.nutsvolts.com/subscribe-to-nuts-volts" class="side-link">New Subscriptions</a>
+</li>
+<li class="navbar-side-item">
+<a href="https://www.nutsvolts.com/attention-subscribers" target="_blank" class="side-link">SUBSCRIPTION ACCOUNT MANAGEMANT</a>
+</li>
+<li class="navbar-side-item dropdown">
+<a class="nav-link dropdown-toggle side-link" href="https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock#" id="drop-community" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Community
+<span class="plus-minus">
+<i class="fa fa-stack-1x fa-plus"></i>
+</span>
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="http://forum.nutsvolts.com/" target="_blank">Forum</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/blog">Blogs</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/forms/reader_feedback">Feedback</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/tech-forum">Techforum</a>
+<a class="dropdown-item" href="https://www.nutsvolts.com/newsletters">Newsletter</a>
+</div>
+</li>
+<li class="navbar-side-item">
+<a href="https://www.nutsvolts.com/faqs#ContactSS" class="side-link">Contact</a>
+</li>
+<li class="navbar-side-item">
+<a href="https://nutsvolts.texterity.com/nutsvolts/current" target="_blank" class="side-link">Digital Edition</a>
+</li>
+</ul>
+</div>
+<div class="nav-social d-block d-lg-none">
+<a href="https://www.nutsvolts.com/search"><i class="fa fa-search fa-lg"></i></a>
+<a href="https://www.facebook.com/pages/NutsVolts-Magazine/76329669411" target="_blank"><i class="fa fa-facebook-f fa-lg"></i></a>
+<a href="https://www.youtube.com/channel/UCYaa34QJP7miqPihaX_h_3g?nohtml5=False" target="_blank"><i class="fa fa-youtube fa-lg"></i></a>
+<a href="https://twitter.com/nutsvolts" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+</div>
+</li>
+
+</ul>
+
+<div class="overlay"></div>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-8">
+<div class="leaderboard ad">
+<script type="text/javascript"><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php':'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=48");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/ajs.php"></script><div id="beacon_053ce19d10" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/lg.php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<noscript><a href='https://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?n=ac885236&amp;cb=982345' target='_blank'><img src='https://adserver.tandlpublications.com/nutsvolts/www/delivery/avw.php?zoneid=48&amp;cb=6534548&amp;n=ac885236' border='0' alt='' class='img-fluid' /></a></noscript>
+</div>
+<br><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Large.jpg" alt="Build the Numitron — A Six-Digit Clock" class="img-responsive">
+<h1 style="margin-bottom:0">Build the Numitron — A Six-Digit Clock</h1>
+<p>By
+<a href="https://www.nutsvolts.com/magazine/contributor/bill-van-dijk">Bill van Dijk</a>
+&nbsp;&nbsp;
+<a href="http://nutsvolts.texterity.com/nutsvolts/201609/?folio=26" class="btn btn-primary" target="_blank">View In Digital Edition &nbsp;<i class="fa fa-file"></i>
+</a>
+</p>
+<div class="article">
+<hr>
+<div class="label" style="margin: 15px 0; font-size: 12px; font-weight:bold; "><a href="https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock#content-extras">» Skip to the Extras </a></div>
+<p><big>I suspect that for many of you the name Numitron is new, while for many others it will bring back (hopefully fond) memories. The venerable electron tube (a.k.a., thermionic valve) has all but disappeared from the mainstream electronics world, and along with them related old technologies such as the Nixie tube (featured in previous N&amp;V articles), Dekatrons, Numitrons, and Panaplex displays, and (to a lesser extent) Vacuum Fluorescent Displays (VFDs) have also faded into the background.</big></p>
+<p>This particular project was designed to showcase Numitron tubes (<strong>Figure 1</strong>), which are still available for a reasonable cost on eBay from old Russian cold war stock. As stocks (rapidly) dwindle, their cost increases steadily until they will be gone forever. Don’t miss out on this opportunity to build a useful project showcasing this beautiful cold war era component.</p>
+<p style="text-align: center;"><img alt="" class="width40" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure01.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 1.</strong>&nbsp; A Numitron tube (with a penny for scale) ready to install.</p>
+<hr>
+<div class="width100" style="background:#eee;border:1px solid #ccc;padding:5px 10px;">
+<p>The manufacture of the first Numitron was — according to Wikipedia (<strong><a href="https://en.wikipedia.org/wiki/%20Seven-segment_display" target="_blank">https://en.wikipedia.org/wiki/ Seven-segment_display</a></strong>) as well as a March 1970 Popular Electronics article (<strong><a href="http://www.rfcafe.com/references/popular-electronics/numitron-readout-march-1970-popular-electronics.htm" target="_blank">www.rfcafe.com/references/popular-electronics/numitron-readout-march-1970-popular-electronics.htm</a></strong>) — attributed to RCA. It was built based on the common seven-segment display format first patented in 1908 by someone called F.W. Wood. Around the same time the Numitron was created, LEDs were also up and rising, and quickly posed a significant competitor.</p>
+<p>The Numitron had an early advantage: At that time, they were slightly brighter than LEDs of those days, and did not have a great dependence on ambient temperature. Nixies, Panaplex displays, and later LCDs required heating elements when used outdoors in colder regions. Even today, the Numitron is still regularly found working in older gasoline pumps.</p>
+<p>The Numitron is still a vacuum tube, and the wires of the IV-9 pass via a sealed hole through the glass envelope. Great care must be taken to ensure no stress (from bending or soldering) is transferred to the glass, which may cause it to crack.</p>
+</div>
+<p>The Numitron is not a traditional tube (valve) in that there is no electron emission involved; it only has filaments, and as such is more analogous to the light bulb than any other electrical device. Seven small filaments (<strong>Figure 2a</strong>) are arranged in the traditional formation of the seven-segment LED numerical display we are all familiar with (<strong>Figure 2b</strong>), all within a simple glass tube.</p>
+<p style="text-align: center;"><img alt="" class="width20" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure02A.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 2a</strong>. A typical seven-segment display layout uses letters to identify each individual lighted part of the display.</p>
+<p style="text-align: center;"><img alt="" class="width25" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure02B.jpg"><br>
+<strong>FIGURE 2b</strong>. The pinout of a Numitron tube. Note that since the Numitron uses filaments, the common can be positive, negative, or even power via AC voltage.</p>
+<hr>
+<p>&nbsp;</p>
+<p>The particular Numitron used in this project (the IV-9) operates on five volts at about 23 mA per segment. It has “fly leads” and as such does not require a difficult socket (<strong>Figure 3</strong>).</p>
+<p style="text-align: center;"><img alt="" class="width75" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure03.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 3.</strong> The Numitron tube mounts directly to the PCB without the need for a socket.</p>
+<hr>
+<h2>The Project</h2>
+<p>In order to effectively showcase the Numitron, I wanted to do it in a useful as well as attractive way. I also wanted to integrate it with more modern technologies — a hybrid as it were — and use as many parts possible that I had in stock. I love challenging my soldering iron, so SMDs (surface-mount devices) were used as well (<strong>Figure 4</strong>).</p>
+<p style="text-align: center;"><img alt="" class="width50" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure04.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 4.</strong> Close-up of placing one of the 0805 caps on the board.</p>
+<hr>
+<p>The “brains” of the project is a Microchip PIC, and it is a very busy fellow in this project; it’s in control of everything happening on the board. LEDs lend themselves very well to multiplexing, and that is used extensively to control the 60 LEDs that form the circle around the Numitrons. They display eight different programmed patterns, most based on a one minute repeat cycle.</p>
+<p>The Numitrons, on the other hand, do not lend themselves at all to multiplexing, and therefore a BCD decoder (with latch) was used to drive each tube. I’ll explain more about the operation of those later on. The schematic and board were created in Eagle, and the files are available for download at the article link in native Eagle format as well as the Gerber RS274x format.</p>
+<h2>The PIC</h2>
+<p>Programming of the PIC is done through the ICSP connector located on the board. I use the PICkittm3 combined with MPLAB IPE (integrated programming environment); refer to <strong>Figure 5</strong>. Other options are available for programming, although programming SMD devices off-board often requires a special adapter. The main system crystal frequency is 4 MHz. The clock (time) crystal is a small 32 kHz watch crystal. <em><strong>NOTE:</strong> This is a critical part for clock accuracy! </em>Please resist using an unknown or salvaged part here.</p>
+<p style="text-align: center;"><img alt="" class="width100" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure05.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 5.</strong> The PICkit3 connected to the Numitron board for programming.</p>
+<hr>
+<p>The two 12 pF load capacitors (<strong>Figure 6</strong>) determine its frequency accuracy, and must be matched with the part. Accuracy of one second per day or less is possible if the crystal and load capacitors are properly matched. If you use a different crystal than listed, be sure to change the load capacitor values to the specification of your part.</p>
+<p style="text-align: center;"><img alt="" class="width50" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure06.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 6.</strong> The clock timing crystal installed on the PCB with the surface-mount noise decoupling capacitors.</p>
+<hr>
+<p>A 0.1 µF ceramic capacitor is placed close to the PIC (as well as the other chips) to provide noise decoupling. After all, there is a lot of heavy duty switching happening on this board. The reset button is not debounced (not needed), and for all intents and purposes may be left off the board all together. Simply disconnecting and reconnecting the power will do the same, and prevent non-intentional reset when in use.</p>
+<h2>The Power Supply</h2>
+<p>The power supply is fairly simple, using a switch mode buck converter to provide the five volts required for the clock (<strong>Figure 7</strong>).</p>
+<p style="text-align: center;"><a href="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure07.jpg" target="_blank"><img alt="" class="width100" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure07.jpg"></a></p>
+<p style="text-align: center;"><strong>FIGURE 7.</strong> Schematic of the power supply section of the project.</p>
+<hr>
+<p>Though I considered a linear regulator, the part became hotter than I was comfortable with while testing in a circuit like this. Additionally, a switch mode supply allows for more choices when it comes to wall wart style power supplies (<strong>Figure 8</strong>). The greatest current requirement is during the start-up flash cycle, where all six Numitrons are lit for a second at the time; 7x6 segments at about 23 mA = 966 mA total. Maximum current required for the project peaks therefore very close to the one amp limit when all Numitron segments are lit when first plugged in (or after reset).</p>
+<p style="text-align: center;"><img alt="" class="width40" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure08.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 8.</strong> Close-up of the LM2575T regulator installed on the PCB.</p>
+<hr>
+<p>The bridge rectifier allows for an AC wall wart to be used, or to allow for different DC wall wart polarity options. You may decide to leave the bridge rectifier out and jump the appropriate points on the board to match your wall wart polarity. Of course, you may also use a different power jack than specified; these are perfect parts to be salvaged from old discarded equipment.</p>
+<p>Be sure the wall wart can supply at least 1.5 amps of current at minimum nine volts. The 1,000 µF tank capacitor is a low profile unit so it does not interfere with the front panel. If you use a taller part, you may have to adjust the front panel spacers. The inductor is also an SMD part selected for space reasons. There’s a special mounting tip discussed in a more detailed construction manual that is available at the article link.</p>
+<h2>The LEDs</h2>
+<p>The LEDs are multiplexed in seven rows of eight, with one additional short row of four for a total of 60. The PIC drives one row at a time, and at a couple of mA each, the current draw is well within the specifications for the PIC. By using one byte per row, there are never more than eight LEDs lit at any given time (<strong>Figure 9</strong>). The circle will appear to be fully lit when required, thanks to a fast multiplex rate and a phenomenon called ‘persistence of vision’ in our eyes.</p>
+<p style="text-align: center;"><a href="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure09.jpg" target="_blank"><img alt="" class="width100" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure09.jpg"></a></p>
+<p style="text-align: center;"><strong>FIGURE 9.</strong> Schematic of the LED driver portion of the project.</p>
+<hr>
+<p>It is important to use high output (also referred to as ultra-bright) LEDs for this design since regular LEDs will appear too dim. You may choose any color you like; the slight difference in voltage requirement for the different colors is insignificant in this project, and does not require any further consideration. Since most of these high output LEDs are “water clear” units, placement is very important to provide a visually pleasing result (<strong>Figure 10</strong>). The construction manual at the article link provides tips for proper installation and alignment.</p>
+<p style="text-align: center;"><img alt="" class="width100" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure10.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 10.</strong> Close-up of the top of the PCB showing the water-clear LEDs in place.</p>
+<hr>
+<p>While a PIC pin will only need to drive a single LED at any given time, the combined current of the full row may need to be sunk in order to light all eight in that row since this exceeds the current output capacity of the CD4017. The ULN2803 acts as the driver there. Also, we need a way to select the correct row synchronized with the data sent from the PIC port. This is the task of the CD4017 decade counter.</p>
+<p>It counts the pulses sent from the PIC and activates the appropriate Darlington pair in the ULN2803. After eight pulses, the CD4017 is reset by the PIC, and is ready to start from the beginning. This arrangement allows any individual LED to be addressed by the PIC, respecting all maximum current limits.</p>
+<h2>The Numitrons</h2>
+<p>The Numitrons are essentially just little multi-filament incandescent light bulbs from an electrical perspective, and as such, multiplexing them will simply act as a light dimmer. A 1x6 (or even a 2x3) multiplexing arrangement would leave them very dim, so is not a viable option. Luckily — since their current requirement at about 23 mA per segment is fairly low and it is a seven-segment device operating at about five volts — we can drive them with a standard BCD to seven-segment decoder designed for seven-segment LED displays with a max driving output of 25 mA. The CD4511 also has a data latch built in, so it was chosen for this design.</p>
+<p>I opted for the SMD version since they neatly tucked behind the Numitron tube, making for a nice clean appearance (<strong>Figures 11a</strong> and <strong>11b</strong>).</p>
+<p style="text-align: center;"><img alt="" class="width40" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure11A.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 11A.</strong> Close-up of the surface-mount CD4511 BCD to seven-segment display decoder.</p>
+<hr>
+<p style="text-align: center;"><img alt="" class="width40" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure11B.jpg"><br>
+<strong>FIGURE 11B.</strong> Numitron tube mounted snugly atop the surface-mount CD4511 chip.</p>
+<hr>
+<p>Since I am now rapidly running out of ports on the PIC, I needed an efficient way to control the CD4511s and their latches. This is done by the 74164 shift register in a similar fashion as to how the CD4017 operates in the LED section. The BCD data is presented to all the CD4511s at the same time via the data bus, but decoded and latched only by the CD4511 selected by the SN74HC164 shift register. Synchronization of data and latch selection is controlled in software.</p>
+<p>Since the time only changes every second, only one Numitron digit is updated for each time the LED circle is updated. This made the software easier, and it is still much faster than actually required. The CD4511 also has a “lamp test” function which is used to flash all segments during startup and for reset of the clock, also providing an easy way to test the Numitrons.</p>
+<p>Note also the diode D2 and jumper JP2 (<strong>Figure 12a</strong>). They were intended to be a rudimentary option for lowering the brightness of the Numitrons and lower the current requirement slightly. It simply relied on the forward voltage drop of the diode, with a jumper to short it (<strong>Figure 12b</strong>). It is not really required and may be left off the board, in which case a simple jumper wire may be inserted in place of the diode.</p>
+<p style="text-align: center;"><img alt="" class="width50" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure12A.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 12A.</strong> Location of the diode and jumper JP2 on the PCB.</p>
+<hr>
+<p style="text-align: center;"><img alt="" class="width70" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure12B.jpg"><br>
+<strong>FIGURE 12B.</strong> Schematic showing the location of the jumper and voltage dropping diode.</p>
+<hr>
+<h2>Buttons</h2>
+<p>The clock is set using only two buttons with multiple functions to control 12/24 hour display selection, LED pattern selection, as well as setting the time. Buttons (or switches) are difficult things to read in high speed digital circuits since the mechanical parts in a switch or button actually bounce like a dropped ball; it takes a bit of time to stop settling in one state or the other when pushed. Debouncing can be done in software, but in this case, a hardware solution was used. The solution is based on the RC time required to charge/discharge a small capacitor (<strong>Figure 13</strong>).</p>
+<p style="text-align: center;"><img alt="" class="width50" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure13.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 13.</strong> Schematic of the clock set pushbutton debounce circuit.</p>
+<hr>
+<p>When the button closes, the capacitor (C7) is discharged through a resistor (R19), allowing the bounce to settle before the voltage on the PIC input pin falls below the logic level 0. When released, the capacitor is charged quickly through R18 and D4. By using this method, no further precautions are required in the software, and the button is treated like an ideal button without bounce.</p>
+<p>A fantastic discussion on the subject is listed in Resources.</p>
+<h2>The Printed Circuit Board</h2>
+<p>The printed circuit board (PCB) is a standard two-layer version, and has no complicated manufacturing issues for most board houses. As mentioned, the Eagle files as well as Gerber (RS274x) files for those board houses that do not accept native Eagle files are at the article link. Of interest is the somewhat odd looking footprint for the CD4511s (<strong>Figure 14</strong>).</p>
+<p style="text-align: center;"><img alt="" class="width50" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure14.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 14.</strong> Example of a PCB that can accommodate both wide and narrow versions of the SMD chip.</p>
+<hr>
+<p>These chips come in wide and narrow packages, and in the past I have received either or both mixed in my orders. Functionally either one is acceptable, so I created an Eagle footprint that would accept both wide and narrow formats. This is shown in greater detail in the download package for this article.</p>
+<p>The circle of LEDs was created by specifying a set of vector coordinates in Eagle by specifying the center, radius, and angle for each LED. The board is about 6” square, and has four mounting holes in which stand-offs are used to hold the front and rear Plexiglas or acrylic panels which allows the finished product to stand vertical.</p>
+<p>A free version of Eagle CAD can be downloaded from the link in Resources.</p>
+<h2>Software</h2>
+<p>The software is written in MPASM (absolute code) — an assembly language for the PIC. The development IDE (integrated development environment) includes the programming software for the PICkit3 mentioned earlier, and can be downloaded for free from the Microchip website (see Resources).</p>
+<p>The source code is available at the article link. The code is heavily commented, so it will help those who wish to dig further into that aspect of the project. Aside from the rather simple section of code that runs the clock, there is a LOT of stuff involved in running the LED displays. This PIC has two eight-bit internal timers and one 16-bit timer, which each generate an interrupt when overflowing. One is used for the time, overflowing every second to advance the clock; the second is used to schedule the display updates; and the third is used for the LEDs.</p>
+<p>In the various LED patterns, a “dot” flies around the circle, filling each circle one second at a time. At the 60 second mark, all dots are lit and reset at the new minute. The dot at the start of the minute must make 60 steps to reach the end, and each subsequent dot makes one step less than the previous one. That means the timing of each step changes with each subsequent second.</p>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/Ybnt4fE2A2g.html"></iframe></div>
+<p>Timer 2 has a special register (PR2) that allows the timer period to be changed on-the-fly; the timing values required for each step are stored in lookup tables. The positions of the dot are also stored in a lookup table. Setting preferences (12/24 mode and preferred LED pattern) are stored in the PIC’s internal EEPROM, and are therefore not lost on reset or power failure.</p>
+<h2>General Notes</h2>
+<p>Building this project is probably at an advanced skill level, mostly due to the number of surface-mount parts. Even if you don’t intend to build this clock, you may enjoy reading the construction manual since it contains many tips and examples that may be of use to you in this or other projects. None of the SMDs used here are ridiculously difficult to solder by hand, but it does require a steady hand, good light, a magnifying glass, and a good soldering iron.</p>
+<div class="width100" style="background:#eee;border:1px solid #ccc;padding:5px 10px;">
+<h3>Soldering SMD Components</h3>
+<p>Small components are best soldered with small tools. That means a very fine soldering tip, fine point tweezers, and very thin solder. The SMD components in this project are not very difficult to solder, however, I'll describe the methods I use.</p>
+<p>Caps, resistors, etc., come in many sizes; 0805 (used in this project) and larger can easily be soldered as follows: Start with placing a small drop of solder on ONE pad. With the tweezers, place the part on the pad, heat the drop, and push the part in place (refer to Figure 10b in the text). If the part is not located properly, reheat the one side and correct. Once properly placed, solder the other side.</p>
+<p>A similar method is used for the ICs. Place solder on ONE pad, and place the part. If not located correctly, reheat and reposition. Do NOT push to bend the leg even a little bit. The legs will break easily, and the stress will add to future failure chances (Figure 13a). Please see the construction manual at the article link for more in-depth information.</p>
+</div>
+<p>My Weller soldering station has replaceable tips, and the tip I use for the SMD parts is almost needle sharp. Combined with very thin solder (0.020”), it is really not too hard to do (<strong>Figure 15</strong>). I have included additional tips in the construction manual at the article link. When ordering the SMD capacitors, order a few spares. If you lose an SMD capacitor during construction, look at the end of your soldering iron first. If it’s not there, best go get another one.</p>
+<p style="text-align: center;"><img alt="" class="width80" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure15.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 15.</strong> The tools I use for surface-mount components on PCBs.</p>
+<hr>
+<p>I usually buy things like the small SMD parts in kits from online providers; it provides lots of spares that way. Speaking of online providers, eBay is a good source for inexpensive parts if you are not in a rush. Since you will probably get your Numitrons there (<strong>Figure 16</strong>), other parts can be ordered at the same time.</p>
+<p style="text-align: center;"><img alt="" class="width75" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/NV_0916_Dijk_Figure16.jpg"></p>
+<p style="text-align: center;"><strong>FIGURE 16.</strong> Typical set of Numitron tubes available on eBay.</p>
+<hr>
+<p>LEDs can be found on eBay for very cheap, but it’s definitely “buyer beware” in my experience; many are junk. Don’t buy the “1,000 for a dollar” deal because you <strong>will</strong> be disappointed. I have included Mouser part numbers for many of the components if you prefer not to take chances. Of course, there are many other excellent vendors to choose from as well (check the advertisers in this issue!).</p>
+<p>Another important thing to keep in mind is static protection — especially in the winter when houses become dry, and static discharges (even so small that you can’t feel them) are guaranteed to destroy or damage many of the parts in this project.</p>
+<h2>Numitron vs. Nixie?</h2>
+<p>So, now that you’ve had a chance to look over this clock, you might be considering building one ... but maybe you had your heart set on a Nixie tube clock. Though Nixies are very cool and retro in their own right, the Numitron tube clock has the same feel while offering some distinct advantages over Nixies:</p>
+<ul>
+<li>They are low voltage devices, so — unlike Nixie tubes — you do not need to insure carefully insulated enclosures to keep users from getting a nasty high voltage “bite.”</li>
+<li>They do not suffer from failure states such as “sputtering” where electrode metal collects on the inside of the glass tube dimming or obscuring the display.</li>
+<li>They don’t encounter cathode poisoning that requires a potentially distracting anti-cathode poisoning software routine.</li>
+<li>In many cases, Numitrons will outlast Nixie tubes as they are typically rated for over 100,000 hours (~11.5 years) of operation compared to some Nixies that are rated for only 5,000 hours (~200 days!).</li>
+</ul>
+<p>All in all, Numitrons are a fun and interesting item, and having them used in a clock while surrounded by high tech LEDs makes for a great conversation piece! I highly recommend Numitrons even if you already have a nifty Nixie clock.</p>
+<p>If you do end up building a Numitron clock of your own, please let us know!&nbsp; <span style="color:#FF8C00;"><strong>NV</strong></span></p>
+<hr>
+<div style="text-align: center;"><span class="hs-cta-wrapper" id="hs-cta-wrapper-6f23194d-3acf-4616-82c3-4cea849db08e"><span class="hs-cta-node hs-cta-6f23194d-3acf-4616-82c3-4cea849db08e" id="hs-cta-6f23194d-3acf-4616-82c3-4cea849db08e" style="visibility: visible;" data-hs-drop="true"><a id="cta_button_2436516_92e4c9b5-f239-4437-b38f-bbd2e40963d4" class="cta_button " href="https://info.nutsvolts.com/cs/c/?cta_guid=92e4c9b5-f239-4437-b38f-bbd2e40963d4&amp;signature=AAH58kFVl-QK4TvEisocCyIqSq1mlqIpiQ&amp;placement_guid=6f23194d-3acf-4616-82c3-4cea849db08e&amp;click=bc89991d-9890-4430-a8e0-18568e4d8e89&amp;hsutk=db0856bbcaf53fd3676e40b368479ca9&amp;canon=https%3A%2F%2Fwww.nutsvolts.com%2Fmagazine%2Farticle%2FSeptember2016_Numitron-LED-Clock&amp;utm_referrer=https%3A%2F%2Fwww.nutsvolts.com%2Fmagazine%2Fcategory%2Fclocks&amp;portal_id=2436516&amp;redirect_url=APefjpFMibVCu20mwXytjaWFjnd7lOAjrEreHY9ayeQHxLyhWY9tbzIrKfL5NzLn3AQWjPk1WEFKR1N60HhOC0851boYP3__DcpVp0Ur0GuaEeB0SHLi1grgWKgmvE50uZnCnL-gi-Y2DjH8aiwJfZFbMIUGins5OjkicF3_cx8xMPAyYdKBz1sKVhD9RJjAvxNhEeaBITHOiiezUQD9g3l6szUsni-zj7cfFcpLgZwkH3tGBqqV9OO3w7mOwVZvlOwMqPpcjs4F66WYQIZjQqLH1HKhPOSpBQ&amp;__hstc=19606951.db0856bbcaf53fd3676e40b368479ca9.1654801266919.1654801266919.1654801266919.1&amp;__hssc=19606951.4.1654801266920&amp;__hsfp=1156041632" target="_blank" rel="noopener" style="" cta_dest_link="https://store.nutsvolts.com/project-kits/sku17430" title="Get The Kit and Start Building!"><span style="color: #ffffff;"><strong><span style="font-family: trebuchet ms, geneva;">Get The Kit and </span><span style="font-family: trebuchet ms, geneva;"><em>Start Building!</em></span></strong></span></a></span> <script charset="utf-8" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/current.js.download" type="text/javascript"></script> <script type="text/javascript"> hbspt.cta.load(2436516, '6f23194d-3acf-4616-82c3-4cea849db08e', {});</script> </span></div>
+<h3>Resources</h3>
+<p style="text-align: center;">Debouncing Discussion<br>
+<strong><a href="http://www.eng.utah.edu/~cs5780/debouncing.pdf" target="_blank">www.eng.utah.edu/~cs5780/debouncing.pdf</a></strong></p>
+<p style="text-align: center;">Free Download of Eagle<br>
+<strong><a href="https://www.autodesk.com/products/eagle/free-download" target="_blank">https://www.autodesk.com/products/eagle/free-download</a></strong></p>
+<p style="text-align: center;">PICkit3 IDE User's Guide<br>
+<a href="http://ww1.microchip.com/downloads/en/DeviceDoc/PICkit_3_User_Guide_51795A.pdf" target="_blank"><strong>http://ww1.microchip.com/downloads/en/DeviceDoc/PICkit_3_User_Guide_51795A.pdf</strong></a></p>
+<p style="text-align: center;">Numitron Lifespan<br>
+<strong><a href="http://www.rfcafe.com/references/popular-electronics/images2/rca-dr2010-numitron.pdf" target="_blank">www.rfcafe.com/references/popular-electronics/images2/rca-dr2010-numitron.pdf</a></strong></p>
+<p style="text-align: center;">Cathode Poisoning<br>
+<a href="http://www.tube-tester.com/sites/nixie/different/cathode%20poisoning/cathode-poisoning.htm" target="_blank"><strong>www.tube-tester.com/sites/nixie/different/cathode%20poisoning/cathode-poisoning.htm</strong></a></p>
+<hr>
+<h3>Parts List</h3>
+<table cellpadding="1" cellspacing="1" class="table table-striped">
+<thead>
+<tr>
+<th scope="col">PART</th>
+<th scope="col">QTY</th>
+<th scope="col">VALUE</th>
+<th scope="col">DEVICE</th>
+<th scope="col">Mouser Part #s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>1</td>
+<td>1000 µF/35V</td>
+<td>Capacitor, polarized, 16 x 15 mm</td>
+<td>(647-URS1V102MHD)</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>1</td>
+<td>220 µF/50V</td>
+<td>Capacitor, polarized, 10 x 16 mm</td>
+<td>(667-EEU-FM1H221)</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>1</td>
+<td>10 µF tan/16V</td>
+<td>Capacitor, polarized, tantalum</td>
+<td>(581-TAP106K016SCS)</td>
+</tr>
+<tr>
+<td>C4-C9</td>
+<td>6</td>
+<td>0.1 µF</td>
+<td>Capacitor, ceramic, through hole</td>
+<td>(75-1C10Z5U104M050B)</td>
+</tr>
+<tr>
+<td>C10-C15</td>
+<td>6</td>
+<td>0.1 µF</td>
+<td>Capacitor, ceramic, 0805 SMD</td>
+<td>(581-08055C104K)</td>
+</tr>
+<tr>
+<td>C16 + C17</td>
+<td>2</td>
+<td>12 pF</td>
+<td>Capacitor, ceramic, 0805 SMD</td>
+<td>(581-08055A120J ) *</td>
+</tr>
+<tr>
+<td>C18 + C19</td>
+<td>2</td>
+<td>20 pF</td>
+<td>Capacitor, ceramic, 0805 SMD</td>
+<td>(80-C0805C200J5G)</td>
+</tr>
+<tr>
+<td>D1</td>
+<td>1</td>
+<td>1N5819</td>
+<td>Schotty diode, high speed</td>
+<td>(512-1N5819)</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>1</td>
+<td>1N4001</td>
+<td>Diode, rectifier</td>
+<td>(512-1N4001) *</td>
+</tr>
+<tr>
+<td>D3 + 4</td>
+<td>2</td>
+<td>1N4148</td>
+ <td>Diode, switching</td>
+<td>(512-1N4148)</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>1</td>
+<td>3N248</td>
+<td>Diode bridge 1.5A</td>
+<td>(625-3N248-E4) *</td>
+</tr>
+<tr>
+<td>F1</td>
+<td>1</td>
+<td>1A</td>
+<td>Fuse, 10x3.8 mm</td>
+<td>(576-07771.25MRET1P) *</td>
+</tr>
+<tr>
+<td>IC1</td>
+<td>1</td>
+<td>PIC16F876A-I/SO</td>
+<td>Eight-bit Microchip PIC (SO28W)</td>
+<td>(579-PIC16F876A-I/SO) *</td>
+</tr>
+<tr>
+<td>IC2</td>
+<td>1</td>
+<td>CD4017BE</td>
+<td>Decade counter (DIL16)</td>
+<td>(595-CD4017BE)</td>
+</tr>
+<tr>
+<td>IC3</td>
+<td>1</td>
+<td>LM2575T-5</td>
+<td>Switch mode regulator 5V (TO220-52)</td>
+<td>(863-LM2575T-5G)</td>
+</tr>
+<tr>
+<td>IC4</td>
+<td>1</td>
+<td>SN74HC164N</td>
+<td>Eight-bit shift register (DIL14)</td>
+<td>(595-SN74HC164N)</td>
+</tr>
+<tr>
+<td>IC5-10</td>
+<td>6</td>
+<td>CD4511BNSR</td>
+<td>BCD to seven-segment driver/latch (SMD)</td>
+<td>(595-CD4511BNSR) *</td>
+</tr>
+<tr>
+<td>IC11</td>
+<td>1</td>
+<td>ULN2803A</td>
+<td>Darlington transistor array (DIL18)</td>
+<td>(595-CD4511BPW) *</td>
+</tr>
+<tr>
+<td>JP1</td>
+<td>1</td>
+<td>POWER_JACK</td>
+<td>Power jack, 7x2.1 mm</td>
+<td>Your favorite/various *</td>
+</tr>
+<tr>
+<td>JP2</td>
+<td>1</td>
+<td>Two-pin</td>
+<td>Straight 0.1" spacing with jumper block</td>
+<td>Your favorite/various *</td>
+</tr>
+<tr>
+<td>JP3</td>
+<td>1</td>
+<td>Five-pin</td>
+<td>Angled 0.1" spacing</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>L1</td>
+<td>1</td>
+<td>330UH</td>
+<td>SMD power inductor</td>
+<td>(851-CDRH127NP-331MC)</td>
+</tr>
+<tr>
+<td>LED1-60</td>
+<td>60</td>
+<td>UltraBrite LED</td>
+<td>LED 5 mm</td>
+<td>Your favorite/various *</td>
+</tr>
+<tr>
+<td>NU1-6</td>
+<td>6</td>
+<td>IV-9</td>
+<td>IV-9-Numitron</td>
+<td>eBay *</td>
+</tr>
+<tr>
+<td>R1-R8</td>
+<td>8</td>
+<td>1k6</td>
+<td>Carbon resistor, 1/4W, axial lead, 5%</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>R9-R13</td>
+<td>5</td>
+<td>10K</td>
+<td>Carbon resistor, 1/4W, axial lead, 5%</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>R14 + R15</td>
+<td>2</td>
+<td>0R</td>
+<td>Use jumper wire</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>R16-R18</td>
+<td>3</td>
+<td>1K</td>
+<td>Carbon resistor, 1/4W, axial lead, 5%</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>R19 + R20</td>
+<td>2</td>
+<td>15K</td>
+<td>Carbon resistor, 1/4W, axial lead, 5%</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>R21-R28</td>
+<td>8</td>
+<td>100 ohm</td>
+<td>Carbon resistor, 1/4W, axial lead, 5%</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>S1-S3</td>
+<td>3</td>
+<td>Switch</td>
+<td>Long tactile button, 90 degree</td>
+<td>(506-FSMRA4JH04)</td>
+</tr>
+<tr>
+<td>X1</td>
+<td>1</td>
+<td>4 MHz</td>
+<td>Crystal, low profile</td>
+<td>(520-040-20-4X-DU)</td>
+</tr>
+<tr>
+<td>X2</td>
+<td>1</td>
+<td>32 kHz</td>
+<td>Watch crystal</td>
+<td>(732-C002RX32.76K-APB) *</td>
+</tr>
+<tr>
+<td>Circuitboard</td>
+<td>1</td>
+<td>N/A</td>
+<td>&nbsp;</td>
+<td>Favorite boardhouse</td>
+</tr>
+<tr>
+<td>Wall wart</td>
+<td>1</td>
+<td>12V or 15V, 1.5A, AC or DC</td>
+<td>(Connector to fit JP1)</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>Spacer</td>
+<td>4</td>
+<td>M3x20 mm F-F</td>
+<td>&nbsp;</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>Spacer</td>
+<td>4</td>
+<td>M3x15 mm M-F</td>
+<td>&nbsp;</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>Screw</td>
+<td>8</td>
+<td>M3x10 mm</td>
+<td>&nbsp;</td>
+<td>Your favorite/various</td>
+</tr>
+<tr>
+<td>Panel</td>
+<td>2</td>
+<td>8" x 8" x 1/4" acrylic</td>
+<td>&nbsp;</td>
+<td>Local plastics shop *</td>
+</tr>
+<tr>
+<td colspan="5">Parts denoted with * are specifically mentioned in the text. Please read before ordering.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div id="content-extras" name="content-extras"></div>
+<div class="downloads">
+<h3>Downloads</h3>
+<div class="col1"><p><a href="https://www.nutsvolts.com/uploads/magazine_downloads/0916-van-dijk.zip" class="download-link"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/disk.png" width="16" height="16"> download</a></p></div>
+<div class="col2"><p>201609-Dijk.zip</p></div>
+<div class="clear"></div>
+<div><p></p><p>What’s in the zip?<br>
+PCB Files<br>
+Firmware<br>
+User Manual<br>
+Construction Manual<br>
+Full Schematic<br>
+Numitron Tube Data Sheets<br>
+Video of clock patterns</p>
+<p></p></div>
+</div>
+<span class="fb-share-button pull-left fb_iframe_widget" data-href="https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock" data-layout="button_count" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;href=https%3A%2F%2Fwww.nutsvolts.com%2Fmagazine%2Farticle%2FSeptember2016_Numitron-LED-Clock&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey"><span style="vertical-align: bottom; width: 77px; height: 20px;"><iframe name="f208b31933a5e18" width="1000px" height="1000px" data-testid="fb:share_button Facebook Social Plugin" title="fb:share_button Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/share_button.html" style="border: none; visibility: visible; width: 77px; height: 20px;" class=""></iframe></span></span>
+<span class="facebook-button pull-left">
+<div class="fb-like fb_iframe_widget" data-href="https://www.nutsvolts.com/magazine/September2016_Numitron-LED-Clock" data-layout="standard" data-action="like" data-show-faces="true" data-share="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;container_width=0&amp;href=https%3A%2F%2Fwww.nutsvolts.com%2Fmagazine%2FSeptember2016_Numitron-LED-Clock&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;share=false&amp;show_faces=true"><span style="vertical-align: bottom; width: 450px; height: 28px;"><iframe name="f11cb355593f1ec" width="1000px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/like.html" style="border: none; visibility: visible; width: 450px; height: 28px;" class=""></iframe></span></div>
+</span>
+<div style="clear:both;"></div>
+</div>
+<br>
+<br>
+<div class="holder">
+<h2>Comments</h2>
+<div id="disqus_thread"><iframe id="dsq-app7110" name="dsq-app7110" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 11581px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+<script type="text/javascript">
+				/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+				var disqus_shortname = 'nutsandvolts'; // required: replace example with your forum shortname
+				var disqus_identifier = '5124';
+				var disqus_title = 'Build the Numitron &#8212; A Six-Digit Clock';
+				var disqus_url = 'https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock';
+		
+				/* * * DON'T EDIT BELOW THIS LINE * * */
+				(function() {
+					var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+					dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				})();
+			</script>
+</div>
+<br><br>
+</div>
+<div class="col-md-4 text-right">
+<div class="sidebar">
+<div class="ad-block">
+<script type="text/javascript"><!--//<![CDATA[
+			   var m3_u = (location.protocol=='https:'?'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php':'http://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php');
+			   var m3_r = Math.floor(Math.random()*99999999999);
+			   if (!document.MAX_used) document.MAX_used = ',';
+			   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+			   document.write ("?zoneid=52");
+			   document.write ('&amp;cb=' + m3_r);
+			   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+			   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+			   document.write ("&amp;loc=" + escape(window.location));
+			   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+			   if (document.context) document.write ("&context=" + escape(document.context));
+			   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+			   document.write ("'><\/scr"+"ipt>");
+			//]]>--></script><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/ajs(1).php"></script><div id="beacon_01c471f80f" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/lg(1).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<noscript><a href='http://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?n=ab03a236&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://adserver.tandlpublications.com/nutsvolts/www/delivery/avw.php?zoneid=52&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=ab03a236' border='0' alt='' /></a></noscript>
+</div>
+<div class="ad-block">
+
+<script type="text/javascript"><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php':'http://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=53");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/ajs(2).php"></script><div id="beacon_d175075013" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/lg(2).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<noscript><a href='http://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?n=a90639e8&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://adserver.tandlpublications.com/nutsvolts/www/delivery/avw.php?zoneid=53&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a90639e8' border='0' alt='' /></a></noscript>
+</div>
+<div class="ad-block">
+<script type="text/javascript"><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php':'http://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=55");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/ajs(3).php"></script><div id="beacon_36f8277053" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/lg(3).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<noscript><a href='http://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?n=ac01be3d&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://adserver.tandlpublications.com/nutsvolts/www/delivery/avw.php?zoneid=55&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=ac01be3d' border='0' alt='' /></a></noscript>
+</div>
+<div class="ad-block">
+
+<script type="text/javascript"><!--//<![CDATA[
+		   var m3_u = (location.protocol=='https:'?'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php':'http://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php');
+		   var m3_r = Math.floor(Math.random()*99999999999);
+		   if (!document.MAX_used) document.MAX_used = ',';
+		   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+		   document.write ("?zoneid=54");
+		   document.write ('&amp;cb=' + m3_r);
+		   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+		   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+		   document.write ("&amp;loc=" + escape(window.location));
+		   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+		   if (document.context) document.write ("&context=" + escape(document.context));
+		   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+		   document.write ("'><\/scr"+"ipt>");
+		//]]>--></script><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/ajs(4).php"></script><a href="https://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?oaparams=2__bannerid=647__zoneid=54__cb=84ec1e3541__oadest=https%3A%2F%2Fwww.expresspcb.com%2F%3Futm_source%3DNV-SERVO%26utm_medium%3DPUB%26utm_campaign%3DSpring22" target="_blank"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/04ef578259a83c6bc7e6ef6aa5e64411.png" width="300" height="250" alt="" title="" border="0"></a><div id="beacon_84ec1e3541" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/lg(4).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<noscript><a href='http://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?n=a07d15cf&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://adserver.tandlpublications.com/nutsvolts/www/delivery/avw.php?zoneid=54&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a07d15cf' border='0' alt='' /></a></noscript>
+</div>
+<div class="ad-block">
+
+<script type="text/javascript"><!--//<![CDATA[
+		   var m3_u = (location.protocol=='https:'?'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php':'http://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php');
+		   var m3_r = Math.floor(Math.random()*99999999999);
+		   if (!document.MAX_used) document.MAX_used = ',';
+		   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+		   document.write ("?zoneid=50");
+		   document.write ('&amp;cb=' + m3_r);
+		   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+		   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+		   document.write ("&amp;loc=" + escape(window.location));
+		   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+		   if (document.context) document.write ("&context=" + escape(document.context));
+		   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+		   document.write ("'><\/scr"+"ipt>");
+		//]]>--></script><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/ajs(5).php"></script><a href="https://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?oaparams=2__bannerid=449__zoneid=50__cb=0005036b31__oadest=https%3A%2F%2Fwww.actuonix.com%2FL12-Micro-Linear-Actuators-s%2F1821.htm" target="_blank"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/180a56fa2180c1544a7fb507a3064833.gif" width="300" height="250" alt="" title="" border="0"></a><div id="beacon_0005036b31" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/lg(5).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<noscript><a href='http://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?n=a535d7d6&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://adserver.tandlpublications.com/nutsvolts/www/delivery/avw.php?zoneid=50&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a535d7d6' border='0' alt='' /></a></noscript>
+</div>
+<div class="ad-block">
+
+<script type="text/javascript"><!--//<![CDATA[
+		    var m3_u = (location.protocol=='https:'?'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php':'http://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php');
+		    var m3_r = Math.floor(Math.random()*99999999999);
+		    if (!document.MAX_used) document.MAX_used = ',';
+		    document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+		    document.write ("?zoneid=56");
+		    document.write ('&amp;cb=' + m3_r);
+		    if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+		    document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+		    document.write ("&amp;loc=" + escape(window.location));
+		    if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+		    if (document.context) document.write ("&context=" + escape(document.context));
+		    if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+		    document.write ("'><\/scr"+"ipt>");
+		 //]]>--></script><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/ajs(6).php"></script><div id="beacon_be18aefcc2" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/lg(6).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<noscript><a href='http://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?n=a41aa32c&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://adserver.tandlpublications.com/nutsvolts/www/delivery/avw.php?zoneid=56&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a41aa32c' border='0' alt='' /></a></noscript>
+</div>
+<div class="ad-block">
+
+<script type="text/javascript"><!--//<![CDATA[
+		   var m3_u = (location.protocol=='https:'?'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php':'http://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php');
+		   var m3_r = Math.floor(Math.random()*99999999999);
+		   if (!document.MAX_used) document.MAX_used = ',';
+		   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+		   document.write ("?zoneid=57");
+		   document.write ('&amp;cb=' + m3_r);
+		   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+		   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+		   document.write ("&amp;loc=" + escape(window.location));
+		   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+		   if (document.context) document.write ("&context=" + escape(document.context));
+		   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+		   document.write ("'><\/scr"+"ipt>");
+		//]]>--></script><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/ajs(7).php"></script><div id="beacon_ac74d5890b" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/lg(7).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<noscript><a href='http://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?n=ac74aaf6&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://adserver.tandlpublications.com/nutsvolts/www/delivery/avw.php?zoneid=57&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=ac74aaf6' border='0' alt='' /></a></noscript>
+</div>
+<div class="ad-block">
+
+<script type="text/javascript"><!--//<![CDATA[
+			   var m3_u = (location.protocol=='https:'?'https://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php':'http://adserver.tandlpublications.com/nutsvolts/www/delivery/ajs.php');
+			   var m3_r = Math.floor(Math.random()*99999999999);
+			   if (!document.MAX_used) document.MAX_used = ',';
+			   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+			   document.write ("?zoneid=58");
+			   document.write ('&amp;cb=' + m3_r);
+			   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+			   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+			   document.write ("&amp;loc=" + escape(window.location));
+			   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+			   if (document.context) document.write ("&context=" + escape(document.context));
+			   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+			   document.write ("'><\/scr"+"ipt>");
+			//]]>--></script><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/ajs(8).php"></script><div id="beacon_ec47cb4203" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/lg(8).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<noscript><a href='http://adserver.tandlpublications.com/nutsvolts/www/delivery/ck.php?n=ab1686eb&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://adserver.tandlpublications.com/nutsvolts/www/delivery/avw.php?zoneid=58&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=ab1686eb' border='0' alt='' /></a></noscript>
+</div>
+<div class="sidebar-block">
+<h3><a href="https://www.nutsvolts.com/newsletters">Latest Newsletters</a></h3>
+<h5>March 12, 2021</h5>
+<p><a href="http://2436516.hs-sites.com/wirespondence-serial-bluetooth-with-a-micro-analog-front-end-am/fm-receiver-restoration" target="_blank">Wirespondence, Serial Bluetooth with a Micro, Analog Front End, AM/FM Receiver Restoration</a></p>
+<ul class="stories list-unstyled">
+<li><a href="https://www.nutsvolts.com/magazine/article/wirespondence">Wirespondence!</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/June2015_Lindley">Using Serial Bluetooth With a Microcontroller</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/february2016_AnalogFrontEnds">Why You Need an Analog Front End and How to Set It Up</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/restoring-a-vintage-zenith-table-top-am-fm-receiver-from-the-60s">Restoring a Vintage Zenith Table Top AM/FM Receiver from the ‘60s</a></li>
+</ul>
+<hr>
+<h5>March 05, 2021</h5>
+<p><a href="http://2436516.hs-sites.com/analog-waves-from-digital-signals-diy-electric-scooter-the-solar-alternative-driving-leds-with-a-microcontroller?ecid=&amp;utm_source=hs_email&amp;utm_medium=email&amp;_hsenc=p2ANqtz-84wt-06HHgQcyNvLX__dP_O_MOlybUvnYDnCOz7izZc1FvyQbVfYsHdFAmBbugWFhlTZi5" target="_blank">Analog Waves from Digital Signals, DIY Electric Scooter, The Solar Alternative, Driving LEDs with a Microcontroller</a></p>
+<ul class="stories list-unstyled">
+<li><a href="https://www.nutsvolts.com/magazine/article/generating_analog_waves_from_digital_signals">Generating Analog Waves From Digital Signals</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/build-a-diy-electric-scooter">Build a DIY Electric Scooter</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/the_solar_alternative">The Solar Alternative</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/april2015_Lindley">Driving LEDs with a Microcontroller</a></li>
+</ul>
+<hr>
+<h3><a href="https://www.nutsvolts.com/newsletters">View All &gt;</a></h3>
+</div>
+<div class="sidebar-block">
+<h3>From the Q&amp;A</h3>
+<p><strong>Selected questions from past Q&amp;A columns.</strong></p>
+<ul class="stories list-unstyled">
+<li><a href="http://www.nutsvolts.com/questions-and-answers/attic-fan-controller">Attic Fan Controller</a></li>
+<li><a href="http://www.nutsvolts.com/questions-and-answers/stepper-motor-overview">Stepper Motor Overview</a></li>
+<li><a href="http://www.nutsvolts.com/questions-and-answers/winding-single-layer-air-coils">Winding Single-Layer Air Coils</a></li>
+<li><a href="http://www.nutsvolts.com/questions-and-answers/wide-range-current-regulator">Wide-Range Current Regulator</a></li>
+<li><a href="http://www.nutsvolts.com/questions-and-answers/sawtooth-generator">Sawtooth Generator</a></li>
+</ul>
+</div>
+<div class="sidebar-block">
+<h3>Popular Stories</h3>
+<ul class="stories list-unstyled">
+<li><a href="http://www.nutsvolts.com/magazine/article/wirespondence">Wirespondence!</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/radar_and_electronic_warfare_fundamentals">RADAR And Electronic Warfare Fundamentals</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/wire_wrap_is_alive_and_well">Wire Wrap Is Alive And Well!</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/turing_machines">Turing Machines</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/1920s-radio-applause-cards">1920s Radio Applause Cards</a></li>
+</ul>
+</div>
+<div class="sidebar-block">
+<h3>Learning Electronics</h3>
+<p>Need to brush up on your electronics principles? These multi-part series may be just what you need!</p>
+<ul class="stories list-unstyled">
+<li><a href="http://www.nutsvolts.com/magazine/article/understanding_digital_logic_ics_part_1">Understanding Digital Logic ICs</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/bipolar_transistor_cookbook_part_1">Bipolar Transistor Cookbook</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/op-amp-cookbook">Op-Amp Cookbook</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/fet_principles_and_circuits_part_1">FET Principles And Circiuits</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/triac_principles_and_circuits_part_1">Triac Principles And Circuits</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/understanding_digital_buffer_gate_and_ic_circuits_part_1">Understanding Digital Buffer, Gate And Logic IC Circuits</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/what_the_l_is_it">Checking Inductors</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/small-logic-gates-spawn-big-dreams-part-1">Small Logic Gates — The building blocks of versatile digital circuits.</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/security-electronics-systems-and-circuits-part-1">Security Electronics Systems And Circuits</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/using-seven-segment-displays-part-1">Using Seven-Segment Displays</a></li>
+<li><a href="http://www.nutsvolts.com/magazine/article/signal-generators-part-1">Signal Generators</a></li>
+</ul>
+</div>
+<div class="sidebar-block">
+<h3>Archives</h3>
+<ul class="stories list-unstyled">
+<li><a href="https://www.nutsvolts.com/blog/archives/2017/04">April 2017</a></li>
+<li><a href="https://www.nutsvolts.com/blog/archives/2017/03">March 2017</a></li>
+<li><a href="https://www.nutsvolts.com/blog/archives/2017/01">January 2017</a></li>
+<li><a href="https://www.nutsvolts.com/blog/archives/2016/10">October 2016</a></li>
+<li><a href="https://www.nutsvolts.com/blog/archives/2016/06">June 2016</a></li>
+</ul>
+<a href="https://www.nutsvolts.com/blog/archives" class="view">View complete archives list</a>
+</div>
+<div class="sidebar-block">
+<h3>Recent Posts</h3>
+<ul class="stories list-unstyled">
+<li><em class="date">April 13</em> - <a href="https://www.nutsvolts.com/blog/post/a-night-at-the-opera">A Night at the Opera?</a></li>
+<li><em class="date">April 13</em> - <a href="https://www.nutsvolts.com/blog/post/3d-printable-tractor-beam">3D Printable Tractor Beam</a></li>
+<li><em class="date">March 07</em> - <a href="https://www.nutsvolts.com/blog/post/video-games-turn-50">Video Games Turn 50</a></li>
+<li><em class="date">March 07</em> - <a href="https://www.nutsvolts.com/blog/post/make-your-raspberries-touchable">Make Your Raspberries Touchable</a></li>
+<li><em class="date">January 27</em> - <a href="https://www.nutsvolts.com/blog/post/worlds-smallest-transistor-sort-of">World’s Smallest Transistor — Sort of</a></li>
+</ul>
+</div>
+<div class="sidebar-block">
+<h3>RECENT COMMENTS</h3>
+<div id="recentcomments" class="dsq-widget"><script type="text/javascript" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/recent_comments_widget.js.download"></script> <style type="text/css" media="screen">	 .dsq-widget ul.dsq-widget-list {	 padding: 0;	 margin: 0;	 text-align: left;	 }	 img.dsq-widget-avatar {	 width: 32px;	 height: 32px;	 border: 0px;	 margin: 0px;	 padding: 0px 3px 3px 0px;	 float: left;	 }	 a.dsq-widget-user {	 font-weight: bold;	 }	 a.dsq-widget-thread {	 font-weight: bold;	 }	 p.dsq-widget-meta {	 clear: both;	 font-size: 80%;	 padding: 0;	 margin: 0;	 }	 li.dsq-widget-item {	 margin: 15px 0;	 list-style-type: none;	 clear: both;	 }	 span.dsq-widget-clout {	 padding: 0 2px;	 background-color: #ff7300;	 color: #fff;	 }	 table.dsq-widget-horiz td {	 padding-right: 15px;	 }	 .dsq-widget-comment p {	 display: inline;	 }	 </style>	 <ul class="dsq-widget-list">	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/BillDem3D/">BillDem3D -- Bill Dempsey</a>	 <span class="dsq-widget-comment"><p>Thanks for a great article. Your explanations of both "why to" and "how to" are excellent. I've found both backlash adjustments and precise tramming to be critical when doing detailed carvings on...</p></span>	 <p class="dsq-widget-meta"><a href="https://www.nutsvolts.com/magazine/article/cnc-routers-backlash">CNC Routers: Backlash</a>&nbsp;·&nbsp;<a href="https://www.nutsvolts.com/magazine/article/cnc-routers-backlash#comment-5880677084">2 days ago</a></p>	 </li>	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/larry_kraemer/">Larry Kraemer</a>	 <span class="dsq-widget-comment"><p>I can't print a pdf of all 4 pages {60..63}  What's the problem with printing the last page?</p><p>This Publication can not be found. You've accessed this page from an unexpected link. Please try later.</p></span>	 <p class="dsq-widget-meta"><a href="http://www.nutsvolts.com/magazine/article/understanding_digital_logic_ics_part_3">Understanding Digital Logic ICs - Part 3</a>&nbsp;·&nbsp;<a href="http://www.nutsvolts.com/magazine/article/understanding_digital_logic_ics_part_3#comment-5879158470">4 days ago</a></p>	 </li>	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/brucealundeen/">Bruce A. Lundeen</a>	 <span class="dsq-widget-comment"><p>Perhaps I am "overdistressed" of the lack of interest in STEM by high school educators. The school she goes to is in the wealthiest neighborhood in Minneapolis. The website first claims "dynamic...</p></span>	 <p class="dsq-widget-meta"><a href="https://www.nutsvolts.com/magazine/article/how-phased-array-antennas-work">How Phased Array Antennas Work</a>&nbsp;·&nbsp;<a href="https://www.nutsvolts.com/magazine/article/how-phased-array-antennas-work#comment-5878694249">4 days ago</a></p>	 </li>	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/disqus_I3a2JNR1mQ/">Daniel</a>	 <span class="dsq-widget-comment"><p>Jeff, I'm also a professional electronics design engineer for over 40 years (retired over a decade), and also grew up with those obsolete/archaic units. But you're a little out of touch with the...</p></span>	 <p class="dsq-widget-meta"><a href="https://www.nutsvolts.com/magazine/article/build-a-wireless-doorbell-pager-for-the-deaf">Build a Wireless Doorbell Pager for the Deaf</a>&nbsp;·&nbsp;<a href="https://www.nutsvolts.com/magazine/article/build-a-wireless-doorbell-pager-for-the-deaf#comment-5878234439">5 days ago</a></p>	 </li>	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/jeff_bob/">Jeff-Bob</a>	 <span class="dsq-widget-comment"><p>"Obsolete units"? Hardly! As a professional electronics design engineer for over 40 years (recently retired), I used inches throughout my career, and can easily convert to metric values, for the...</p></span>	 <p class="dsq-widget-meta"><a href="https://www.nutsvolts.com/magazine/article/build-a-wireless-doorbell-pager-for-the-deaf">Build a Wireless Doorbell Pager for the Deaf</a>&nbsp;·&nbsp;<a href="https://www.nutsvolts.com/magazine/article/build-a-wireless-doorbell-pager-for-the-deaf#comment-5878202505">5 days ago</a></p>	 </li>	 </ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer>
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<a href="https://www.nutsvolts.com/magazine/issue/2022/02"><img src="https://www.nutsvolts.com/magazine/article/September2016_Numitron-LED-Clock" alt="" class="img-responsive"></a>
+<h5><a href="https://www.nutsvolts.com/magazine/issue/2022/02">
+2022 Issue-2
+</a></h5>
+<ul class="stories list-unstyled">
+</ul>
+</div>
+<div class="col-md-2">
+<a href="https://www.nutsvolts.com/magazine/issue/2022/01"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/2022-01.jpg" alt="" class="img-responsive"></a>
+<h5><a href="https://www.nutsvolts.com/magazine/issue/2022/01">
+2022 Issue-1
+</a></h5>
+<ul class="stories list-unstyled">
+<li><a href="https://www.nutsvolts.com/magazine/article/the-transistor-compound-pair">The Transistor Compound Pair</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/build-a-farmer-fox-chicken-corn-puzzle">Build a Farmer, Fox, Chicken, Corn Puzzle</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/vintage-tek-continuously-variable-autotransformers">Vintage Tek: Continuously Variable Autotransformers</a></li>
+</ul>
+</div>
+<div class="col-md-2">
+<a href="https://www.nutsvolts.com/magazine/issue/2020/06"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/2020-06.jpg" alt="" class="img-responsive"></a>
+<h5><a href="https://www.nutsvolts.com/magazine/issue/2020/06">
+2020 Issue-6
+</a></h5>
+<ul class="stories list-unstyled">
+<li><a href="https://www.nutsvolts.com/magazine/article/build-a-one-inch-scope">BUILD A ONE INCH SCOPE</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/vintage-tek-current-limiters">Vintage Tek: Current Limiters</a></li>
+</ul>
+</div>
+<div class="col-md-2">
+<a href="https://www.nutsvolts.com/magazine/issue/2020/05"><img src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/2020-05.jpg" alt="" class="img-responsive"></a>
+<h5><a href="https://www.nutsvolts.com/magazine/issue/2020/05">
+2020 Issue-5
+</a></h5>
+<ul class="stories list-unstyled">
+<li><a href="https://www.nutsvolts.com/magazine/article/restoration-of-a-vintage-zenith-g725-am-fm-receiver">Restoration of a Vintage Zenith G725 AM/FM Receiver</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/build-a-digital-clock-family-using-nextion-displays">Build a Digital Clock Family Using Nextion Displays</a></li>
+<li><a href="https://www.nutsvolts.com/magazine/article/beginning-to-build-with-tubes">Beginning to Build with Tubes</a></li>
+</ul>
+</div>
+<div class="col-md-3 col-md-offset-1">
+<h3>Connect With Us</h3>
+<p><a href="https://www.facebook.com/pages/NutsVolts-Magazine/76329669411" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>&nbsp;&nbsp;
+<a href="https://twitter.com/nutsvolts" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>&nbsp;&nbsp;
+<a href="https://www.youtube.com/channel/UCYaa34QJP7miqPihaX_h_3g?nohtml5=False" target="_blank"><i class="fa fa-youtube fa-lg"></i></a></p>
+<h4>Subscribe to our Newsletter</h4>
+<p><a href="http://visitor.r20.constantcontact.com/d.jsp?llr=86xzrxdab&amp;p=oi&amp;m=1103523274683&amp;sit=tp6jucgfb&amp;f=ec320f4a-cc94-4594-92c2-d8fc178bf293" class="btn btn-primary" target="_blank">Sign Up Now</a></p>
+</div>
+</div>
+<br>
+<br>
+<div class="row">
+<div class="col-sm-12">
+<div class="copyright">
+<p>Copyright © 2022 T &amp; L Publications. All Rights Reserved |
+<a href="https://www.nutsvolts.com/privacy">Privacy Policy</a> |
+<a href="https://www.nutsvolts.com/terms">Terms &amp; Conditions</a> |
+<a href="https://www.nutsvolts.com/copyright">Copyright Statement</a>
+</p>
+</div>
+</div>
+</div>
+<br>
+<br>
+</div>
+</footer>
+
+
+<script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/jquery.min.js.download" type="text/javascript"></script>
+<script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/popper.min.js.download" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" type="text/javascript"></script>
+<script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/bootstrap.min.js.download" type="text/javascript"></script>
+<script src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/jquery.bxslider.min.js.download" type="text/javascript"></script>
+
+<link href="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/jquery.bxslider.css" rel="stylesheet">
+<script type="text/javascript">
+	$(document).ready(function(){
+	  $('.bxslider').bxSlider({
+		  auto: true,
+    	  mode: 'fade'	
+	  });
+	});
+	</script>
+<script type="text/javascript">
+		$( document ).ready(function() {
+		
+		  // Open navbarSide when button is clicked
+		  $('#navbarSideButton').on('click', function() {
+		    $('#navbarSide').addClass('reveal');
+		    $('.overlay,.close').show();
+		  });
+		
+		  // Close navbarSide when the outside of menu is clicked
+		  $('.overlay, .close').on('click', function(){
+		    $('#navbarSide').removeClass('reveal');
+		    $('.overlay, .close').hide();
+		  });
+		
+		});
+	</script>
+<script type="text/javascript">
+		$(document).ready(function() {
+			$(".megamenu").on("click", function(e) {e.stopPropagation();});
+		});
+	</script>
+<script type="text/javascript">
+		// http://jsfiddle.net/ukdesignservices/kxvnqee3/
+		var intvl = setInterval(function() {
+     if ($("#navbarDropdown").attr("aria-expanded") == "true") {$(".plus-minus").children(".fa-stack-1x").removeClass("fa-plus").addClass("fa-minus")} else {$(".plus-minus").children(".fa-stack-1x").removeClass("fa-minus").addClass("fa-plus")}
+			},10);
+	</script>
+
+<script async="" type="text/javascript" id="hs-script-loader" defer="" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/2436516.js(2).download"></script>
+
+
+
+<iframe style="display: none;" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/saved_resource(1).html"></iframe><iframe owner="archetype" title="archetype" style="display: none; visibility: hidden;" src="./Build the Numitron — A Six-Digit Clock _ Nuts &amp; Volts Magazine_files/saved_resource(2).html"></iframe><div id="leadinModal-173754" class="leadinModal-173754 leadinModal-reset leadinModal leadinModal-theme-bottom-right-corner leadinModal-v3 leadinModal-preview" tabindex="0"><div class="leadinModal-overlay"></div><div class="leadinModal-content" role="dialog" aria-modal="true" aria-label="Don&#39;t Miss Out!"><button class="leadinModal-close" aria-label="Close"></button><div class="leadinModal-content-wrapper" id="leadinModal-content-wrapper-173754" tabindex="-1"><div class="leadin-content-body leadin-preview-wrapper-no-image"><div class="leadin-preview-wrapper"><h4>Don't Miss Out!</h4><div class="clearfix-image"></div><span tabindex="-1" class="leadinModal-hide-outline leadinModal-description-173754"><div class="leadinModal-description-body"><p>Get our FREE Cool Reads newsletter and feed your brain with great electronics projects, tutorials, and other specially selected content. Delivered right to your inbox 4 times per month!</p></div></span><div class="advance-wrapper"><button class="leadin-button leadin-advance-button leadin-button-secondary">Get It Now!</button></div></div></div></div></div></div></body></html>

@@ -1,0 +1,71 @@
+var Complexify = (function($) {
+	var init, checkPassword, checkPasswordConfirmation, hasError;
+
+	init = function () {
+		$(document).ready(function () {
+			hasError = false;
+			$('#password_entry')
+				.on('keyup', function(e) {
+					checkPassword(this);
+					if ($.trim($('#password_confirm').next('.password-msg').html()) != '') {
+						checkPasswordConfirmation($('#password_confirm'));
+					}
+				})
+				.on('focus', function(e) {
+					checkPassword(this);
+				});
+
+			$('#password_confirm')
+				.on('keyup', function(e) {
+					checkPasswordConfirmation(this);
+				})
+				.on('focus', function(e) {
+					checkPasswordConfirmation(this);
+				});
+
+			$("#frmProfile").submit(function() {
+				if (hasError) {
+					alert($('#complexity').html());
+					return false;
+				}
+			});
+		});
+	}
+
+	checkPassword = function(el) {
+		var val = $(el).val();
+
+		if (val != '') {
+			var errorMsg = [];
+
+			if ($.trim(val).length < 9) {
+				errorMsg.push('9 characters');
+			} else {
+				if (!/[A-Z]+/.test(val)) errorMsg.push('one capital letter');
+				if (!/[a-z]+/.test(val)) errorMsg.push('one lower case letter');
+				if (!/[0-9]+/.test(val)) errorMsg.push('one number');
+				if (!/[^\w\*]/.test(val)) errorMsg.push('one special character');
+			}
+
+			if (errorMsg.length > 0) {
+				hasError = true;
+				$(el).next('.password-msg').removeClass('msg-success').addClass('msg-error').html('Password must have at least ' + errorMsg.join(', and '));
+			} else {
+				hasError = false;
+				$(el).next('.password-msg').removeClass('msg-error').addClass('msg-success').html('Good Password!');
+			}
+		}
+
+		return hasError;
+	};
+
+	checkPasswordConfirmation = function(el) {
+		if ($(el).val() != $('#password_entry').val()) {
+			$(el).parent().find('.password-msg').removeClass('msg-success').addClass('msg-error').html('Passwords do not match!');
+		} else {
+			$(el).parent().find('.password-msg').removeClass('msg-error').addClass('msg-success').html('Passwords match!');
+		}
+	};
+
+	init();
+}(jQuery));

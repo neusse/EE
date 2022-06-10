@@ -1,0 +1,74 @@
+
+
+document.write(' \
+<style type="text/css" media="screen">\
+	 .dsq-widget ul.dsq-widget-list {\
+	 padding: 0;\
+	 margin: 0;\
+	 text-align: left;\
+	 }\
+	 img.dsq-widget-avatar {\
+	 width: 32px;\
+	 height: 32px;\
+	 border: 0px;\
+	 margin: 0px;\
+	 padding: 0px 3px 3px 0px;\
+	 float: left;\
+	 }\
+	 a.dsq-widget-user {\
+	 font-weight: bold;\
+	 }\
+	 a.dsq-widget-thread {\
+	 font-weight: bold;\
+	 }\
+	 p.dsq-widget-meta {\
+	 clear: both;\
+	 font-size: 80%;\
+	 padding: 0;\
+	 margin: 0;\
+	 }\
+	 li.dsq-widget-item {\
+	 margin: 15px 0;\
+	 list-style-type: none;\
+	 clear: both;\
+	 }\
+	 span.dsq-widget-clout {\
+	 padding: 0 2px;\
+	 background-color: #ff7300;\
+	 color: #fff;\
+	 }\
+	 table.dsq-widget-horiz td {\
+	 padding-right: 15px;\
+	 }\
+	 .dsq-widget-comment p {\
+	 display: inline;\
+	 }\
+	 </style>\
+	 <ul class="dsq-widget-list">\
+	 <li class="dsq-widget-item">\
+	 <a class="dsq-widget-user" href="https://disqus.com/by/BillDem3D/">BillDem3D -- Bill Dempsey</a>\
+	 <span class="dsq-widget-comment"><p>Thanks for a great article. Your explanations of both "why to" and "how to" are excellent. I\'ve found both backlash adjustments and precise tramming to be critical when doing detailed carvings on...</p></span>\
+	 <p class="dsq-widget-meta"><a href="https://www.nutsvolts.com/magazine/article/cnc-routers-backlash">CNC Routers: Backlash</a>&nbsp;&middot;&nbsp;<a href="https://www.nutsvolts.com/magazine/article/cnc-routers-backlash#comment-5880677084">2 days ago</a></p>\
+	 </li>\
+	 <li class="dsq-widget-item">\
+	 <a class="dsq-widget-user" href="https://disqus.com/by/larry_kraemer/">Larry Kraemer</a>\
+	 <span class="dsq-widget-comment"><p>I can\'t print a pdf of all 4 pages {60..63}  What\'s the problem with printing the last page?</p><p>This Publication can not be found. You\'ve accessed this page from an unexpected link. Please try later.</p></span>\
+	 <p class="dsq-widget-meta"><a href="http://www.nutsvolts.com/magazine/article/understanding_digital_logic_ics_part_3">Understanding Digital Logic ICs - Part 3</a>&nbsp;&middot;&nbsp;<a href="http://www.nutsvolts.com/magazine/article/understanding_digital_logic_ics_part_3#comment-5879158470">4 days ago</a></p>\
+	 </li>\
+	 <li class="dsq-widget-item">\
+	 <a class="dsq-widget-user" href="https://disqus.com/by/brucealundeen/">Bruce A. Lundeen</a>\
+	 <span class="dsq-widget-comment"><p>Perhaps I am "overdistressed" of the lack of interest in STEM by high school educators. The school she goes to is in the wealthiest neighborhood in Minneapolis. The website first claims "dynamic...</p></span>\
+	 <p class="dsq-widget-meta"><a href="https://www.nutsvolts.com/magazine/article/how-phased-array-antennas-work">How Phased Array Antennas Work</a>&nbsp;&middot;&nbsp;<a href="https://www.nutsvolts.com/magazine/article/how-phased-array-antennas-work#comment-5878694249">4 days ago</a></p>\
+	 </li>\
+	 <li class="dsq-widget-item">\
+	 <a class="dsq-widget-user" href="https://disqus.com/by/disqus_I3a2JNR1mQ/">Daniel</a>\
+	 <span class="dsq-widget-comment"><p>Jeff, I\'m also a professional electronics design engineer for over 40 years (retired over a decade), and also grew up with those obsolete/archaic units. But you\'re a little out of touch with the...</p></span>\
+	 <p class="dsq-widget-meta"><a href="https://www.nutsvolts.com/magazine/article/build-a-wireless-doorbell-pager-for-the-deaf">Build a Wireless Doorbell Pager for the Deaf</a>&nbsp;&middot;&nbsp;<a href="https://www.nutsvolts.com/magazine/article/build-a-wireless-doorbell-pager-for-the-deaf#comment-5878234439">5 days ago</a></p>\
+	 </li>\
+	 <li class="dsq-widget-item">\
+	 <a class="dsq-widget-user" href="https://disqus.com/by/jeff_bob/">Jeff-Bob</a>\
+	 <span class="dsq-widget-comment"><p>"Obsolete units"? Hardly! As a professional electronics design engineer for over 40 years (recently retired), I used inches throughout my career, and can easily convert to metric values, for the...</p></span>\
+	 <p class="dsq-widget-meta"><a href="https://www.nutsvolts.com/magazine/article/build-a-wireless-doorbell-pager-for-the-deaf">Build a Wireless Doorbell Pager for the Deaf</a>&nbsp;&middot;&nbsp;<a href="https://www.nutsvolts.com/magazine/article/build-a-wireless-doorbell-pager-for-the-deaf#comment-5878202505">5 days ago</a></p>\
+	 </li>\
+	 </ul>\
+');
