@@ -1,0 +1,431 @@
+                 LAB-XT Documentation
+                           
+      Copyright (c) 2002 microEngineering Labs, Inc.
+
+
+Introduction
+
+
+A parts list and assembly instructions can be found on the LAB-X
+diskette, in a file named BOMXT.TXT.
+
+Each of the circuits on the LAB-XT are described below.  Refer to
+the schematic and sample programs on the disk for additional
+information.  It is also a good idea to have the data sheets available
+for each of the devices used on the LAB-XT.  These data sheets
+can usually be found on the manufacturers' web sites.
+
+It is recommended that you start with a simple program like
+BLINKXT.BAS to get familiar with the operation and
+programming of the LAB-XT.
+
+The LAB-XT is designed to be used as a development tool only. Although
+the circuitry is fully compatible, it is not certified by any 
+regulatory agency for connection to a telephone network.  Development
+should be performed using telephone line simulators for testing.  
+Should you decide to  ignore this warning, microEngineering Labs, Inc.
+accepts no liability for fines or damages resulting from unauthorized
+connection to a telephone network.
+
+
+Power Supply
+
+The power supply section provides regulated +5 volts DC for use
+by the LAB-XT components.  An AC adapter that provides 12
+volts DC is recommended to power the LAB-XT through J4.  The
+center pin on the connector is positive.
+
+The regulator will get quite warm.  It may be desirable to attach a
+heat sink to it at higher input voltages.
+
+There is no power switch.  The AC adapter should be unplugged
+when the LAB-XT
+is not in use.
+
+
+Processor
+
+The LAB-XT includes a 40-pin ZIF socket to support a 40-pin
+PICmicro MCU.  A PIC16F877 or PIC18F452 are recommended. 
+These flash devices may be reprogrammed in-circuit using the
+EPIC Programmer. Other PICmicro MCUs may also be used but
+may not have all the functions necessary to make use of all the
+circuits on the LAB-XT.
+
+To insert a PICmicro MCU into the ZIF socket, disconnect power
+and lift the lever on the socket.  The PICmicro MCU must be
+placed in the socket with pin 1 at the bottom of the LAB-XT
+board.  The lever on the socket should then be lowered.
+
+The LAB-XT must be powered-up in order to program a PICmicro
+MCU in the 40-pin ZIF socket.
+
+A reset button is provided to restart a running program.  It should
+not be pressed during device programming.
+
+
+Oscillator
+
+The LAB-XT includes a 20MHz oscillator that provides the clock
+source to the PICmicro MCU.  The oscillator configuration should
+be set to HS when programming the PICmicro MCU.
+
+
+ICSP Header
+
+The PICmicro MCU in the LAB-XT 40-pin ZIF socket may be
+programmed in-circuit using an EPIC Programmer.  A short 10-pin
+cable should be attached between connector J3 on the EPIC
+Programmer and J4 on the LAB-XT (pin 1 is located on the lower
+right of J4 on the LAB-XT).  The EPIC software should be started
+and the proper device selected. The PICmicro MCU should then be
+placed into the 40-pin ZIF socket on the LAB-XT.  The LAB-XT
+must be powered up during programming.  The PICmicro MCU
+may now be programmed in-circuit on the LAB-XT.
+
+If the PICmicro MCU is a flash device, it may be reprogrammed
+without being erased.  If it is a windowed EPROM (JW) device, it
+must be removed from the LAB-XT to be UV erased before
+reprogramming.  An OTP device cannot be erased.
+
+
+Isolated Telephone Line Interface
+
+The line interface performs several functions.  It places a load
+across the telephone line (tip to ring) for an off-hook condition,
+transfers audio signal to and from the telephone line, detects the
+presence of loop current and incoming ring, and provides isolation
+to protect the rest of the circuitry from high voltages on the phone
+line.
+
+PORTA.3 is the RING DETECT input.  If the telephone line is
+ringing, a square wave of the same frequency as the ring signal
+will be present (20Hz is common).
+
+PORTA.2 is the LOOP CURRENT input.  A low (0V) condition
+will be present when DC current is flowing between tip and ring. 
+When a call is terminated remotely (called/calling party hangs up),
+the loop current will be momentarily interrupted.  You can use this
+input in your programs to check for connection to a telephone line
+or to know when a remote party hangs up.
+
+PORTD.1 is the SEIZE LINE output.  Set this output high to
+energize the relay that connects the load transformer from tip to
+ring on the telephone line.  Seizing the line is the same as lifting
+the handset on a telephone.  Loop current will flow and dial tone
+will be supplied by the telephone company.  To terminate a
+connection, or hang up, set this output low.  LED2 will be lit when
+this line is active and the relay is energized. 
+
+
+Audio Amplifier Circuitry
+
+The audio amp provides power to drive the various devices that
+need audio signals.  For the incoming signals (FROM the phone
+line), it drives the voice recorder, the headset speaker, and
+provides an indicator of audio signal to the microcontroller.  For
+the outgoing signals (TO the telephone line), it drives the line-
+interface transformer, provides high-gain amplification for the
+headset microphone, and provides RC filtering for the DTMF
+signals from the MCU.
+
+PORTA.1 is the TONE DETECT input.  Audio signals of
+sufficient level will be converted into  square waves.  This allows
+you to detect and measure the frequency of incoming tones in your
+programs.  Use this input to make sure that dial tone is present
+before dialing or to monitor for progress tones when using calling
+cards or operator services.
+
+PORTE.2 is the DTMF OUT output.  This output is filtered and
+amplified to accommodate the PicBasic Pro DTMFOUT
+command.  DTMF or tone output is fed to the telephone line
+interface for dialing and signaling.
+
+
+DTMF Receiver
+
+The DTMF receiver consists of an MT8870 (or equivalent) device. 
+This device listens for certain combinations of tones that signify
+telephone dial characters.  When they are received, the
+microcontroller is signaled and the data is made available.
+
+PORTA.4 is the DTMF READY input.  The 8870 will set this
+input high when a valid DTMF tone is present on the telephone
+line.  The high condition will remain until the DTMF tone ends.
+
+PORTB.7 through PORTB.4 are the DTMF DATA inputs.  The
+data will be binary and range from 0 to 15.  Referring to a
+telephone keypad, 0-9 represent the number keys, 10 represents *,
+and 11 represents #.  The digits 12-15 represent keys A-D, which
+are not present on most telephones.
+
+PORTD.3 is the SELECT DTMF output.  To read data from the
+8870, you must first enable the 8870's output by setting this pin
+high.  The output of the 8870 is normally disabled (high
+impedance).  This allows the 4 data lines to be shared with other
+devices.  The LAB-XT shares the data lines with the keypad and
+the ICSP connections.  Care should be taken to avoid DTMF errors
+caused by keypad switches being pressed.
+
+The common method for receiving DTMF digits uses the
+following process:
+     1.  Monitor the DTMF READY line until it goes high.
+     2.  Set the SELECT DTMF line high to enable the 8870's
+output.
+     3.  Read PORTB and shift it 4 places to the right.
+     4.  Clear the SELECT DTMF line low to disable the 8870's
+output.
+     5.  Wait until the DTMF READY line returns low, then
+continue.
+
+
+Caller ID Receiver
+
+The caller id receiver consists of a 1200baud FSK device, the
+NJN2211 (or equivalent).  It converts the analog data signal on the
+telephone line to digital, RS-232 serial information that the
+microcontroller can read.  The analog signal is FSK encoded,
+which stands for Frequency-Shift-Keying.  This is the same type of
+signal used by a modem.
+
+PORTA.0 is the CID SERIAL DATA input.  The caller id
+information will begin approximately 500mS after the end of the
+first incoming ring.  To receive the data, use the PicBasic Pro
+commands SERIN or SERIN2, set for 1200 baud, true mode.
+
+The format of the caller id string may differ according to your
+location, but most places in the United States use the Multiple
+Data Message Format.  See the sample program CALLIDXT.BAS
+for an example of the code required to read this format.
+
+
+Voice Record and Playback
+
+A socket is provide for the 28-pin Winbond ISD4003 series voice
+record devices.  These devices are capable of recording and
+playing voice messages under control of the PICmicro MCU.   You
+can communicate with the ISD4003 using synchronous serial. 
+Please note that this device is not included with your LAB-XT and
+must be purchased separately.  The recommended device is the
+ISD4003-04MP.
+
+The ISD4003 can be controlled with the PicBasic Pro SHIFTOUT
+command.  This will allow you to set the device to an address in
+memory, start and stop playback or record, and power-up or power
+down the device.
+
+You cannot use the SHIFTIN command to read the ending address
+of a recording.  This is due to the requirement that the address be
+received simultaneously while sending the stop code.  To
+accomplish this, you must use the hardware synchronous serial
+port on the PICmicro MCU.  This technique is demonstrated in the
+sample program VOICEXT.BAS.
+
+PORTD.2 is the SELECT VOICE output.  A low condition on this
+pin activates the synchronous serial port on the ISD4003.
+
+PORTC.5 is the SERIAL MCU OUT output.  Serial data is sent to
+the ISD4003 on this pin.
+
+PORTC.4 is the SERIAL MCU IN input.  Serial data is received
+from the ISD4003 on this pin.
+
+PORTC.3 is the SERIAL CLK output.  This clock signal
+synchronizes the data transfer to and from the ISD4003.
+
+PORTA.5 is the VOICE_INT input.  The ISD4003 signals by
+setting this pin high when the end of a message or end of memory
+is reached during playback.
+
+
+Keypad Switches
+
+16 push button switches are arranged into a 4 by 4 matrix and
+connected to the 8 pins of PORTB on the PICmicro MCU.  The 4
+rows are connected to PORTB.0 - PORTB.3 through 270 ohm
+series resistors, R1 - R4.  The resistors isolate the pins so that
+multiple button pressed at the same time don't short them out.
+
+Note that the DTMF encoder inputs are shared with the keypad
+inputs.  Pressing keypad switches while receiving DTMF may
+cause errors.
+
+The 4 columns are connected to PORTB.4 - PORTB.7.  This
+arrangement allows any single switch state to be read by the
+PICmicro MCU.  The PORTB pullups must be enabled before the
+switches are read:
+
+     OPTION_REG.7 = 0  (16F877)
+or
+     INTCON2.7 = 0 (18F452)
+
+The switch states are read by setting one row to ground and
+making the other 7 PORTB lines inputs.  The 4 columns may then
+be read to determine which of the switches in the selected row is
+closed.  A closed switch will show a 0 in its column position and
+an open switch will show a 1.  Each of the 4 rows is scanned in the
+same manner to determine all of the switch state.  An included
+sample program demonstrates this scanning.
+
+See KEYXT.BAS for a programming example.
+
+
+LED Indicators
+
+There are 4 LEDs on the LAB-XT.  
+
+LED1 is the power indicator and is lit whenever 5 volts is present
+on the board.  
+
+LED2 indicates that the seize relay is energized and that the
+telephone line interface is in the off-hook state.
+
+LED3 and LED4 are for general use and are connected to RC0 and
+RC1.
+
+See BLINKXT.BAS for a programming example.
+
+
+LCD Module
+
+A 20 character by 2 line LCD module is included on the LAB-XT. 
+It may be used to display all manner of text information.  The
+module includes a Hitachi 44780 (or equivalent) controller.  It may
+be accessed using a 4-bit data bus along with register select and
+enable lines.  Datasheets in Adobe Acrobat format can be found on
+the LAB-X diskette.
+
+The LCD module is operated with a 4-bit data bus, PORTD.4 -
+PORTD.7 are used.  The register select line is connected to
+PORTE.0.  Enable is connected to PORTE.1.  
+
+On PICmicro MCUs with analog to digital converters, PORTE will
+start up in analog mode.  PORTE must be set to digital mode for
+the LCD to operate properly:
+
+     ADCON1 = 7
+
+The LCD contrast is set with a single resistor to ground, R4.  
+
+See KEYXT.BAS for a programming example.
+
+
+SEEPROMs
+
+The LAB-XT includes a socket for a serial EEPROM using the I2C
+communication protocol.  The serial EEPROM must be inserted
+into the socket with pin 1 toward the bottom of the board.
+
+The serial clock line is connected to PICmicro MCU pin
+PORTC.3.  The serial data line is connected to PORTC.4.  Both
+the serial clock and data lines are connected to 4.7k pull-up
+resistors R25 and R26.
+
+Some of the possible serial EEPROMs are:
+
+Device    Interface      Architecture        Digi-Key Part Number
+24LC01B   I2C EEPROM     1K (128 x 8)        24LC01B/P-ND
+24LC02B   I2C EEPROM     2K (256 x 8)        24LC02B/P/ND
+24LC04B   I2C EEPROM     4K (2 x 256 x 8)    24LC04B/P-ND
+24LC08B   I2C EEPROM     8K (4 x 256 x 8)    24LC08B/P-ND
+24LC16B   I2C EEPROM     16K (8 x 256 x 8)   24LC16B/P-ND
+24LC32A   I2C EEPROM     32K (4K x 8)        24LC32B/P-ND
+24LC256   I2C EEPROM     256K (32K x 8) 24LC256-I/P-ND
+
+
+Sound
+
+The LAB-XT includes a low power piezo speaker in series with a
+DC blocking capacitor.  This allows the program to generate sound
+by toggling PORTC.2.  The hardware PWM module may also be
+used to generate tones. 
+
+If the speaker is too loud, cover the hole on top with a piece of
+tape.
+
+
+
+
+RS232
+
+The LAB-XT includes an RS232 interface to connector J7.  This
+allows asynchronous serial communication with other devices,
+including PCs.  A MAX232 IC in socket U10, along with several
+capacitors, generates the required RS232 voltages.
+
+The serial TX line (pin 2 on J7) is connected to PORTC.6 through
+the MAX232.  The serial RX line (pin 3 on J7) is connected to
+PORTC.7 through the MAX232.  RTS is connected to CTS (pin 7
+to pin 8) on J7.  DTR is connected to DCD and DSR (pin 1 to 4 to
+6) on J7.  These jumped connections make most comm programs
+think the LAB-XT is online and ready to communicate.
+
+See HSERXT.BAS for a programming example.
+
+
+
+PICmicro MCU Port Pin Connections
+
+The table below lists the pre-wired connections to each of the
+PICmicro MCU port pins. 
+
+
+PORTA - Inputs
+A0   Caller ID serial data
+A1   Tone Detect
+A2   Ring Detect
+A3   Loop Current Detect
+A4   DTMF Ready
+A5   Voice Message Interrupt
+
+PORTB - Keypad / DTMF Data
+B0   Row 1 (270 ohm series resistors each row)
+B1   Row 2
+B2   Row 3
+B3   Row 4
+B4   DTMF D0 / Col 1 (enable internal pull-ups)
+B5   DTMF D1 / Col 2
+B6   DTMF D2 / Col 3  / ICSP SCLOCK
+B7   DTMF D3 / Col 4  / ICSP SDATA
+
+PORTC - Serial / Misc.  I/O
+C0   LED 3
+C1   LED 4
+C2   Speaker
+C3   I2C SEEPROM SCL (4.7k pull-up) / SPI Voice Device SCK
+C4   I2C SEEPROM SDA (4.7k pull-up) / SPI Voice Device SI
+C5   SPI Voice Device SO
+C6   RS232 TX
+C7   RS232 TX
+
+PORTD - LCD Data / Control Outputs
+D0   Unused (routed to proto area)
+D1   Line Seize Relay
+D2   Select Voice Device
+D3   Enable DTMF Data
+D4   LCD DB4
+D5   LCD DB5
+D6   LCD DB6
+D7   LCD DB7
+
+PORTE - LCD control / DTMF Out
+E0   LCD RS
+E1   LCD E
+E2   DTMF Out
+
+MISC Pins
+!MCLR     RESET / ICSP Vpp
+O1   OSC1
+O2   OSC2
+Vdd  +5 volts
+Vss  Ground
+
+
+
+microEngineering Labs, Inc.
+Box 60039
+Colorado Springs CO 80960
+(719) 520-5323
+(719) 520-1867 fax
+http://www.melabs.com
+email:support@melabs.com

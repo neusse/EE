@@ -1,0 +1,305 @@
+                      LAB-X2 Documentation
+                                
+      Copyright (c) 2008 microEngineering Labs, Inc.
+
+
+Introduction
+
+The LAB-X2 is a platform for experimenting with PIC(R) microcontroller (MCU)
+applications.  It contains the circuitry required by the PIC MCU to operate:
+5-volt power supply, oscillator, reset circuit, as well as additional
+application circuits including LEDs, switches, a potentiometer, an RC servo
+connector and an RS232 interface.  A small prototyping area is also included
+in case we missed your favorite circuit.
+
+The LAB-X2 can run programs written in assembler, C and PICBASIC(TM) or
+PICBASIC PRO(TM).  It include an in-circuit programming connector so the
+resident PIC MCU may be reprogrammed on the fly (requires flash device) using
+programmers that support this feature like the melabs EPIC(TM), Serial and
+USB Programmers.
+
+All of the PIC MCU I/O pins are brought out to a header socket at the bottom
+edge of the LAB-X2.  This allows connection to an off-board breadboard so
+that other circuits can be added.
+
+The LAB-X2 is designed to work with 28- and 40-pin PIC MCUs.  It is available
+in either assembled or bare-board form.  A parts list and schematic, along
+with PICBASIC and PICBASIC PRO example programs, are included.  It has the
+following features:
+
+28-pin socket for PIC(R) MCU
+40-pin socket for PIC(R) MCU
+5-volt regulator
+4MHz oscillator
+3 LEDs plus power LED
+3 pushbutton switches plus reset button
+Potentiometer
+RC servo connector
+RS232 interface
+EPIC(TM) in-circuit programming connector
+Prototyping area for additional circuits
+Header socket for connection to breadboard
+
+A parts list and assembly instructions, along with a PIC MCU pin
+connection list, are found towards the end of this document.
+
+Each of the circuits on the LAB-X2 are described below.  Refer to the
+schematic and sample programs on the disk for additional information.
+
+It is recommended that you start with a simple program like BLINKX2.BAS to
+get familiar with the operation and programming of the LAB-X2.
+
+
+Power Supply
+
+The power supply section provides regulated +5 volts DC for use by the LAB-X2
+components.  An AC adapter that provides between +7.5 and +16 volts DC is
+recommended to power the LAB-X2 through J2.  The center pin on the connector
+is positive.
+
+The regulator will get quite warm.  It may be desirable to attach a heat sink
+to it at higher input voltages.
+
+There is no power switch.  The AC adapter should be unplugged when the LAB-X2
+is not in use.
+
+
+Processor
+
+The LAB-X2 includes 28- and 40-pin sockets to support a 28- or 40-pin PIC
+MCU.  A PIC16F876A or PIC16F877A is recommended where available.  These flash
+devices may be reprogrammed in-circuit using the melabs EPIC, Serial or USB
+Programmer.
+
+The PIC MCU must be inserted with pin 1 at the notch end of the socket on the
+LAB-X2 board.
+
+The LAB-X2 must be powered-up in order to program a PIC MCU on it.
+
+A reset button is provided to restart a running program.  It should not be
+pressed during device programming.
+
+Header socket J1 allows connections to external circuits on a solderless or
+other breadboard.
+
+
+Oscillator
+
+The LAB-X2 includes a 4MHz oscillator that provides the clock source to the
+PIC MCU.
+
+
+ICSP
+
+The PIC MCU in the LAB-X2 28- or 40-pin socket may be programmed in-circuit
+using an melabs EPIC, Serial or USB Programmer.  A short 10-pin cable should
+be attached between connector J3 on the programmer and J3 on the LAB-X2 (pin 1
+is located on the lower left of J3 on the LAB-X2).  The programmer software
+should be started and the proper device selected.  The LAB-X2 must be powered
+up during programming.  The PIC MCU may now be programmed in-circuit on the
+LAB-X2.
+
+If the PIC MCU is a flash device, it may be reprogrammed without being
+removed.  If it is a windowed EPROM (JW) device, it must be removed from the
+LAB-X2 to be UV erased before reprogramming.  An OTP device cannot be erased.
+
+
+LEDs
+
+3 programmable LEDs are connected to PORTB.0 - 2.  There is also 1 power LED
+that is always on when power is applied to the LAB-X2.  Resistors R4 - 7 are
+the current limit series resistors for the LEDs.  To make an LED light up, set
+the appropriate PORTB pin to output high.
+
+See BLINKX2.BAS and BLINK3X2.BAS for programming examples.
+
+
+Pushbutton Switches
+
+3 push button switches are connected to pins PORTB.4 - 6 on the PIC MCU.
+The PORTB pullups must be enabled before the switches are read:
+
+        OPTION_REG.7 = 0        ' PICBASIC PRO code to enable PORTB pullups
+
+A closed switch will show a 0 and an open switch will show a 1.
+
+See BUTX2.BAS for a programming example.
+
+
+Potentiometer
+
+The LAB-X2 includes a potentiometer connected to PORTA.0 of the PIC MCU.
+This is an analog to digital converter input pin on PIC MCUs that support
+this function (such as the 16F876A and 16F877A).  Jumper JP2 allows the
+potentiometer to be disconnected from the PIC MCU pin when the pin is to
+be used for another purpose.  Make sure the jumper is in place to use the
+potentiometer.
+
+The potentiometer may also be used as a switch by setting the input pin to
+digital mode and moving the pot wheel all the way to either the 5-volt or
+ground position, providing either a high or low on the input.
+
+See ADCX2.BAS, ADC8X2.BAS and ADC10X2.BAS for programming examples.
+
+
+RC Servo
+
+Connector J5 may be used to connect an RC servo to the LAB-X2.  Pin 1, at the
+bottom of the connector (usually the white wire), is the servo pulse input.
+It is connected to PORTB.3.  Pin 2 is +5 volts to the servo (usually the red
+wire) and Pin 3 is ground (usually the black wire).
+
+Most RC servos are operated by sending a 1ms to 2ms pulse 50 to 60 times a
+second.  The pulse width determines the servo position.  A 1.5ms pulse is the
+center.  A 1ms pulse is all the way one direction and a 2ms pulse is all the
+way the other direction.
+
+See SERVOX2.BAS for a programming example.
+
+
+RS232
+
+The LAB-X2 includes an RS232 interface to connector J4.  This allows
+asynchronous serial communication with other devices, including PCs.  A
+MAX232 IC in socket U2, along with several capacitors, generates the required
+RS232 voltages.
+
+The serial TX line (pin 2 on J4) is connected to PORTC.6 through the MAX232.
+The serial RX line (pin 3 on J4) is connected to PORTC.7 through the MAX232.
+RTS is connected to CTS (pin 7 to pin 8) on J4.  DTR is connected to DCD and
+DSR (pin 1 to 4 to 6) on J4.  These jumped connections make most comm
+programs think the LAB-X2 is online and ready to communicate.
+
+See HSERX2.BAS for a programming example.
+
+
+
+PIC(R) MCU Port Pin Connections
+
+The table below lists the pre-wired connections to each of the PIC MCU
+port pins.
+
+Off-board circuits may also be connected to the PIC MCU using header
+socket J1.
+
+PORTA - A/D
+A0      POT1
+
+PORTB - LEDs, RC Servo, Pushbuttons
+B0      LED1
+B1      LED2
+B2      LED3
+B3      RC Servo, J5
+B4      SW1 (enable internal pull-ups)
+B5      SW2 (enable internal pull-ups)
+B6      SW3 (enable internal pull-ups) / ICSP SCLOCK
+B7      ICSP SDATA
+
+PORTC - Serial
+C6      RS232 TX
+C7      RS232 RX
+
+MISC Pins
+!MCLR   RESET / ICSP Vpp
+O1      OSC1
+O2      OSC2
+Vdd     +5 volts
+Vss     Ground
+
+
+
+LAB-X2 Parts List
+
+Designator	Description
+R1		4.7k 1/4W resistor (yellow-violet-red)
+R2		100 ohm 1/4W resistor (brown-black-brown)
+R3              10k 1/4W resistor (brown-black-orange) (not included)
+R4-7		470 ohm 1/4W resistors (yellow-violet-brown)
+
+POT1		5k thumbwheel potentiometer
+
+C1,2		22pf ceramic disk capacitors
+C3		10uf 50-volt radial electrolytic capacitor
+C4,6-10		1uf 35-volt radial electrolytic capacitors
+C5		.1uf monolythic capacitor (104)
+
+POWER,LED1-3	T-1 3/4 LEDs
+
+Y1		4.000MHz crystal
+
+REG1		7805T 5-volt regulator
+
+U1		28-pin dip socket
+		40-pin dip socket
+U2		16-pin dip socket
+		MAX232CPE IC
+
+SW1-3,RESET	6.5mm x 4.5mm push buttons
+
+J1		40-pin dual-row header socket
+J2		2.1mm DC power connector
+J3		10-pin dual-row header
+J4		DB9S female right angle connector
+J5		3-pin header
+
+JP1,2		2-pin header
+
+		4 rubber feet
+
+
+
+Assembly Instructions
+
+All components must be placed on the top side of the board (the side with the
+silk-screened labeling) and soldered from the under side of the board using a
+good quality resin-core solder.  While the LAB-X2 is not difficult to
+assemble, some experience with assembling previous projects is desirable.
+
+1. Solder in the resistors.
+
+2. Solder in the IC sockets, observing polarity.
+
+3. Solder in the push button switches.
+
+4. Solder in the LEDs, observing polarity.
+
+5. Solder in the headers, header socket and jumpers.
+
+6. Solder in the capacitors, observing polarity where necessary.
+
+7. Solder in the DC power connector.
+
+8. Solder in the DB9S connector.
+
+9. Solder in the 4.000MHz crystal.
+
+10. Solder in the 5-volt regulator, observing polarity (flat heat-sink side
+toward bottom of board).
+
+11. Solder in the thumbwheel potentiometer.
+
+12. Place jumper on JP2.
+
+Before proceeding, it is a good idea to check the power supply.  Attach a
+suitable DC power source to J2.  Measure for 5 volts between Vdd (pin 32) and
+Vss (pin 31) on the 40-pin socket.  If 5 volts is not present, recheck all
+your work.
+
+13. Install the MAX232 IC, observing polarity.
+
+14. Stick the rubber feet to each corner of the board.
+
+
+
+PICBASIC, PICBASIC PRO and EPIC Programmer are trademarks of Microchip
+Technology Inc. in the U.S.A. and other countries.  PIC is a registered
+trademarks of Microchip Technology Inc. in the U.S.A. and other countries.
+
+
+microEngineering Labs, Inc.
+Box 60039
+Colorado Springs CO 80960
+(719) 520-5323
+(719) 520-1867 fax
+http://www.melabs.com
+email:support@melabs.com

@@ -1,0 +1,386 @@
+                 LAB-X18 Documentation
+                           
+      Copyright (c) 2008 microEngineering Labs, Inc.
+
+
+Introduction
+
+The LAB-X18 is a platform for experimenting with PIC(R) microcontroller (MCU)
+applications.  It contains the circuitry required by the PIC MCU to operate:
+5-volt power supply, oscillator, reset circuit, as well as additional
+application circuits including switches, potentiometer, LED, I2C serial
+EEPROM socket, LCD module and an RS232 interface.  A prototyping area is
+also included in case we missed your favorite circuit.
+
+Many different projects may be created using the LAB-X18.  Some examples
+include a LCD clock, data logger, LCD backpack and many more.  The LAB-X18
+can run programs written in assembler, C and PICBASIC(TM) or PICBASIC PRO(TM).
+It includes an in-circuit programming connector so the resident PIC MCU may
+be reprogrammed on the fly (requires flash device) using programmers that
+support this feature like the melabs EPIC(TM), Serial or USB Programmers.
+
+All of the PIC MCU I/O pins are brought out to a header.  This allows
+connection to off-board circuits.
+
+The LAB-X18 is available in either assembled or bare-board form.  A parts
+list and schematic, along with PICBASIC and PICBASIC PRO example programs,
+are included.  It has the following features:
+
+18-pin dip socket for PIC(R) MCU
+5-volt regulator
+4MHz oscillator
+Reset button
+Push button
+Potentiometer
+1 LED plus power LED
+2 line by 20 character LCD module
+Socket for I2C serial EEPROM
+RS232 interface
+EPIC(TM) in-circuit programming connector
+Prototyping area for additional circuits
+
+A parts list and assembly instructions, along with a PIC MCU pin connection
+list, are found towards the end of this document.
+
+Each of the circuits on the LAB-X18 are described below.  Refer to the
+schematic and sample programs on the disk for additional information.  It is
+also a good idea to have the data sheets available for each of the devices
+used on the LAB-X18.  These data sheets can usually be found on the
+manufacturers web site.
+
+It is recommended that you start with a simple program like BLINKX18.BAS to
+get familiar with the operation and programming of the LAB-X18.
+
+
+Power Supply
+
+The power supply section provides regulated +5 volts DC for use by the
+LAB-X18 components.  An AC adapter that provides between +7.5 and +16 volts
+DC is recommended to power the LAB-X18 through J2.  The center pin on the
+connector is positive.
+
+The regulator will get quite warm.  It may be desirable to attach a heat sink
+to it at higher input voltages.
+
+There is no power switch.  The AC adapter should be unplugged when the
+LAB-X18 is not in use.
+
+
+Processor
+
+The LAB-X18 includes an 18-pin dip socket to support an 18-pin PIC MCU.
+A PIC16F88 is recommended where available.  This flash device may be
+reprogrammed in-circuit using an melabs EPIC, Serial or USB Programmer.
+Alternatively, other 18-pin PIC MCUs may be used.  These devices may need to
+be removed from the socket for erasing but may be programmed on the LAB-X18
+board using the in-circuit connector and an melabs Programmer.
+
+The PIC MCU must be placed in the socket with pin 1 toward the left, bottom
+of the LAB-X18 board.
+
+The LAB-X18 must be powered-up in order to program a PIC MCU in the 18-pin
+dip socket.
+
+A reset button is provided to restart a running program.
+
+Header J4 may be added to the LAB-X18 below the 18-pin dip socket.  This
+allows connections to external circuits.
+
+
+Oscillator
+
+The LAB-X18 includes a 4MHz oscillator that provides the clock source to the
+PIC MCU.
+
+
+ICSP
+
+The PIC MCU in the LAB-X18 18-pin socket may be programmed in-circuit using
+an melabs EPIC, Serial or USB Programmer.  A short 10-pin cable should be
+attached between connector J3 on the programmer and J3 on the LAB-X18 (pin 1
+is located on the lower right of J3 on the LAB-X18).  The programmer
+software should be started and the proper device selected. The PIC MCU should
+then be placed into the 18-pin socket on the LAB-X18.  The LAB-X18 must be
+powered up during programming.  The PIC MCU may now be programmed in-circuit
+on the LAB-X18.
+
+If the PIC MCU is a flash device, it may be reprogrammed without being
+removed.  If it is a windowed EPROM (JW) device, it must be removed from the
+LAB-X18 to be UV erased before reprogramming.  An OTP device cannot be
+erased or reprogrammed.
+
+Neither button should be pressed during device programming.
+
+
+Analog / Digital pins
+
+PIC MCU pins with analog to digital converters or analog comparators will
+start up in analog mode.  They must be set to digital mode for the many
+functions, including the LCD to operate properly:
+
+        ANSEL = 0       ' PICBASIC PRO code to set all pins to digital
+        CMCON = 7       ' PICBASIC PRO code to disable the analog comparators
+
+
+Potentiometer
+
+The LAB-X18 includes a potentiometer connected to PORTA.4.  The
+potentiometer can be read using the PICBASIC PRO Compiler Adcin command.
+
+The potentiometer may be disconnected from the PIC MCU by cutting the trace
+on the back of the board under JP3.
+
+The potentiometer may also be used as a switch by setting the input pin to
+digital mode and moving the pot wheel all the way to either the 5-volt or
+ground position, providing either a high or low on the input.
+
+See ADCX18.BAS for a programming example.
+
+
+Pushbutton Switches
+
+Two push button switches are available on the LAB-X18.  S1 is connected to
+pin PORTB.7 on the PIC MCU.  The PORTB pullups must be enabled before this
+switch can be read:
+
+        OPTION_REG.7 = 0        ' PICBASIC PRO code to enable PORTB pullups
+
+The push button switch labelled RESET is connected to the master clear
+(reset) line on the PIC MCU.  For the PIC16F84 and many other 18-pin PIC
+MCUs, pressing this button will cause the PIC MCU to reset.  On PIC16F88,
+PIC16F648A and other MCUs, the reset function of this pin can be disabled
+and the pin can be used as an input pin.  It is recommended this pin be
+configured as a reset pin when the MCU is programmed in-circuit.  See the
+Microchip data sheet special functions section for information on this
+option.
+
+A closed switch will show a 0 and an open switch will show a 1.
+
+None of the buttons should be pressed during device programming.
+
+See BUTX18.BAS for a programming example.
+
+
+LEDs
+
+The LAB-X18 includes a power LED that is on any time the power is on, and
+one programmable LED, LED1.  Each LED includes a 470 ohm series resistor.
+
+To turn on LED1, set pin PORTB.0 to output high.
+
+The LED may be disconnected by cutting the trace on the back of the board
+under JP4.
+
+See BLINKX18.BAS for a programming example.
+
+
+LCD Module
+
+A 20 character by 2 line LCD module is included on the LAB-X18.  It may be
+used to display all manner of text information.  The module includes a
+Hitachi 44780 (or equivalent) controller.  It is accessed using a 4-bit data
+bus along with register select and enable lines.
+
+The LCD data bus is connected to PORTA.0 - 3 of the PIC MCU.  The register
+select line is connected to PORTB.6.  Enable is connected to PORTB.3.  The
+read/write line is connected to ground to select write at all times.
+
+On PIC MCUs with analog to digital converters or analog comparators, PORTA
+will start up in analog mode.  PORTA must be set to digital mode for the LCD
+to operate properly:
+
+        ANSEL = 0       ' PICBASIC PRO code to set all pins to digital
+        CMCON = 7       ' PICBASIC PRO code to disable the analog comparators
+
+The LCD contrast is set with a single resistor to ground, R6.  Another
+resistor, R9, may be used to power an LCD backlight.  The supplied LCD module
+does not include a backlight.
+
+See LCDX18.BAS for a programming example.
+
+
+I2C Serial EEPROM
+
+The LAB-X18 includes a socket (U3) for an I2C serial EEPROM.  The I2C serial
+data (SDA) line is connected to PIC MCU pin PORTB.1.  The serial
+clock (SCL) line is connected to PORTB.4.
+
+The serial clock and data lines are connected to 4.7k pull-up resistors R1
+and R8.  R1 may also be used for pulling the low-voltage programming line
+(PGM, RB4) low as required for in-circuit programming on some devices.  To
+select this, cut the trace on the back of the LAB-X18 under JP2 and connect
+a jumper to pins 2 and 3.  To go back to operation of a I2C serial EEPROM,
+connect a jumper between pins 1 and 2 instead.
+
+Some of the possible I2C serial EEPROMs that may be used are:
+
+Device          Architecture
+24LC01B         1K (128 x 8)
+24LC02B         2K (256 x 8)
+24LC04B         4K (2 x 256 x 8)
+24LC08B         8K (4 x 256 x 8)
+24LC16B         16K (8 x 256 x 8)
+24LC32A         32K (4K x 8)
+24LC256         256K (32K x 8)
+
+See I2CX18.BAS and I2CWX18.BAS for programming examples.
+
+
+RS232
+
+The LAB-X18 includes an RS232 interface to connector J5.  This allows
+asynchronous serial communication with other devices, including PCs.  A
+MAX232 IC in socket U2, along with several capacitors, generates the required
+RS232 voltages.
+
+The serial TX line (pin 2 on J5) is connected to PORTB.5 through the MAX232. 
+The serial RX line (pin 3 on J5) is connected to PORTB.2 through the MAX232. 
+RTS is connected to CTS (pin 7 to pin 8) on J5.  DTR is connected to DCD and
+DSR (pin 1 to 4 to 6) on J5.  These jumped connections make most comm
+programs think the LAB-X18 is online and ready to communicate.
+
+See HSERX18.BAS for a programming example.
+
+
+
+PIC(R) MCU Port Pin Connections
+
+The table below lists the pre-wired connections to each of the PIC MCU
+port pins.  Off-board circuits may also be connected to the PIC MCU
+using header J4.
+
+PORTA
+RA0    LCD DB4
+RA1    LCD DB5
+RA2    LCD DB6
+RA3    LCD DB7
+RA4    Potentiometer
+RA5    RESET / !MCLR
+RA6    OSC2
+RA7    OSC1
+
+PORTB
+RB0    LED1
+RB1    I2C SDA
+RB2    RS232 RX
+RB3    LCD E
+RB4    I2C SCL
+RB5    RS232 TX
+RB6    LCD RS
+RB7    S1
+
+
+
+LAB-X18 Parts List
+
+Designator	Description
+R1,4,8		4.7k 1/4W resistors (yellow-violet-red)
+R2,3		470 ohm 1/4W resistors (yellow-violet-brown)
+R5		100 ohm 1/4W resistor (brown-black-brown)
+R6		270 ohm 1/4W resistor (red-violet-brown)
+R7		100k ohm 1/4W resistor (brown-black-yellow)
+
+POT1		5k thumbwheel potentiometer
+
+C1		10uf 50-volt radial electrolytic capacitor
+C2,6-10		1uf 35-volt radial electrolytic capacitors
+C3,4		22pf ceramic disk capacitors
+C5		.1uf monolythic capacitor (104)
+
+LED1,POWER	T-1 3/4 LEDs
+
+Y1		4.000MHz crystal
+
+LCD		20x2 LCD module w/ Hitachi controller
+		Double-sided foam tape
+
+REG1		7805T 5-volt regulator
+
+U1		18-pin dip socket
+U2		16-pin dip socket
+		MAX232CPE IC
+U3		8-pin dip socket
+
+RESET,S1	6.5mm x 4.5mm push buttons
+
+J1		16-pin dual-row header
+J2		2.1mm DC power connector
+J3		10-pin dual-row header
+J4		26-pin dual-row header
+J5		DB9S female right angle connector
+
+JP1,3,4		2-pin headers (not included)
+J2		3-pin header (not included)
+
+		4 rubber feet
+
+Items marked (not included) are not included with the assembled version and
+may be user supplied.
+
+
+
+Assembly Instructions
+
+All components must be placed on the top side of the board (the side with the
+silk-screened labeling) and soldered from the under side of the board using a
+good quality resin-core solder.  While the LAB-X18 is not difficult to
+assemble, some experience with assembling previous projects is desirable.
+
+1. Solder in the resistors.
+
+2. Solder in the IC sockets, observing polarity.
+
+3. Solder in the push button switches.
+
+4. Solder in the LEDs, observing polarity.
+
+5. Solder in the capacitors, observing polarity where necessary.
+
+6. Solder in the headers, including J1 for the LCD module.
+
+7. Solder in the DC power connector, DB9S connector and 4.000MHz crystal.
+
+8. Solder in the 5-volt regulator, observing polarity (flat heat-sink side
+toward board).
+
+9. Solder in the thumbwheel potentiometer.
+
+Before proceeding, it is a good idea to check the power supply.  Attach a
+suitable DC power source to J2.  Measure for 5 volts between Vdd, pin 11, and
+Vss, pin 5, on U1.  If 5 volts is not present, recheck all your work.
+
+10. Place the double-sided foam tape onto the back of the LCD module.  Slide
+the LCD module, face up, onto the LCD header, J1, and solder into place from
+the top side of the LCD.
+
+11. Install the MAX232 IC, observing polarity.
+
+12. Stick the rubber feet to each corner of the board.
+
+
+
+Test Program
+
+A test program, TESTX18.BAS, has been included to provide a quick operational
+test of the LAB-X18.  It must be programmed into a PIC16F88 device and the
+LAB-X18 powered up.
+
+The top line of the LCD will display the potentiometer value.  If pins 2 and
+3 are jumped on the RS232 connector, J6, the second line of the LCD will
+display the word "loopback".  When push button S1 is pressed, LED1 will light
+up.
+
+
+
+PICBASIC, PICBASIC PRO and EPIC Programmer are trademarks of Microchip
+Technology Inc. in the U.S.A. and other countries.  PIC is a registered
+trademarks of Microchip Technology Inc. in the U.S.A. and other countries.
+
+
+microEngineering Labs, Inc.
+Box 60039
+Colorado Springs CO 80960
+(719) 520-5323
+(719) 520-1867 fax
+http://www.melabs.com
+email:support@melabs.com

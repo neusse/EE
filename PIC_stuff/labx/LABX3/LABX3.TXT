@@ -1,0 +1,363 @@
+                 LAB-X3 Documentation
+                           
+      Copyright (c) 2008 microEngineering Labs, Inc.
+
+
+Introduction
+
+The LAB-X3 is a platform for experimenting with PIC(R) microcontroller (MCU)
+applications.  It contains the circuitry required by the PIC MCU to operate:
+5-volt power supply, oscillator, reset circuit, as well as additional
+application circuits including switches, a potentiometer, LEDs, LCD module
+and an RS232 interface.  A prototyping area is also included in case we
+missed your favorite circuit.
+
+Many different projects may be created using the LAB-X3.  Some examples
+include a LCD clock, servo controller, LCD backpack and many more.  The
+LAB-X3 can run programs written in assembler, C and PICBASIC(TM) or
+PICBASIC PRO(TM).  It includes an in-circuit programming connector so the
+resident PIC MCU may be reprogrammed on the fly (requires flash device) using
+programmers that support this feature like the melabs EPIC(TM), Serial and
+USB Programmers.
+
+All of the PIC MCU I/O pins are brought out to a header.  This allows
+connection to off-board circuits.
+
+The LAB-X3 is available in either assembled or bare-board form.  A parts list
+and schematic, along with PICBASIC and PICBASIC PRO example programs, are
+included.  It has the following features:
+
+18-pin dip socket for PIC(R) MCU
+5-volt regulator
+4MHz oscillator
+Reset button
+Push button
+Potentiometer
+2 LEDs plus power LED
+2 line by 20 character LCD module
+RC servo connector
+RS232 interface
+EPIC(TM) in-circuit programming connector
+Prototyping area for additional circuits
+
+A parts list and assembly instructions, along with a PIC MCU pin
+connection list, are found towards the end of this document.
+
+Each of the circuits on the LAB-X3 are described below.  Refer to the
+schematic and sample programs on the disk for additional information.  It is
+also a good idea to have the data sheets available for each of the devices
+used on the LAB-X3.  These data sheets can usually be found on the
+manufacturers web site.
+
+It is recommended that you start with a simple program like BLINKX3.BAS to
+get familiar with the operation and programming of the LAB-X3.
+
+
+Power Supply
+
+The power supply section provides regulated +5 volts DC for use by the LAB-X3
+components.  An AC adapter that provides between +7.5 and +16 volts DC is
+recommended to power the LAB-X3 through J2.  The center pin on the connector
+is positive.
+
+The regulator will get quite warm.  It may be desirable to attach a heat sink
+to it at higher input voltages.
+
+There is no power switch.  The AC adapter should be unplugged when the LAB-X3
+is not in use.
+
+
+Processor
+
+The LAB-X3 includes an 18-pin dip socket to support an 18-pin PIC MCU.
+A PIC16F84A or PIC16F648A is recommended where available.  These flash
+devices may be reprogrammed in-circuit using the melabs EPIC, Serial or USB
+Programmer.  Alternatively, other 18-pin PIC MCUs may be used.  These devices
+may need to be removed from the socket for erasing but may be programmed on
+the LAB-X3 board using the in-circuit connector and an melabs Programmer.
+
+The PIC MCU must be placed in the socket with pin 1 toward the left, bottom
+of the LAB-X3 board.
+
+The LAB-X3 must be powered-up in order to program a PIC MCU in the 18-pin
+dip socket.
+
+A reset button, S2, is provided to restart a running program.
+
+Header J4 may be added to the LAB-X3 below the 18-pin dip socket.  This
+allows connections to external circuits.
+
+
+Oscillator
+
+The LAB-X3 includes a 4MHz oscillator that provides the clock source to the
+PIC MCU.
+
+
+ICSP
+
+The PIC MCU in the LAB-X3 18-pin socket may be programmed in-circuit using an
+melabs EPIC, Serial or USB Programmer.  A short 10-pin cable should be
+attached between connector J3 on the programmer and J3 on the LAB-X3 (pin 1
+is located on the lower right of J3 on the LAB-X3).  The programmer software
+should be started and the proper device selected.  The PIC MCU should then be
+placed into the 18-pin socket on the LAB-X3.  The LAB-X3 must be powered up
+during programming.  The PIC MCU may now be programmed in-circuit on the
+LAB-X3.
+
+If the PIC MCU is a flash device, it may be reprogrammed without being
+removed.  If it is a windowed EPROM (JW) device, it must be removed from the
+LAB-X3 to be UV erased before reprogramming.  An OTP device cannot be erased.
+
+Neither button should be pressed during device programming.
+
+
+Potentiometer
+
+The LAB-X3 includes a potentiometer connected to PORTB.0, along with a
+capacitor.  This allows the potentiometer to be read using the PICBASIC and
+PICBASIC PRO Compiler POT command.
+
+The PORTB pullup resistors must be disabled to read the potentiometer
+reliably:
+
+        OPTION_REG.7 = 1        ' PICBASIC PRO code to disable PORTB pullups
+
+See POTX3.BAS for a programming example.
+
+
+Pushbutton Switches
+
+Two push button switches are available on the LAB-X3.  S1 is connected to pin
+PORTB.7 on the PIC MCU.  The PORTB pullups must be enabled before this switch
+can be read:
+
+        OPTION_REG.7 = 0        ' PICBASIC PRO code to enable PORTB pullups
+
+Push button switch S2 is connected to the master clear (reset) line on the
+PIC MCU.  For the PIC16F84A and most other 18-pin PIC MCUs, pressing this
+button will cause the PIC MCU to reset.  On PIC16F648A and other MCUs, the
+reset function of this pin can be disabled and the pin can be used as an
+input pin.  See the Microchip data sheet special functions section for
+information on this option.
+
+A closed switch will show a 0 and an open switch will show a 1.
+
+See BUTX3.BAS for a programming example.
+
+
+LEDs
+
+The LAB-X3 includes a power LED that is on any time the power is on, and two
+programmable LEDs, LED1 and LED2.  Each LED includes a 470 ohm series
+resistor.
+
+To turn on LED1, set pin PORTB.4 to output high.  To turn on LED2, set pin
+PORTB.5 to output high.
+
+See BLINKX3.BAS for a programming example.
+
+
+LCD Module
+
+A 20 character by 2 line LCD module is included on the LAB-X3.  It may be
+used to display all manner of text information.  The module includes a
+Hitachi 44780 (or equivalent) controller.  It is accessed using a 4-bit data
+bus along with register select and enable lines.
+
+The LCD data bus is connected to PORTA.0 - 3 of the PIC MCU.  The register
+select line is connected to PORTA.4, along with a pullup resistor.  Enable is
+connected to PORTB.3.  The read/write line is connected to ground to select
+write at all times.
+
+On PIC MCUs with analog to digital converters or analog comparators, PORTA
+will start up in analog mode.  PORTA must be set to digital mode for the LCD
+to operate properly:
+
+     CMCON = 7
+
+or
+
+     ADCON1 = 7
+
+The LCD contrast is set with a single resistor to ground, R2.  Another
+resistor, R8, may be used to power an LCD backlight through connector J7.
+The supplied LCD module does not include a backlight.
+
+See LCDX3.BAS for a programming example.
+
+
+RC Servo
+
+Connector J5 may be used to connect an RC servo to LAB-X3.  Pin 1, all the
+way to the left on the connector (usually the white wire), is the servo
+pulse input.  It is connected to PORTB.6.  Pin 2 is +5 volts to the servo
+(usually the red wire) and pin 3 on the connector is ground (usually the
+black wire).
+
+Most RC servos are operated by sending a 1ms to 2ms pulse 50 to 60 times a
+second.  The pulse width determines the servo position.  A 1.5ms pulse is the
+center.  A 1ms pulse is all the way one direction and a 2ms pulse is all the
+way the other direction.
+
+See SERVOX3.BAS for a programming example.
+
+
+RS232
+
+The LAB-X3 includes an RS232 interface to connector J6.  This allows
+asynchronous serial communication with other devices, including PCs.  A
+MAX232 IC in socket U2, along with several capacitors, generates the required
+RS232 voltages.
+
+The serial TX line (pin 2 on J6) is connected to PORTB.2 through the MAX232. 
+The serial RX line (pin 3 on J6) is connected to PORTB.1 through the MAX232. 
+RTS is connected to CTS (pin 7 to pin 8) on J6.  DTR is connected to DCD and
+DSR (pin 1 to 4 to 6) on J6.  These jumped connections make most comm
+programs think the LAB-X3 is online and ready to communicate.
+
+See HSERX3.BAS for a programming example.
+
+
+
+PIC(R) MCU Port Pin Connections
+
+The table below lists the pre-wired connections to each of the PIC MCU
+port pins.  Off-board circuits may also be connected to the PIC MCU
+using header J4.
+
+PORTA - LCD
+A0   LCD DB4
+A1   LCD DB5
+A2   LCD DB6
+A3   LCD DB7
+A4   LCD RS (1k pull-up)
+A5   S2 / !MCLR
+A6   OSC2
+A7   OSC1
+
+PORTB - Misc.
+B0   Potentiometer, capacitor
+B1   RS232 RX
+B2   RS232 TX
+B3   LCD E
+B4   LED1
+B5   LED2
+B6   RC servo J5
+B7   S1
+
+
+
+LAB-X3 Parts List
+
+Designator	Description
+R1,6,7		470 ohm 1/4W resistors (yellow-violet-brown)
+R2		270 ohm 1/4W resistor (red-violet-brown)
+R3		1k 1/4W resistor (brown-black-red)
+R4		4.7k 1/4W resistor (yellow-violet-red)
+R5		100 ohm 1/4W resistor (brown-black-brown)
+
+POT1		5k thumbwheel potentiometer
+
+C1		10uf 50-volt radial electrolytic capacitors
+C2,7-11		1uf 35-volt radial electrolytic capacitors
+C3,6		.1uf monolythic capacitors (104)
+C4,5		22pf ceramic disk capacitors
+
+LED1,2		T-1 3/4 LEDs
+
+Y1		4.000MHz crystal
+
+LCD		20x2 LCD module w/ Hitachi controller
+		Double-sided foam tape
+
+REG1		7805T 5-volt regulator
+
+U1		18-pin dip socket
+U2		16-pin dip socket
+		MAX232CPE IC
+
+SW1,2		6.5mm x 4.5mm push buttons
+
+J1		14-pin dual-row header
+J2		2.1mm DC power connector
+J3		10-pin dual-row header
+J4		26-pin dual-row header
+J5		3-pin header
+J6		DB9S female right angle connector
+J7		2-pin header (not included)
+
+JP1		2-pin header (not included)
+
+		4 rubber feet
+
+Items marked (not included) are not included with the assembled version and
+may be user supplied.
+
+
+
+Assembly Instructions
+
+All components must be placed on the top side of the board (the side with the
+silk-screened labeling) and soldered from the under side of the board using a
+good quality resin-core solder.  While the LAB-X3 is not difficult to
+assemble, some experience with assembling previous projects is desirable.
+
+1. Solder in the resistors.
+
+2. Solder in the IC sockets, observing polarity.
+
+3. Solder in the push button switches.
+
+4. Solder in the LEDs, observing polarity.
+
+5. Solder in the capacitors, observing polarity where necessary.
+
+6. Solder in the headers, including J1 for the LCD module.
+
+7. Solder in the DC power connector, DB9S connector and 4.000MHz crystal.
+
+8. Solder in the 5-volt regulator, observing polarity (flat heat-sink side
+toward board).
+
+9. Solder in the thumbwheel potentiometer.
+
+Before proceeding, it is a good idea to check the power supply.  Attach a
+suitable DC power source to J2.  Measure for 5 volts between Vdd, pin 11, and
+Vss, pin 5, on U1.  If 5 volts is not present, recheck all your work.
+
+10. Place the double-sided foam tape onto the back of the LCD module.  Slide
+the LCD module, face up, onto the LCD header, J1, and solder into place from
+the top side of the LCD.
+
+11. Install the MAX232 IC, observing polarity.
+
+12. Stick the rubber feet to each corner of the board.
+
+
+
+Test Program
+
+A test program, TESTX3.BAS, has been included to provide a quick operational
+test of the LAB-X3.  It must be programmed into an appropriate device and the
+LAB-X3 powered up.
+
+The top line of the LCD will display the potentiometer value.  If pins 2 and
+3 are jumped on the RS232 connector, J6, the second line of the LCD will
+display the word "loopback".  When push button S1 is pressed, LED1 will light
+up.  When push button S2 is pressed, LED2 will light.
+
+
+
+PICBASIC, PICBASIC PRO and EPIC Programmer are trademarks of Microchip
+Technology Inc. in the U.S.A. and other countries.  PIC is a registered
+trademarks of Microchip Technology Inc. in the U.S.A. and other countries.
+
+
+microEngineering Labs, Inc.
+Box 60039
+Colorado Springs CO 80960
+(719) 520-5323
+(719) 520-1867 fax
+http://www.melabs.com
+email:support@melabs.com

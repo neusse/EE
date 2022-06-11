@@ -1,0 +1,393 @@
+                 LAB-X20 Documentation
+                           
+      Copyright (c) 2008 microEngineering Labs, Inc.
+
+
+Introduction
+
+The LAB-X20 is a platform for experimenting with PIC(R) microcontroller (MCU)
+applications.  It contains the circuitry required by the PIC MCU to operate:
+5-volt power supply, oscillator, reset circuit, as well as additional
+application circuits including switches, a potentiometer, LEDs, LCD module,
+serial EEPROM socket and an RS232 interface.  A prototyping area is also
+included in case we missed your favorite circuit.
+
+Many different projects may be created using the LAB-X20.  Some examples
+include a LCD clock, servo controller, LCD backpack and many more.  The
+LAB-X20 can run programs written in assembler, C and PICBASIC(TM) or
+PICBASIC PRO(TM).  It includes an in-circuit programming connector so the
+resident PIC MCU may be reprogrammed on the fly (requires flash device)
+using programmers that support this feature like the melabs EPIC(TM), Serial
+and USB Programmers.
+
+All of the PIC MCU I/O pins are brought out to a header.  This allows
+connection to off-board circuits.
+
+The LAB-X20 is available in either assembled or bare-board form.  A parts
+list and schematic, along with PICBASIC and PICBASIC PRO example programs,
+are included.  It has the following features:
+
+20-pin dip socket for PIC(R) MCU
+5-volt regulator
+3 push buttons (one may be used for reset)
+Potentiometer
+2 LEDs plus power LED
+2 line by 20 character LCD module
+Socket for I2C serial EEPROM
+RS232 interface
+EPIC(TM) in-circuit programming connector
+Layout for oscillator
+Prototyping area for additional circuits
+
+A parts list and assembly instructions, along with a PIC MCU pin
+connection list, are found toward the end of this document.
+
+Each of the circuits on the LAB-X20 are described below.  Refer to the
+schematic and sample programs on the disk for additional information.  It is
+also a good idea to have the data sheets available for each of the devices
+used on the LAB-X20.  These data sheets can usually be found on the
+manufacturers web site.
+
+It is recommended that you start with a simple program like BLINKX20.BAS to
+get familiar with the operation and programming of the LAB-X20.
+
+
+Power Supply
+
+The power supply section provides regulated +5 volts DC for use by the LAB-X20
+components.  An AC adapter that provides between +7.5 and +16 volts DC is
+recommended to power the LAB-X20 through J2.  The center pin on the connector
+is positive.
+
+The regulator will get quite warm.  It may be desirable to attach a heat sink
+to it at higher input voltages.
+
+There is no power switch.  The AC adapter should be unplugged when the LAB-X20
+is not in use.
+
+
+Processor
+
+The LAB-X20 includes a 20-pin dip socket to support an 8-, 14- or 20-pin
+PIC MCU.  A PIC12F683, PIC16F688 or PIC16F690 is recommended where available.
+These flash devices may be reprogrammed in-circuit using the melabs EPIC,
+Serial or USB Programmer.  Alternatively, other 8-, 14- or 20-pin PIC
+MCUs may be used.  These devices may need to be removed from the socket for
+erasing but may be programmed on the LAB-X20 board using the in-circuit
+connector with an melabs Programmer.
+
+Depending on the processor used, the first port on it may be referred to by
+several names: GPIO, PORTA or PORTB.  This document and schematic will use
+the name PORTA.  The appropriate name for the specific device must be used
+in the program.
+
+The PIC MCU must be placed in the socket with pin 1 toward the left, bottom
+of the LAB-X20 board.
+
+The LAB-X20 must be powered-up in order to program a PIC MCU in the 20-pin
+dip socket.
+
+A reset button is provided to restart a running program.  The pin connected
+to this button may also be configured to act as a general purpose input pin
+instead of a reset pin, though this is not recommended when using in-circuit
+programming to reprogram the device.
+
+Header J4 may be added to the LAB-X20 below the 20-pin dip socket.  This
+allows connections to external circuits.
+
+
+Oscillator
+
+The LAB-X20 includes traces for an external oscillator (not included) that
+can provide the clock source to the PIC MCU.  Most 8-, 14- and 20-pin PIC
+MCUs have an on-chip oscillator that is usually used.  An external crystal
+and capacitors or a ceramic resonator may be added if more accuracy is
+required than the internal oscillator can provide.
+
+LED1 and LED2 are normally connected to these oscillator pins.  If an
+external oscillator is desired, the LEDs must be disconnected by cutting the
+traces on the back of the board under JP2 and JP3.
+
+
+ICSP
+
+The PIC MCU in the LAB-X20 20-pin socket may be programmed in-circuit using
+an melabs EPIC, Serial or USB Programmer.  A short 10-pin cable should be
+attached between connector J3 on the programmer header and J3 on the
+LAB-X20 (pin 1 is located on the lower right of J3 on the LAB-X20).  The
+programmer software should be started and the proper device selected. The
+PIC MCU should then be placed into the 20-pin socket on the LAB-X20.
+The LAB-X20 must be powered up during programming.  The PIC MCU may now be
+programmed in-circuit on the LAB-X20.
+
+If the PIC MCU is a flash device, it may be reprogrammed without being
+removed.  If it is a windowed EPROM (JW) device, it must be removed from the
+LAB-X20 to be UV erased before reprogramming.  An OTP device cannot be erased.
+
+None of the buttons should be pressed during device programming.
+
+
+Analog / Digital pins
+
+PIC MCU pins with analog to digital converters or analog comparators will
+start up in analog mode.  They must be set to digital mode for the many
+functions, including the LCD to operate properly:
+
+	ANSEL = 0	' PICBASIC PRO commands to set all pins to digital
+	ANSELH = 0
+
+
+Potentiometer
+
+The LAB-X20 includes a potentiometer connected to PORTA.2.  The potentiometer
+can be read using the PICBASIC PRO Compiler's ADCIN command.
+
+The potentiometer may be disconnected from the PIC MCU by cutting the trace
+on the back of the board under JP4.
+
+The potentiometer may also be used as a switch by setting the input pin to
+digital mode and moving the pot wheel all the way to either the 5-volt or
+ground position, providing either a high or low on the input.
+
+See POTX20.BAS for a programming example.
+
+
+Pushbutton Switches
+
+Three push button switches are available on the LAB-X20.  The switch labeled
+RESET is connected to pin PORTA.3 on the PIC MCU, along with a pullup
+resistor.  This pin can be configured as either a general purpose input pin
+or as a reset pin.  It is recommended this pin be configured as a reset pin
+when the MCU is programmed in-circuit.  See the Microchip data sheet special
+functions section for information on this option.
+
+Switch SW1 is connected to PORTA.0 and SW2 is connected to PORTA.1.  The
+internal pullups for these pins must be enabled before the switches can be
+read:
+
+	OPTION_REG.7 = 0	' PICBASIC PRO command to enable internal pullups
+
+A closed switch will read as 0 and an open switch will read as 1.
+
+None of the buttons should be pressed during device programming.
+
+See BUTX20.BAS for a programming example.
+
+
+LEDs
+
+The LAB-X20 includes a power LED that is on any time the power is on, and two
+programmable LEDs, LED1 and LED2.  Each LED includes a 470 ohm series
+resistor.
+
+To turn on LED1, set pin PORTA.0 to output high.  To turn on LED2, set pin
+PORTA.1 to output high.
+
+LED1 and LED2 are also connected to these oscillator pins.  If adding an
+external oscillator is desired, the LEDs must be disconnected by cutting the
+traces on the back of the board under JP2 and JP3.
+
+See BLINKX20.BAS for a programming example.
+
+
+LCD Module
+
+A 20 character by 2 line LCD module is included on the LAB-X20.  It may be
+used to display all manner of text information.  The module includes a
+Hitachi 44780 (or equivalent) controller.  It is accessed using a 4-bit data
+bus along with register select and enable lines.
+
+The LCD data bus is connected to PORTC.0 - 3 of the PIC MCU.  The register
+select line is connected to PORTC.4.  Enable is connected to PORTC.5.  The
+read/write line is connected to ground to select write at all times.
+
+The LCD contrast is set with a single resistor to ground, R6.  Another
+resistor, R9, may be used to power an LCD backlight through connector J6.
+The supplied LCD module does not include a backlight.
+
+See LCDX20.BAS for a programming example.
+
+
+I2C Serial EEPROM
+
+The LAB-X20 includes a socket for an I2C serial EEPROM.  The I2C serial
+data (SDA) line is connected to PIC MCU pin PORTB.4.  The serial
+clock (SCL) line is connected to PORTB.6.  A 20-pin PIC MCU is required to
+use these connections.
+
+The serial clock and data lines are connected to 4.7k pull-up resistors R7
+and R8.
+
+See I2CX20.BAS for a programming example.
+
+Some of the possible I2C serial EEPROMs that may be used are:
+
+Device          Architecture
+24LC01B         1K (128 x 8)
+24LC02B         2K (256 x 8)
+24LC04B         4K (2 x 256 x 8)
+24LC08B         8K (4 x 256 x 8)
+24LC16B         16K (8 x 256 x 8)
+24LC32A         32K (4K x 8)
+24LC256         256K (32K x 8)
+
+
+RS232
+
+The LAB-X20 includes an RS232 interface to connector J5.  This allows
+asynchronous serial communication with other devices, including PCs.  A
+MAX232 IC in socket U2, along with several capacitors, generates the required
+RS232 voltages.
+
+The serial TX line (pin 2 on J5) is connected to PORTB.7 through the MAX232. 
+The serial RX line (pin 3 on J5) is connected to PORTB.5 through the MAX232. 
+A 20-pin PIC MCU is required to use these connections.
+
+RTS is connected to CTS (pin 7 to pin 8) on J5.  DTR is connected to DCD and
+DSR (pin 1 to 4 to 6) on J5.  These jumped connections make most comm
+programs think the LAB-X20 is online and ready to communicate.
+
+See HSERX20.BAS for a programming example.
+
+
+
+PIC MCU Port Pin Connections
+
+The table below lists the pre-wired connections to each of the PIC MCU
+port pins.  Off-board circuits may also be connected to the PIC MCU
+using header J4.
+
+PORTA (GPIO) - Buttons, Potentiometer, LEDs
+A0   SW1
+A1   SW2
+A2   POT1
+A3   RESET
+A4   LED1 / OSC2
+A5   LED2 / OSC1
+
+PORTB - SEEPROM, RS232
+B4   I2C SEEPROM SDA
+B5   RS232 RX
+B6   I2C SEEPROM SCL
+B7   RS232 TX
+
+PORTC - LCD
+C0   LCD DB4
+C1   LCD DB5
+C2   LCD DB6
+C3   LCD DB7
+C4   LCD RS
+C5   LCD E
+C6   nc
+C7   nc
+
+
+
+LAB-X20 Parts List
+
+Designator	Description
+R1-3		470 ohm 1/4W resistors (yellow-violet-brown)
+R4,7,8		4.7K 1/4W ohm resistors (yellow-violet-red)
+R5		100 ohm 1/4W resistor (brown-black-brown)
+R6		270 ohm 1/4W resistor (red-violet-brown)
+R9		LCD 1/4W backlight resistor (not included)
+
+POT1		5k thumbwheel potentiometer
+
+C1		10uf 50-volt radial electrolytic capacitors
+C2,7-11		1uf 35-volt radial electrolytic capacitors
+C3,4		22pf ceramic disk capacitors (not included)
+C5,6		.1uf monolythic capacitors (104)
+
+POWER,LED1,2	T-1 3/4 LEDs
+
+Y1		4.000MHz crystal (not included)
+
+LCD		20x2 LCD module w/ Hitachi controller
+
+REG1		7805T 5-volt regulator
+
+U1		20-pin dip socket
+U2		16-pin dip socket
+		MAX232CPE IC
+U3		8-pin dip socket
+
+RESET,SW1,2	6.5mm x 4.5mm push buttons
+
+J1		14-pin dual-row header
+J2		2.1mm DC power connector
+J3		10-pin dual-row header
+J4		20-pin dual-row header (not included)
+J5		DB9S female right angle connector
+J6		2-pin header (not included)
+
+JP1-4		2-pin header (not included)
+
+Items marked (not included) are not included with the assembled version and
+may be user supplied.
+
+
+
+Assembly Instructions
+
+All components must be placed on the top side of the board (the side with the
+silk-screened labeling) and soldered from the under side of the board using a
+good quality resin-core solder.  While the LAB-X20 is not difficult to
+assemble, some experience with assembling previous projects is desirable.
+
+1. Solder in the resistors.
+
+2. Solder in the IC sockets, observing polarity.
+
+3. Solder in the push button switches.
+
+4. Solder in the LEDs, observing polarity.
+
+5. Solder in the capacitors, observing polarity where necessary.
+
+6. Solder in the headers, including J1 for the LCD module.
+
+7. Solder in the DC power connector and DB9S connector.
+
+8. Solder in the 5-volt regulator, observing polarity (flat heat-sink side
+toward board).
+
+9. Solder in the thumbwheel potentiometer.
+
+Before proceeding, it is a good idea to check the power supply.  Attach a
+suitable DC power source to J2.    Measure for 5 volts between +5V and GND
+on the pads right below J2.  If 5 volts is not present, recheck all your work.
+
+10. Place the double-sided foam tape onto the back of the LCD module.  Slide
+the LCD module, face up, onto the LCD header, J1, and solder into place from
+the top side of the LCD.
+
+11. Install the MAX232 IC, observing polarity.
+
+
+
+Test Program
+
+A test program, TESTX20.BAS, has been included to provide a quick operational
+test of the LAB-X20.  It must be programmed into an appropriate device and the
+LAB-X20 powered up.
+
+The top line of the LCD will display the potentiometer value.  If pins 2 and
+3 are jumped on the RS232 connector, J5, the second line of the LCD will
+display the word "loopback".  When push button SW1 is pressed, LED1 will
+light up.  When push button SW2 is pressed, LED2 will light.
+
+
+
+PICBASIC, PICBASIC PRO and EPIC Programmer are trademarks of Microchip
+Technology Inc. in the U.S.A. and other countries.  PIC is a registered
+trademarks of Microchip Technology Inc. in the U.S.A. and other countries.
+
+
+microEngineering Labs, Inc.
+Box 60039
+Colorado Springs CO 80960
+(719) 520-5323
+(719) 520-1867 fax
+http://www.melabs.com
+email:support@melabs.com

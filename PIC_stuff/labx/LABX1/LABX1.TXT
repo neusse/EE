@@ -1,0 +1,745 @@
+                 LAB-X1 Documentation
+                           
+      Copyright (c) 2008 microEngineering Labs, Inc.
+
+
+Introduction
+
+The LAB-X1 (formerly called the PIC-X1) is a platform for experimenting with
+PIC(R) microcontroller (MCU) applications.  It contains the circuitry
+required by the PIC MCU to operate: 5-volt power supply, oscillator, reset
+circuit, as well as additional application circuits including switches,
+potentiometers, LEDs, LCD module, RS232 interface and speaker, among others.
+A prototyping area is also included in case we missed your favorite circuit.
+
+Many different projects may be created using the LAB-X1.  Some examples
+include a calculator, LCD clock, digital thermometer, LCD backpack, tone
+dialer and many more.  The LAB-X1 can run programs written in assembler, C
+and PICBASIC(TM) or PICBASIC PRO(TM).  It includes in-circuit programming
+connectors so the resident PIC MCU may be reprogrammed on the fly (requires
+flash device) using programmers that support this feature like the melabs
+EPIC(TM), Serial and USB Programmers.
+
+All of the PIC MCU I/O pins are brought out to headers next to a 40-pin
+ZIF socket.  This allows connection to off-board circuits as well as allowing
+on-board circuits to be connected to other PIC MCU pins, if desired.
+The LAB-X1 is designed to work with 40-pin PIC MCUs.
+
+The LAB-X1 is available in either assembled, kit or bare-board form.  A parts
+list and schematic, along with PICBASIC PRO example programs, are included.
+It has the following features:
+
+40-pin ZIF socket for PIC(R) MCU
+5-volt regulator
+Jumper selectable oscillator from 4MHz to 20MHz
+Reset button
+16 switch keypad
+3 potentiometers
+LED bargraph
+2 line by 20 character LCD module
+Speaker
+2 RC servo connectors
+RS232 interface
+Socket for RS485 interface (device not included)
+Socket for I2C serial EEPROM (device not included)
+Socket for SPI serial EEPROM (device not included)
+Socket for Microwire serial EEPROM (device not included)
+Socket for real time clock / serial analog to digital convertor (devices not
+included)
+Socket for Dallas 1620 / 1820 temperature sensors (devices not included)
+IR module / LED (devices not included)
+EPIC(TM) in-circuit programming connector
+Microchip in-circuit debug connector pads (connector not included)
+Prototyping area for additional circuits
+
+A parts list and assembly instructions, along with a PIC MCU pin connection
+list, are found toward the end of this document.
+
+Each of the circuits on the LAB-X1 are described below.  Refer to the
+schematic and sample programs on the disk for additional information.  It is
+also a good idea to have the data sheets available for each of the devices
+used on the LAB-X1.  These data sheets can usually be found on the
+manufacturers web site.
+
+It is recommended that you start with a simple program like BLINKX.BAS to get
+familiar with the operation and programming of the LAB-X1.
+
+
+Power Supply
+
+The power supply section provides regulated +5 volts DC for use by the LAB-X1
+components.  An AC adapter that provides between +7.5 and +16 volts DC is
+recommended to power the LAB-X1 through J2.  The center pin on the connector
+is positive.
+
+The regulator will get quite warm.  It may be desirable to attach a heat sink
+to it at higher input voltages.
+
+There is no power switch.  The AC adapter should be unplugged when the LAB-X1
+is not in use.
+
+
+Processor
+
+The LAB-X1 includes a 40-pin ZIF socket to support a 40-pin PIC MCU.  A
+PIC16F877A or PIC16F4620 is recommended where available.  These flash devices
+may be reprogrammed in-circuit using the melabs EPIC, Serial or USB
+Programmer.  Other PIC MCUs may also be used but may not have all the
+functions necessary to make use of all the circuits on the LAB-X1.
+
+To insert a PIC MCU into the ZIF socket, first lift the lever on the socket.
+The PIC MCU must be placed in the socket with pin 1 at the bottom of the
+LAB-X1 board.  The lever on the socket should then be lowered.
+
+The LAB-X1 must be powered-up in order to program a PIC MCU in the 40-pin ZIF
+socket.
+
+A reset button is provided to restart a running program.  It should not be
+pressed during device programming.
+
+Headers P1 - P4 may be added to the LAB-X1 around the 40-pin ZIF socket.
+These allow connections to external circuits.  They also allow jumpers to
+connect the on-board circuits to pins different than shown on the schematic.
+Additionally, jumpers can allow the use of PIC MCUs with fewer pins than 40.
+In any of these cases, it may be necessary to cut the traces on the bottom of
+the board that connect the pad from the PIC MCU to the LAB-X1 circuit.
+
+
+Oscillator
+
+The LAB-X1 includes a jumper programmable oscillator that can provide a clock
+source to the PIC MCU of between 4MHz and 20MHz using a 4MHz crystal.  It is
+also possible to use other crystal values to provide other clock frequencies.
+
+Jumpers A, B and C allow the selection of the various frequencies as shown in
+the following table:
+
+
+A       B       C       Multiplier      Frequency
+
+23      xx      xx      x1              4MHz
+12      23      23      x2              8MHz
+12      12      12      x2.5            10MHz
+12      23      open    x3              12MHz
+12      12      open    x3.33           13.32MHz
+12      23      12      x4              16MHz
+12      12      23      x5              20MHz
+
+
+As examples, to select a 4MHz clock, jumper A should be on pins 2 and 3. 
+Jumpers B and C positions don't matter.  To select a 20MHz clock, jumpers A
+and B should be on pins 1 and 2 and jumper C should be on pins 2 and 3.
+
+Jumper JP3 (not populated) allows a crystal or TTL or CMOS oscillator to be
+used directly without the ISC502M clock generator.  A TTL or CMOS oscillator,
+Y1A, may be used in place of crystal Y1 and the 2 capacitors, C5 and C6.
+
+
+ICSP
+
+The PIC MCU in the LAB-X1 40-pin ZIF socket may be programmed in-circuit
+using an melabs EPIC, Serial or USB Programmer.  A short 10-pin cable should
+be attached between connector J3 on the programmer and J3 on the LAB-X1 (pin 1
+is located on the lower right of J3 on the LAB-X1).  The programmer software
+should be started and the proper device selected.  The PIC MCU should then be
+placed into the 40-pin ZIF socket on the LAB-X1.  The LAB-X1 must be powered
+up during programming.  The PIC MCU may now be programmed in-circuit on the
+LAB-X1.
+
+If the PIC MCU is a flash device, it may be reprogrammed without being
+erased.  If it is a windowed EPROM (JW) device, it must be removed from the
+LAB-X1 to be UV erased before reprogramming.  An OTP device cannot be erased.
+
+Microchip's In-Circuit Debugger (ICD) may also be used to program flash
+devices in-circuit on the LAB-X1 through connector J3A (not populated).
+
+Jumper JP1 (not populated) may be shorted to connect the ICSP and ICD Vdd
+lines to the 5 volts of the LAB-X1.  This is necessary to power Microchip's
+ICD hardware.
+
+
+Potentiometer
+
+The LAB-X1 includes 3 potentiometers connected to PORTA.0, 1 and 3.  These
+are analog to digital converter input pins on PIC MCUs that support this
+function (such as the 16F877A).  They can be used independently or with POT3
+providing a reference voltage for the other 2 channels, depending on
+programming.
+
+The potentiometers may also be used as switches by setting the input pins to
+digital mode and moving the pot wheels all the way to either the 5-volt or
+ground position, providing either a high or low on the input.
+
+See ADCX.BAS for a programming example.
+
+
+Keypad Switch
+
+16 push button switches are arranged into a 4 by 4 matrix and connected to
+the 8 pins of PORTB on the PIC MCU.  The 4 rows are connected to
+PORTB.0 - PORTB.3 through 270 ohm series resistors, R1 - R4.  The resistors
+isolate the pins so that multiple button pressed don't short them out.
+
+The 4 columns are connected to PORTB.4 - PORTB.7.  This arrangement allows
+any single switch state to be read by the PIC MCU.  The PORTB pullups must be
+enabled before the switches are read:
+
+     OPTION_REG.7 = 0
+
+The switch states are read by setting one row to ground and making the other
+7 PORTB lines inputs.  The 4 columns may then be read to determine which of
+the switches in the selected row is closed.  A closed switch will show a 0 in
+its column position and an open switch will show a 1.  Each of the 4 rows is
+scanned in the same manner to determine all of the switch state.  An included
+sample program demonstrates this scanning.
+
+See KEYX.BAS for a programming example.
+
+
+LED Bargraph
+
+8 programmable LEDs connected to PORTD and 2 power LEDs are provided by
+the LED bargraph.  Resistor pack RP4 provides the current limit series
+resistors for the LEDs.  The LED bargraph may be inserted in the socket so
+that the LEDs are lit when the PIC MCU pin is in either its high or low state.
+
+To make the LEDs light up when a PIC MCU pin is high, insert the LED
+bargraph into the socket with pin 1 toward the edge of the board (this will
+also line it up with pin 1 on the socket and is the default placement).
+Jumper JP2 must have pins 2 and 3 connected (jumper on the top 2 JP2 pins).
+When the LAB-X1 is powered up, the leftmost LED will light up to show that
+power is on.  To make an LED light up, set the appropriate PORTD pin to
+output high.
+
+To make the LEDs light up when a PIC MCU pin is low, insert the LED
+bargraph into the socket with pin 1 toward the center of the board.  Jumper
+JP2 must have pins 1 and 2 connected (jumper on the bottom 2 JP2 pins).  When
+the LAB-X1 is powered up, the second to the leftmost LED will light up to
+show that power is on.  To make an LED light up, set the appropriate PORTD
+pin to output low.
+
+The LED bargraph shares PORTD with the LCD module data lines.  If the
+program is not using the LCD module, it can effectively be ignored.  If the
+LCD module is also being used, it may leave the LEDs in a different state
+than it found them in.  If the LCD is operating on a 4-bit data bus, only the
+top 4 LEDs, 4 - 8, will be affected.  If the LCD is using an 8-bit data bus,
+all 8 LEDs will be affected.  The proper LED state will need to be reset
+after each LCD access.
+
+See BLINKX.BAS for a programming example.
+
+
+LCD Module
+
+A 20 character by 2 line LCD module is included on the LAB-X1.  It may be
+used to display all manner of text information.  The module includes a
+Hitachi 44780 (or equivalent) controller.  It may be accessed using a 4- or
+8-bit data bus along with register select, read/write and enable lines.
+
+The LCD data bus is connected to PORTD of the PIC MCU.   If the LCD module is
+operating with a 4-bit data bus, only the top 4 lines, PORTD.4 - PORTD.7 are
+used.  The register select line is connected to PORTE.0.  Enable is connected
+to PORTE.1.  The read/write line is connected to PORTE.2.  The read/write
+line is also pulled down (write mode) with a 1k resistor, R7.  The read/write
+line is also shared with the RS485 output enable line (normally not used).
+
+On PIC MCUs with analog to digital converters, PORTE will start up in
+analog mode.  PORTE must be set to digital mode for the LCD to operate
+properly:
+
+     ADCON1 = 7
+
+The LCD modules shares PORTD with the LED bargraph.  If the LEDs are not
+used in a program, they can effectively be ignored.  The LEDs will simply
+flicker as the LCD is being accessed.  If both the LCD module and the LEDs
+are being used, LCD accesses may leave the LEDs in a different state than it
+found them in.  If the LCD is operating on a 4-bit data bus, only the top 4
+LEDs, 4 - 8, will be affected.  If the LCD is using an 8-bit data bus, all 8
+LEDs will be affected.  The proper LED state will need to be reset after each
+LCD access.
+
+The LCD contrast is set with a single resistor to ground, R8.  Another
+resistor, R16, may be used to power an LCD backlight through connector J12.
+The supplied LCD module does not include a backlight.
+
+See LCDX.BAS for a programming example.
+
+
+SEEPROMs
+
+The LAB-X1 includes 3 sockets for serial EEPROMs with each of the major
+interfaces: I2C (U3), SPI (U4) and Microwire (U5).  Only one type of SEEPROM
+should be used at a time as they all share the same I/O pins.  i.e., if an
+I2C device is used, the SPI and Microwire sockets should be empty.  The
+serial EEPROM must be inserted into the socket with pin 1 toward the bottom
+of the board.
+
+The serial clock line is connected to PIC MCU pin PORTC.3.  The serial data
+(or data in) line is connected to PORTC.4.  Data out is connected to PORTC.5
+and chip select is connected to PORTA.5 on the SPI and Microwire devices.
+Both the serial clock and data lines are connected to 4.7k pull-up resistors
+R9 and R10.
+
+PORTC.3 is also shared with the clock lines of the real time clock, ADC and
+temperature ICs, if any of these are present.  PORTC.5 may also be shared
+with some of these devices.
+
+See I2CX.BAS, SPIX.BAS and MWX.BAS for programming examples.
+
+Some of the possible serial EEPROMs are:
+
+Device  Interface       Architechture
+24LC01B I2C EEPROM      1K (128 x 8)
+24LC02B I2C EEPROM      2K (256 x 8)
+24LC04B I2C EEPROM      4K (2 x 256 x 8)
+24LC08B I2C EEPROM      8K (4 x 256 x 8)
+24LC16B I2C EEPROM      16K (8 x 256 x 8)
+24LC32A I2C EEPROM      32K (4K x 8)
+24LC256 I2C EEPROM      256K (32K x 8)
+
+25LC040 SPI EEPROM      4K (512 x 8)
+25LC080 SPI EEPROM      8K (1K x 8)
+25LC160 SPI EEPROM      16K (2K x 8)
+
+93LC56A Microwire EEPROM 2K (256 x 8)
+93LC66A Microwire EEPROM 4K (512 x 8)
+
+
+Sound
+
+The LAB-X1 includes a low power piezo speaker in series with a DC blocking
+capacitor.  This allows the program to generate sound by toggling PORTC.2. 
+PORTC.2 is also connected to the PWM RCs and the IR output LED, if present.
+
+If the speaker is too loud, cover the hole on top with a piece of tape.
+
+See TONEX.BAS for a programming example.
+
+
+PWM / DTMF Output
+
+Pulse width modulated (PWM) and dual tone modulated frequencies (DTMF)
+may be generated from the PIC MCU in either hardware or software.
+PORTC.2 is connected to up to a 2 pole RC filter to connector J11.
+
+For PWM output, a single pole integrator is generally sufficient using values
+of something on the order of 10k for R13 and 1uf for C18.  R14 would need to
+be jumpered with a piece of wire to get the output to J11.
+
+For DTMF filtering, values of 1k for R13 and R14 and .1uf for C18 and C19
+would remove much of the high-frequency noise.  Other values along with
+external amplification may be necessary for a particular application.
+
+Output on PORTC.2 will also occur on the speaker and IR LED, if present.
+
+See TONEX.BAS for a programming example.
+
+
+IR In and Out
+
+IR components may be added to the LAB-X1 to provide IR transmission and
+reception.  An IR LED may be soldered to the board along with a 100 to 270
+ohm resistor for R15.  This can provide IR transmission from PORTC.2.
+
+An IR input module may also be added to provide IR input to PORTA.4.
+
+PORTC.2 is shared with the speaker and the PWM / DTMF output, if present.
+
+
+RC Servos
+
+Connectors J7 and J8 may be used to connect RC servos to LAB-X1.  Pin 1, all
+the way to the right on each connector (usually the white wire), is the servo
+pulse input.  It is connected to PORTC.1 for J7 (Servo1) and PORTC.0 for J8
+(Servo2).  Pin 2 is +5 volts to the servo (usually the red wire) and Pin 3 on
+each connector is ground (usually the black wire).
+
+Most RC servos are operated by sending a 1ms to 2ms pulse 50 to 60 times a
+second.  The pulse width determines the servo position.  A 1.5ms pulse is the
+center.  A 1ms pulse is all the way one direction and a 2ms pulse is all the
+way the other direction.
+
+The servo pins, PORTC.0 and PORTC.1, are also shared with the temperature
+ICs, if present.
+
+See SERVOX.BAS for a programming example.
+
+
+RS232
+
+The LAB-X1 includes an RS232 interface to connector J9.  This allows
+asynchronous serial communication with other devices, including PCs.  A
+MAX232 IC in socket U9, along with several capacitors, generates the required
+RS232 voltages.
+
+The serial TX line (pin 2 on J9) is connected to PORTC.6 through the MAX232. 
+The serial RX line (pin 3 on J9) is connected to PORTC.7 through the MAX232. 
+RTS is connected to CTS (pin 7 to pin 8) on J9.  DTR is connected to DCD and
+DSR (pin 1 to 4 to 6) on J9.  These jumped connections make most comm
+programs think the LAB-X1 is online and ready to communicate.
+
+PORTC.6 and PORTC.7 are shared with the RS485 driver.  Only one of the two
+interfaces, RS232 or RS485, should be installed at a time.
+
+See HSERX.BAS for a programming example.
+
+
+RS485
+
+The LAB-X1 includes an optional RS485 interface to connector J10.  The RS485
+interface may be used to communicate with multiple devices in a chain.  It
+usually uses a standard 8-bit asynchronous serial communication format.
+
+To enable RS485 communications, remove the MAX232 from its socket and install
+an RS485 driver IC into U10 with pin 1 toward the bottom of the board.  Pin
+compatible ICs include the MAX485 and SN75176, among others.  A terminating
+resistor, R12, may also be necessary.  Biasing resistors may also be desired.
+See the particular interface's data sheet for more information.
+
+The serial TX line is connected to PORTC.6.  The serial RX line is connected
+to PORTC.7.  JP4 controls the receive enable (/RE) line.  This line is
+normally grounded to allow the received data to always appear on PORTC.7.  It
+may be jumpered to DE to allow the PIC MCU to enable and disable input
+to the PIC MCU receive pin.  The circuit trace to ground under the jumper on
+the under side of the board will need to be cut before a header and jumper is
+installed for JP4.
+
+DE is connected to PORTE.2 to allow the PIC MCU to turn on and off the
+transmitter output.  PORTE.2 may be an analog input pin at reset, depending
+on the particular PIC MCU device.  It must be set to digital mode before
+it will work properly to control the DE line.  PORTE.2 is pulled down to
+ground (disabled) with a 1k resistor, R7.  It is shared with the LCD R/W
+line.
+
+PORTC.6 and PORTC.7 are shared with the RS232 driver.  Only one of the two
+interfaces, RS232 or RS485, should be installed at a time.
+
+
+Real Time Clock
+
+Several different types of real time clocks (RTC) may be installed in socket
+U6 on the LAB-X1.  In any case, the IC should be installed with pin 1 toward
+the bottom of the board.  A 32.768KHz crystal is also required to be soldered
+into J5.  Many of the clock devices require a specific type of crystal so be
+sure to check the device specs before installation.
+
+The RTC will normally run from the LAB-X1 5 volt power supply.  Battery
+backup power may be provided through connector J4.  Be sure to match the
+polarity of the battery and the connector before connecting.  The LAB-X1 and
+battery supplies are isolated from each other with diodes.
+
+If an NJU6355 RTC is installed in U6, the PIC MCU connections are: CE to
+PORTA.2, CLK to PORTC.1, DATA to PORTC.3 and I/O to PORTC.5.
+
+If a Dallas 1202 or 1302 RTC is installed in U6, the PIC MCU connections are:
+!RST to PORTA.2, IO to PORTC.1 and SCLK to PORTC.3.
+
+Socket U6 may also be used for an analog to digital converter instead of a
+real time clock.
+
+See JRCX.BAS and RTCX.BAS for programming examples.
+
+
+A/D Converter
+
+An analog to digital converter (ADC) may be plugged into U6 instead of a real
+time clock.  While many PIC MCU devices contain A/D converters on-chip, in
+some cases it may be desirable to use an external device.  The LTC1298 is one
+such device that may be used.
+
+The LTC1298 contains 2 serial interfaced 12-bit A/D converters.  It connects
+with the PIC MCU as follows: Din to PORTA.2, Dout to PORTC.1, CLK to PORTC.3
+and !CS to PORTC.5.  Power is supplied through diode D1.  It may be desirable
+to jumper across the diode to eliminate its drop on the 5-volt supply.
+
+The voltage input to be measured by the ADC is provided through J5.  The 2
+channels on the ADC can be configured to several different single ended and
+differential modes.
+
+Socket U6 may also be used for a real time clock instead of an analog to
+digital converter.
+
+See LTCX.BAS for a programming example.
+
+
+Temperature
+
+Two different Dallas temperature sensor ICs may be used with the LAB-X1.  The
+3-wire Dallas 1620 may be inserted in socket U7 with pin 1 toward the bottom
+of the board. !RST is connected to PORTC.0, DQ is connected to PORTC.1 and
+CLK is connected to PORTC.3.  TCOM, TLOW and THIGH may be accessed on
+connector J6.
+
+PORTC.0 is shared with the Servo2 connector and PORTC.1 is shared with the
+Servo1 connector.  PORTC.3 is also shared with the SEEPROM and RTC clock
+lines.
+
+A Dallas 1820 1-wire temperature sensor may be used instead of the 1620.  It
+may be soldered into the U8 position on the LAB-X1 or extended using wires to
+another location.  A 4.7k resistor must also be soldered into R11.  The
+1-wire DQ line is connected to PORTC.0, which is also shared with Servo2.
+
+See TEMPX.BAS and TEMP3X.BAS for programming examples.
+
+
+
+Using Devices With Less Than 40 Pins
+
+It is highly recommended that a PIC MCU with 40 pins, such as the PIC16F877A,
+be used with the LAB-X1.  This will allow all of the peripherals on the
+LAB-X1 to be utilized.  Once the main program features have been tested, the
+pin assignments in the program may be changed and the program recompiled for
+the final target processor and board.  The PIC16F877A is an excellent choice
+as it has almost all the features of other PIC MCUs and is flash
+reprogrammable.
+
+However, it is possible to install a PIC MCU device with fewer pins and then
+use jumpers to connect power, ground, oscillator inputs and I/O to the proper
+pins for that device.
+
+For example, to use the 18-pin PIC16F84 on the LAB-X1, first cut the traces
+between the first 9 pads on headers P1 and P4 on the solder side of the
+board.  This will isolate the inner pads to the 40-pin ZIF socket from the
+outer pads to the peripherals.
+
+Next, solder in headers for P1 - P4.  Jumper the outer Vdd, Vss, O1 and MCLR
+posts to the proper inner posts to connect power, ground, the oscillator and
+master clear to the PIC16F84.  Refer to the PIC16F84 data sheet to determine
+the correct PIC MCU pins.
+
+Finally, jumper the desired peripherals to the PIC16F84 I/O pins.  For
+in-circuit programming through J3 to work properly, RB6 and RB7 on the
+PIC16F84 must be connected to B6 and B7 on header P4.
+
+
+
+PIC MCU Port Pin Connections
+
+The table below lists the pre-wired default connections to each of the
+PIC MCU port pins.  Each of these connections, including power, ground and
+the oscillator inputs, are jumpered across un-populated headers (P1 - P4)
+by a trace on the under side of the board.  By cutting the traces between
+these pads on the under side of the board and installing headers, it is
+possible to jumper program any of the LAB-X1 circuits to any PIC MCU pin.
+
+Off-board circuits may also be connected to the PIC MCU using headers
+P1 - P4.
+
+PORTA - A/D / Misc.
+A0   POT1
+A1   POT2
+A2   JRC RTC CE / Dallas RTC !Reset / LTC ADC Din
+A3   POT3
+A4   IR in
+A5   SPI SEEPROM !CS / Microwire SEEPROM CS
+
+PORTB - Keypad
+B0   Row  0 (270 ohm series resistors each row)
+B1        1
+B2        2
+B3        3 / ICD PGM
+B4   Col  0 (enable internal pull-ups)
+B5        1
+B6        2 / ICSP SCLOCK / ICD SCLOCK
+B7        3 / ICSP SDATA / ICD SDATA
+
+PORTC - Serial / Misc.
+C0   Dallas 1820 DQ (4.7k pull-up) / Dallas 1620 !RST / Servo2
+C1   JRC RTC CLK / Dallas RTC IO / LTC ADC Dout / Dallas 1620 DQ /
+     Servo1
+C2   Speaker / DTMF Out / PWM Out / IR Out
+C3   I2C SEEPROM SCL (4.7k pull-up) / SPI SEEPROM SCK / Microwire
+     SEEPROM CLK / JRC RTC DATA / Dallas RTC SCLK / LTC ADC
+     CLK / Dallas 1620 CLK
+C4   I2C SEEPROM SDA (4.7k pull-up) / SPI SEEPROM SI / Microwire
+     SEEPROM DI
+C5   SPI SEEPROM SO / Microwire SEEPROM DO / JRC RTC I/O / LTC
+     ADC !CS
+C6   RS232 TX / RS485 TX
+C7   RS232 TX / RS485 RX
+
+PORTD - LCD / LED bargraph
+D0   LCD DB0 / LED1
+D1   LCD DB1 / LED2
+D2   LCD DB2 / LED3
+D3   LCD DB3 / LED4
+D4   LCD DB4 / LED5
+D5   LCD DB5 / LED6
+D6   LCD DB6 / LED7
+D7   LCD DB7 / LED8
+
+PORTE - LCD control
+E0   LCD RS
+E1   LCD E
+E2   LCD R/W (1k pull-down) / RS485 DE
+
+MISC Pins
+!MCLR     RESET / ICSP Vpp / ICD Vpp
+O1   OSC1 (oscillator clock input)
+O2   OSC2 (no connection between P2 header pins)
+Vdd  +5 volts
+Vss  Ground
+
+
+
+LAB-X1 Standard Parts List
+
+Designator	Description
+R1-4,8		270 ohm 1/4W resistors (red-violet-brown)
+R5,9,10		4.7k 1/4W resistors (yellow-violet-red)
+R6		100 ohm 1/4W resistor (brown-black-brown)
+R7		1k 1/4W resistors (brown-black-red)
+R11		4.7k 1/4W resistor (not included)
+R12,16		(not included)
+R13,14		1k 1/4W resistors (not included)
+R15		270 ohm 1/4W resistor (not included)
+R17		100k 1/4W resistor (brown-black-yellow)
+
+RP1		9 x 470 ohm bussed resistor pack
+
+POT1-3		5k thumbwheel potentiometers
+
+C1,17		10uf 50-volt radial electrolytic capacitors
+C2,12-16	1uf 35-volt radial electrolytic capacitors
+C3,4,8-11	.1uf monolythic capacitors (104)
+C5,6		22pf ceramic disk capacitors
+C7		.01uf monolythic capacitor (103)
+C18,19		.1uf monolythic capacitors (not included)
+
+D1,2		1N4148 diodes
+
+LEDS		20-pin dip socket
+		10-LED bargraph
+
+IRLED		IR LED (not included)
+IRIN		Infra-red module (not included)
+
+Y1		4.000MHz crystal
+
+SP1		Speaker
+
+LCD		20x2 LCD module w/ Hitachi controller
+		Double-sided foam tape
+
+REG1		7805T 5-volt regulator
+
+U1		40-pin ZIF socket
+U2		ICS502M PLL clock multiplier IC
+U3-7,10		8-pin dip sockets
+U8		(not included)
+U9		16-pin dip socket
+		MAX232CPE IC
+
+SW1-16,RESET	6.5mm x 4.5mm push buttons
+
+J1		14-pin dual-row header
+J2		2.1mm DC power connector
+J3		10-pin dual-row header
+J3A		6-pin modular connector (not included)
+J4		2-pin header
+J5		32.768KHz crystal / 2-pin header (not included)
+J6,10		3-pin headers (not included)
+J7,8		3-pin headers
+J9		DB9S female right angle connector
+J11,12		2-pin headers (not included)
+
+JP1		2-pin header (not included)
+JP2		3-pin header
+		2-pin jumper
+JP3,4		3-pin headers (not included)
+ABC		3 3-pin headers
+		3 2-pin jumpers
+
+P1-4		20-pin dual-row headers (not included)
+
+4 rubber feet
+
+Items marked (not included) are not included with the standard version and
+may be user supplied.
+
+Unpopulated (not included) headers may have the default connection made as
+a trace on the solder side of the board.  You must cut this trace if you
+intend to add the header.
+
+
+
+Assembly Instructions
+
+All components must be placed on the top side of the board (the side with the
+silk-screened labeling) and soldered from the under side of the board using a
+good quality resin-core solder.  While the LAB-X1 is not difficult to
+assemble, some experience with assembling previous projects is desirable.
+
+0. SOIC U2 will be already soldered to the board.
+
+1. Solder in the resistors.
+
+2. Solder in the diodes, observing polarity.
+
+3. Solder in the resistor pack, observing polarity.
+
+4. Solder in the IC sockets, with the exception of the 40-pin ZIF socket,
+observing polarity.
+
+5. Solder in the push button switches.
+
+6. Solder in the capacitors, observing polarity where necessary.
+
+7. Solder in the headers, including J1 for the LCD module.
+
+8. Solder in the DC power connector, DB9S connector, 4.000MHz crystal and
+speaker.
+
+9. Solder in the 40-pin ZIF socket.
+
+10. Solder in the 5-volt regulator, observing polarity (flat heat-sink side
+toward board).
+
+11. Solder in the thumbwheel potentiometers.
+
+12. Place jumpers on JP2 pins 2 and 3 (top 2 pins), A pins 2 and 3, B pins 1
+and 2 and C pins 2 and 3.
+
+Before proceeding, it is a good idea to check the power supply.  Attach a
+suitable DC power source to J2.  Measure for 5 volts between Vdd and Vss on
+either P2 or P4.  If 5 volts is not present, recheck all your work.
+
+13. Place the double-sided foam tape onto the back of the LCD module.  Slide
+the LCD module, face up, onto the LCD header, J1, and solder into place from
+the top side of the LCD.
+
+14. Install the LED bargraph, observing polarity.
+
+15. Install the MAX232 IC, observing polarity.
+
+16. Stick the rubber feet to each corner of the board.
+
+
+
+Test Program
+
+A test program, TESTX.BAS, has been included to provide a quick operational
+test of the LAB-X1.  It must be programmed into an appropriate device and the
+LAB-X1 powered up.
+
+The test program will sequentially blink each of the 8 LEDs on the bargraph.
+It will also sound an ascending series of beeps on the speaker.  The top line
+of the LCD will display the analog voltage values of the 3 potentiometers,
+0 - 255.  The bottom line of the LCD will display the key number of any
+switch pressed.  If pins 2 and 3 are jumped on the RS232 connector, J9, the
+second line of the LCD will also display the word "loopback".
+
+
+
+PICBASIC, PICBASIC PRO and EPIC Programmer are trademarks of Microchip
+Technology Inc. in the U.S.A. and other countries.  PIC is a registered
+trademarks of Microchip Technology Inc. in the U.S.A. and other countries.
+
+
+microEngineering Labs, Inc.
+Box 60039
+Colorado Springs CO 80960
+(719) 520-5323
+(719) 520-1867 fax
+http://www.melabs.com
+email:support@melabs.com

@@ -1,0 +1,538 @@
+                 LAB-XUSB Documentation
+                           
+      Copyright (c) 2008 microEngineering Labs, Inc.
+
+
+Introduction
+
+The LAB-XUSB is a platform for experimenting with PIC(R) microcontroller
+(MCU) applications.  It contains the circuitry required by the PIC(R) MCU
+to operate: 5-volt power supply, oscillator, reset circuit, as well as
+additional application circuits including switches, potentiometers, LEDs,
+LCD module, RS232 interface, USB interface and speaker, among others.
+A prototyping area is also included in case we missed your favorite circuit.
+
+Many different projects may be created using the LAB-XUSB.  Some examples
+include a calculator, LCD clock, digital thermometer, LCD backpack, data
+logger and many more.  All of the PIC MCU I/O pins are brought out to a
+header that allows connection to off-board circuits.
+
+The LAB-XUSB can run programs written in assembler, C and PICBASIC(TM) or
+PICBASIC PRO(TM).  It includes an in-circuit programming connector so the
+resident PIC MCU may be reprogrammed on the fly (requires flash device)
+using programmers that support this feature like the melabs EPIC(TM), Serial
+and USB Programmers.
+
+The LAB-XUSB is designed to work with 40-pin PIC MCUs and is available in
+either assembled or bare-board form.  A parts list and schematic, along with
+PICBASIC(TM) and PICBASIC PRO(TM) example programs, are included.  It has
+the following features:
+
+40-pin ZIF socket for PIC MCU
+5-volt regulator
+20MHz oscillator
+Reset button
+16 switch keypad
+2 potentiometers
+4 LEDs
+2 line by 20 character LCD module
+Speaker
+RC servo connector
+RS232 interface
+USB connector
+Socket for digital to analog converter (device not included)
+Socket for I2C serial EEPROM (device not included)
+Socket for Dallas DS1307 real time clock (device not included)
+Pads for Dallas DS18S20 temperature sensors (device not included)
+EPIC in-circuit programming connector
+Prototyping area for additional circuits
+
+A parts list and assembly instructions, along with a PIC MCU pin
+connection list, are found towards the end of this document.
+
+Each of the circuits on the LAB-XUSB are described below.  Refer to the
+schematic and sample programs on the disk for additional information.  It is
+also a good idea to have the data sheets available for each of the devices
+used on the LAB-XUSB.  These data sheets can usually be found on the
+manufacturers web site.
+
+It is recommended that you start with a simple program like BLINKXU.BAS to
+get familiar with the operation and programming of the LAB-XUSB.
+
+
+Power Supply
+
+5 volt power to run the LAB-XUSB can be supplied by either a USB connection
+to a PC or by an on-board regulator and external AC adapter.  Jumper JP2 is
+used to select which to use for power.  If pins 1 and 2 (labeled USB) are
+jumpered, power will be taken from the USB connector.  If pins 2 and 3
+(labeled Ext.) are jumpered, power is taken from an AC adapter via the
+on-board regulator.  An AC adapter that provides between +7.5 and +16 volts
+DC is recommended to power the LAB-XUSB through J2.  The center pin on the
+connector is positive.
+
+The regulator may get quite warm.  It may be desirable to attach a heat sink
+to it at higher input voltages.
+
+There is no power switch.  The AC adapter or USB connection should be
+unplugged when the LAB-XUSB is not in use.
+
+
+Processor
+
+The LAB-XUSB includes a 40-pin ZIF socket to support a 40-pin PIC MCU.  A
+PIC18F4550 is recommended where available.  This flash device may be
+reprogrammed in-circuit using an melabs Programmer.  Other PIC MCUs may also
+be used but may not have all the functions necessary to make use of all the
+circuits on the LAB-XUSB.
+
+To insert a PIC MCU into the ZIF socket, first lift the lever on the
+socket.  The PIC MCU must be placed in the socket with pin 1 to the left
+of the LAB-XUSB board.  The lever on the socket should then be lowered.
+
+The LAB-XUSB must be powered-up in order to program a PIC MCU in the 40-pin
+ZIF socket.
+
+A reset button is provided to restart a running program.  It should not be
+pressed during device programming.
+
+Header J5 may be added to the LAB-XUSB below the 40-pin ZIF socket.  This
+allow connections to external circuits.
+
+
+Oscillator
+
+The LAB-XUSB includes a 20MHz oscillator that provides the clock source to
+the PIC MCU.  It is possible to use other crystal values to provide other
+clock frequencies.
+
+
+ICSP
+
+The PIC MCU in the LAB-XUSB 40-pin ZIF socket may be programmed in-circuit
+using an melabs Programmer.  A short 10-pin cable should be attached between
+connector J3 on the melabs Programmer and J3 on the LAB-XUSB (pin 1 is
+located on the lower right of J3 on the LAB-XUSB).  The programmer software
+should be started and the proper device selected. The PIC MCU should then be
+placed into the 40-pin ZIF socket on the LAB-XUSB.  The LAB-XUSB must be
+powered up during programming.  The PIC MCU may now be programmed in-circuit
+on the LAB-XUSB.
+
+If the PIC MCU is a flash device, it may be erased and reprogrammed without
+removing it from the LAB-XUSB.  If it is a windowed EPROM (JW) device, it
+must be removed from the LAB-XUSB to be UV erased before reprogramming.  An
+OTP (one time programmable) device cannot be erased.
+
+Two 100k pull-down resistors are included, R11 on PORTB.3 for the PIC16F877
+and R12 on PORTB.5 for the PIC18F4550.  These connections to the PGM pin
+make sure it is connected to ground for programming purposes.  They should
+not affect any other program operation.
+
+
+USB
+
+The LAB-XUSB includes a USB connector that is connected to D+ and D- on PIC
+MCUs that have an on-chip USB peripheral.  These include the low-speed
+PIC16C765 and full-speed PIC18F4455 and 4550.  The PIC18F4550 is recommended
+to give the best performance and is also flash erasable and reprogrammable.
+
+To use the PIC16C765, a 1.5k resistor must be added at location R5 to signal
+the USB bus a low speed device is available.  R5 should remain empty when
+using the PIC18F4550.
+
+Some USB example programs are included, such as USBMOUSE.BAS.  Many of
+the included sample programs do not use USB as the LAB-XUSB may also be used
+with PIC MCUs that do not include the USB peripheral.
+
+
+Potentiometers
+
+The LAB-XUSB includes 2 potentiometers connected to PORTA.0 and 1.  These
+are analog to digital converter input pins on PIC MCUs that support this
+function (such as the 18F4550).  The potentiometers may be disconnected from
+the PIC MCU by cutting the trace on the back of the board connecting JP7 and
+JP8, so that these pins may be used for other functions.
+
+The potentiometers may also be used as switches by setting the input pins to
+digital mode and moving the pot wheels all the way to either the 5-volt or
+ground position, providing either a high or low on the input.
+
+See ADCIN8XU.BAS for a programming example.
+
+
+Keypad Switches
+
+16 push button switches are arranged into a 4 by 4 matrix and connected to
+the 8 pins of PORTB on the PIC MCU.  The 4 rows are connected to
+PORTB.0 - PORTB.3 through 270 ohm series resistors, R13 - R16.  The
+resistors isolate the pins so that multiple button pressed don't short them
+out.
+
+The 4 columns are connected to PORTB.4 - PORTB.7.  This arrangement allows
+any single switch state to be read by the PIC MCU.  The PORTB pullups must
+be enabled before the switches are read:
+
+	OPTION_REG.7 = 0	' For PIC16Xxxx
+
+	INTCON2.7 = 0		' For PIC18Xxxxx
+
+The switch states are read by setting one row to ground and making the other
+7 PORTB lines inputs.  The 4 columns may then be read to determine which of
+the switches in the selected row is closed.  A closed switch will show a 0
+in its column position and an open switch will show a 1.  Each of the 4 rows
+is scanned in the same manner to determine all of the switch states.
+Included sample programs demonstrate this scanning.
+
+See KEYXU.BAS for a programming example.
+
+
+LEDs
+
+4 programmable LEDs connected to PORTD.0 - PORTD.3 and 1 power LED are
+provided.  The programmable LEDs light up when the PIC MCU pin is high.
+These LEDs may be effectively disconnected from the PIC MCU, if desired, by
+cutting the trace on the back of the board connecting JP4.
+
+See BLINK4XU.BAS for a programming example.
+
+
+LCD Module
+
+A 20 character by 2 line LCD module is included on the LAB-XUSB.  It may be
+used to display all manner of text information.  The module includes a
+Hitachi 44780 (or equivalent) controller.  It is accessed using a 4-bit data
+bus along with register select, read/write and enable lines.
+
+The LCD data bus is connected to PORTD.4 - PORTD.7 of the PIC MCU.  The
+register select line is connected to PORTE.0.  Enable is connected to
+PORTE.1.  The read/write line is connected to PORTE.2.  The read/write line
+is also pulled down (write mode) with a 1k resistor, R4.
+
+On PIC MCUs with analog to digital converters, PORTE will start up in analog
+mode.  PORTE must be set to digital mode for the LCD to operate properly:
+
+	ADCON1 = 15
+
+The LCD contrast is set with a single resistor to ground, R3.  Another
+resistor, R6, may be used to power an LCD backlight through connector J6.
+The supplied LCD module does not include a backlight.
+
+See LCDXU.BAS for a programming example.
+
+
+I2C Serial EEPROM
+
+The LAB-XUSB includes a socket for an I2C serial EEPROM.  The I2C serial
+data (SDA) line is connected to PIC MCU pin PORTA.4, by default.  The serial
+clock (SCL) line is connected to PORTA.5, by default.  Cutting the traces on
+the back of the board behind connectors JP5 and JP6 allows connection of the
+SDA and SCL lines to alternate pins on the PIC MCU.  Jumpering pins 2 to 3
+on each of those connectors moves SDA to PORTB.0 and SCL to PORTB.1.
+
+The serial clock and data lines are connected to 4.7k pull-up resistors R9
+and R10.  The I2C lines are also shared with the real time clock, if present.
+
+See I2CXU.BAS for a programming example.
+
+Some of the possible I2C serial EEPROMs that may be used are:
+
+Device          Architecture
+24LC01B         1K (128 x 8)
+24LC02B         2K (256 x 8)
+24LC04B         4K (2 x 256 x 8)
+24LC08B         8K (4 x 256 x 8)
+24LC16B         16K (8 x 256 x 8)
+24LC32A         32K (4K x 8)
+24LC256         256K (32K x 8)
+
+
+Speaker
+
+The LAB-XUSB includes a low power piezo speaker in series with a DC blocking
+capacitor.  This allows the program to generate sound by toggling PORTC.2. 
+
+If the speaker is too loud, cover the hole on top with a piece of tape.  The
+speaker may be disconnected from the PIC MCU by cutting the trace on the
+back of the board connecting JP3.  PORTC.2 is also shared with the DAC, if
+present.
+
+See TONEXU.BAS for a programming example.
+
+
+RC Servo
+
+Connector J9 may be used to connect an RC servo to LAB-XUSB.  Pin 1, all the
+way to the left on the connector (usually the white wire), is the servo
+pulse input.  It is connected to PORTA.2.  Pin 2 is +5 volts to the servo
+(usually the red wire) and Pin 3 on the connector is ground (usually the
+black wire).
+
+Most RC servos are operated by sending a 1ms to 2ms pulse 50 to 60 times a
+second.  The pulse width determines the servo position.  A 1.5ms pulse is
+the center.  A 1ms pulse is all the way one direction and a 2ms pulse is all
+the way the other direction.
+
+The servo pin, PORTA.2 is also shared with the temperature IC, if present.
+
+See SERVOXU.BAS for a programming example.
+
+
+RS232
+
+The LAB-XUSB includes an RS232 interface to connector J7.  This allows
+asynchronous serial communication with other devices, including PCs.  A
+MAX232 IC in socket U2, along with several capacitors, generates the
+required RS232 voltages.
+
+The serial TX line (pin 2 on J7) is connected to PORTC.6 through the MAX232. 
+The serial RX line (pin 3 on J7) is connected to PORTC.7 through the MAX232. 
+RTS is connected to CTS (pin 7 to pin 8) on J7.  DTR is connected to DCD and
+DSR (pin 1 to 4 to 6) on J7.  These jumped connections make most comm
+programs think the LAB-XUSB is online and ready to communicate.
+
+See HSERXU.BAS for a programming example.
+
+
+Real Time Clock
+
+A Dallas DS1307 real time clock (RTC) may be installed in U5.  The default
+PIC MCU connections are I2C serial data (SDA) to PORTA.4 and I2C serial
+clock (SCL) to PORTA.5.  Cutting the traces on the back of the board behind
+connectors JP5 and JP6 allows connection of the SDA and SCL lines to
+alternate pins on the PIC MCU.  Jumpering pins 2 to 3 on each of those
+connectors moves SDA to PORTB.0 and SCL to PORTB.1.
+
+A 32.768kHz crystal is also required to be soldered into Y2.  The RTC
+requires a specific type of crystal so be sure to check the device specs
+before installation.
+
+The RTC will normally run from the LAB-XUSB 5 volt power supply.  Battery
+backup power may be provided through connector J10.  Be sure to match the
+polarity of the battery and the connector before connecting.
+
+The serial clock and data lines are connected to 4.7k pull-up resistors R9
+and R10.  The I2C lines are also shared with the serial EEPROM, if it is
+present.
+
+See RTCXU.BAS for programming examples.
+
+
+Digital to Analog Converter
+
+A Maxim MAX549A 2-channel 8-bit digital to analog converter (DAC) may be
+plugged into U6.  It connects with the PIC MCU as follows: !CS to PORTC.0,
+SCLK to PORTC.1, and DIN to PORTC.2.  PORTC.2 is also connected to the
+speaker.
+
+The 2 outputs of the DAC are brought out to pins 1 and 2 of header J8.  Pin
+1 of J8 is closest to the bottom of the LAB-XUSB and pin 3 is ground.
+
+See DACXU.BAS for a programming example.
+
+
+Temperature
+
+A Dallas DS18S20 1-wire temperature sensor may be soldered into the U3
+position on the LAB-XUSB or extended using wires to another location.  A
+4.7k resistor must also be soldered into R8.  The 1-wire DQ line is
+connected to PORTA.2, which is also shared with the RC servo.
+
+See TEMPXU.BAS for a programming example.
+
+
+
+PIC MCU Port Pin Connections
+
+The table below lists the pre-wired connections to each of the PIC MCU port
+pins.  Off-board circuits may also be connected to the PIC MCU using header
+J5.
+
+PORTA - ADC / Temperature / Servo / I2C SEEPROM / I2C RTC
+A0   POT1
+A1   POT2
+A2   Dallas DS18S20 DQ (4.7k pull-up) / RC servo
+A3
+A4   I2C SDA
+A5   I2C SCL
+
+PORTB - Keypad / ICSP
+B0   Row  0 (270 ohm series resistors each row) / I2C SDA alternate (JP5)
+B1        1 / I2C SCL alternate (JP6)
+B2        2
+B3        3 / ICSP PGM
+B4   Col  0 (enable internal pull-ups)
+B5        1 / ICSP PGM
+B6        2 / ICSP SCLOCK
+B7        3 / ICSP SDATA
+
+PORTC - DAC / Speaker / USB / Serial
+C0   DAC !CS
+C1   DAC SCLK
+C2   Speaker / DAC DIN
+C3   VUSB
+C4   USB D-
+C5   USB D+
+C6   RS232 TX
+C7   RS232 RX
+
+PORTD - LEDs / LCD
+D0   LED1
+D1   LED2
+D2   LED3
+D3   LED4
+D4   LCD DB4
+D5   LCD DB5
+D6   LCD DB6
+D7   LCD DB7
+
+PORTE - LCD control
+E0   LCD RS
+E1   LCD E
+E2   LCD R/W (1k pull-down)
+
+MISC Pins
+!MC  RESET / ICSP Vpp
+O1   OSC1
+O2   OSC2
+Vdd  +5 volts
+Vss  Ground
+
+
+
+LAB-XUSB Parts List
+
+Designator	Description
+R1,9,10		4.7K 1/4W ohm resistors
+R2		100 1/4W ohm resistor
+R3,13-16	270 1/4W ohm resistors
+R4		1K 1/4W resistor
+R5		1.5K 1/4W resistor (not included)
+R6		LCD 1/4W backlight resistor (not included)
+R7,17-20	470 1/4W ohm resistors
+R8		4.7K 1/4W ohm resistor (not included)
+R11,12		100K 1/4W resistors
+
+POT1,2		5k thumbwheel potentiometers
+
+C1,13		10uf 50-volt radial electrolytic capacitors
+C2,7-11		1uf 35-volt radial electrolytic capacitors
+C5,12,14,15	.1uf monolythic capacitors
+C6		.47uf monolythic capacitor
+C3,4		22pf ceramic disk capacitors
+
+Y1		20.000MHz crystal
+Y2		32.768kHz crystal (not included)
+
+SP1		speaker
+
+POWER, LED1-4	T-1 3/4 red LEDs
+
+LCD		2X20 LCD w/ Hitachi controller
+
+REG1		7805T 5 volt regulator
+
+U1		40-pin ZIF socket
+U2		16-pin DIP socket
+U2		MAX232CPE RS232 driver
+U3		DS18S20 digital thermometer (not included)
+U4-6		8-pin DIP socket
+
+RESET, S1-16	6.5mm push button
+
+J1		14-pin header
+J2		2.1mm DC power conn.
+J3		10-pin header
+J4		USB-B female connector
+J5		40-pin header (not included)
+J6,10		2-pin header (not included)
+J7		DB9S right angle connector
+J8,9		3-pin header
+
+JP1,3,4,7,8	2-pin header (not included)
+JP2		3-pin header w/ jumper
+JP5,6		3-pin header (not included)
+
+	
+Items marked (not included) are not included with the assembled version and
+may be user supplied.
+
+Unpopulated (not included) headers may have the default connection made as
+a trace on the solder side of the board.  You must cut this trace if you
+intend to add the header.
+
+See the melabs web site for additional parts and vendor information.
+
+
+
+Assembly Instructions
+
+All components must be placed on the top side of the board (the side with the
+silk-screened labeling) and soldered from the under side of the board using a
+good quality resin-core solder.  While the LAB-XUSB is not difficult to
+assemble, some experience with assembling previous projects is desirable.
+
+1. Solder in the resistors.
+
+2. Solder in the IC sockets, with the exception of the 40-pin ZIF socket,
+observing polarity.
+
+3. Solder in the push button switches.
+
+4. Solder in the LEDs, observing polarity.
+
+5. Solder in the capacitors, observing polarity where necessary.
+
+6. Solder in the jumpers and headers, including J1 for the LCD module.
+
+7. Solder in the 5-volt regulator, observing polarity (flat heat-sink side
+toward center of board).
+
+8. Solder in the DC power connector, USB connector, DB9S connector,
+20.000MHz crystal and speaker.
+
+9. Solder in the 40-pin ZIF socket.
+
+10. Solder in the thumbwheel potentiometers.
+
+11. Place jumper on JP2 pins 1 and 2 (bottom 2 pins).
+
+12. Before proceeding, it is a good idea to check the power supply.  Attach
+a suitable DC power source to J2.  Measure for 5 volts between +5V and GND
+on the pads right below J2.  If 5 volts is not present, recheck all your
+work.
+
+13. Place the double-sided foam tape onto the back of the LCD module.  Slide
+the LCD module, face up, onto the LCD header, J1, and solder into place from
+the top side of the LCD.
+
+14. Install the MAX232 IC, observing polarity.
+
+
+
+Test Program
+
+A test program, TESTXU.BAS, has been included to provide a quick operational
+test of the LAB-XUSB.  It must be programmed into an appropriate device and
+the LAB-XUSB powered up.
+
+The test program will sequentially blink each of the 4 LEDs.  It will also
+sound an ascending series of beeps on the speaker.  The top line of the LCD
+will display the analog voltage values of the 2 potentiometers, 0 - 255.
+The bottom line of the LCD will display the key number of any switch pressed.
+If pins 2 and 3 are jumped on the RS232 connector, J7, the second line of
+the LCD will also display the word "loopback".
+
+
+
+PICBASIC, PICBASIC PRO and EPIC Programmer are trademarks of Microchip
+Technology Inc. in the U.S.A. and other countries.  PIC is a registered
+trademarks of Microchip Technology Inc. in the U.S.A. and other countries.
+
+
+microEngineering Labs, Inc.
+Box 60039
+Colorado Springs CO 80960
+(719) 520-5323
+(719) 520-1867 fax
+http://www.melabs.com
+email:support@melabs.com
