@@ -1,0 +1,75 @@
+#
+# Test command script for the Monochron emulator
+#
+# Purpose: Test the controller stub by combining changes in the controller
+# startline and display registers
+#
+# Note: After quiting this script reset the display and controller registers
+# using command 'le' (erase lcd display)
+#
+
+# Clear display and show a static clock for 4 seconds
+hm --- press 'q' to quit ---
+le
+psf
+lds 1 1
+cs 4
+wts
+rf wait=0 wait<16 wait=wait+1
+  tf
+  wte 250
+rn
+
+# Now let the fun begin... :-)
+
+# display off countdown counters for controllers
+vs countera=0
+vs counterb=0
+
+# random seed
+vs r=rand(0)
+
+# timer based display refresh
+wts
+
+rf null true null
+  rf rn=0 rn<40 rn=rn+1
+    # Set startline for both controllers
+    lss rand()*63 rand()*63
+    wte 75
+    tf
+
+    # Display for controller 0 with a 3% chance it will be turned off for the
+    # next 5 script loop cycles
+    iif countera>0
+      vs countera=countera-1
+      vs ctrla=false
+    iel
+      iif rand()<0.03
+        vs ctrla=false
+        vs countera=5
+      iel
+        vs ctrla=true
+      ien
+    ien
+
+    # Display for controller 1 with a 3% chance it will be turned off for the
+    # next 5 script loop cycles
+    iif counterb>0
+      vs counterb=counterb-1
+      vs ctrlb=false
+    iel
+      iif rand()<0.03
+        vs ctrlb=false
+        vs counterb=5
+      iel
+        vs ctrlb=true
+      ien
+    ien
+
+    # Set display for both controllers
+    lds ctrla ctrlb
+    wte 75
+    tf
+  rn
+rn
