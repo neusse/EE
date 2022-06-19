@@ -1,0 +1,208 @@
+#
+# Test command script for the Monochron emulator
+#
+# Purpose: This obviously fake Kubrick's 2001 HAL report on its Monochron (MON)
+# subsystem is used for testing gldcdLine() when painting sin and cos curves
+# and lines between the two.
+#
+
+# Erase LCD display
+le
+psf
+lbs 16
+w 1000
+
+# Provide HAL MON status report page
+pa 28 15 5x5p h 1 1 gpr: 21-tf
+pa 35 25 5x7m h 3 2 M
+pa 58 25 5x7m h 3 2 O
+pa 81 25 5x7m h 3 2 N
+
+# Set start (xs), length (xl) and step (xe) values for graph x-axis
+# For step use divider values of 120, such as 2, 3, 4, 5, 6, 8, 10, 12
+vs xs=4
+vs xl=121
+vs xe=4
+
+# Set start (ys) and +/- range (yr) of y-axis
+vs ys=31
+vs yr=30
+
+# Paint x/y axis and markers
+w 3000
+le
+w 500
+pl 2 ys-yr 2 ys+yr
+rf y=ys-yr y<=ys+yr y=y+6
+  pd 1 y
+rn
+pl xe-1 31 xs+xl ys
+rf x=xs x<=xs+xl x=x+xe
+  pd x ys+1
+rn
+
+# Paint sin and cos curve and line between sin and cos
+w 1000
+wts
+rf x=xs+xe x<=xs+xl x=x+xe
+  iif x==xs+xe
+    # Initial start-off sin/cos points and a line between them
+    vs sp=-sin(0)*yr+ys
+    vs cp=-cos(0)*yr+ys
+    pl xs sp xs cp
+  ien
+  wte 30
+  # Get new y values
+  vs sy=-sin(2*pi/xl*(x-xs))*yr+ys
+  vs cy=-cos(2*pi/xl*(x-xs))*yr+ys
+  # Connect new point with previous point
+  pl x-xe sp x sy
+  pl x-xe cp x cy
+  # Paint line between sin and cos value
+  pl x sy x cy
+  # Set new previous values
+  vs sp=sy
+  vs cp=cy
+rn
+
+# Pulse the graph using the backlight setting
+w 2000
+wts
+rf pu=0 pu<5 pu=pu+1
+  rf bs=16 bs>=3 bs=bs-1
+    lbs bs
+    wte 40
+  rn
+rn
+lbs 16
+
+# Do rectangle box and message animation magic
+
+# Define the x/y coordinates of the box and messages
+vs bx=64
+vs by=1
+vs mx=10
+vs my=37
+
+# Paint a rectangle box
+w 3000
+pr bx by 34 15
+
+# Flash the glcdline text in the box
+w 1000
+vs w=50
+wts
+rf fl=0 fl<7 fl=fl+1
+  prf bx+1 by+2 32 5 0 5
+  wte w
+  pa bx+3 by+2 5x5p h 1 1 glcdline
+  wte w
+rn
+
+# Flash the sin/cos text in the box
+w 500
+vs w=50
+wts
+rf fl=0 fl<7 fl=fl+1
+  prf bx+1 by+8 32 5 0 5
+  wte w
+  pa bx+2 by+8 5x5p h 1 1 sin / cos
+  wte w
+rn
+
+# Add important messages
+w 3000
+pa mx my 5x5p h 1 1 rnd>1e
+pa mx my+6 5x5p h 1 1 fx=auto
+pa mx my+12 5x5p h 1 1 ]]#fail
+
+# Rotate the important messages
+w 2000
+vs w=70
+wts
+prf 6 43 33 17 0 5
+rf fl=0 fl<6 fl=fl+1
+  pa mx my 5x5p h 1 1 rnd>1e
+  wte w
+  pa mx my+6 5x5p h 1 1 fx=auto
+  wte w
+  pa mx my+12 5x5p h 1 1 ]]#fail
+  wte w
+  prf mx my 27 5 0 5
+  wte w
+  prf mx my+6 27 5 0 5
+  wte w
+  prf mx my+12 27 5 0 5
+  wte w
+rn
+pa mx my 5x5p h 1 1 rnd>1e
+pa mx my+6 5x5p h 1 1 fx=auto
+pa mx my+12 5x5p h 1 1 ]]#fail
+
+# Add seemingly random numbers as last message
+w 1500
+vs r=rand(0)
+wts
+rf rn=0 rn<40 rn=rn+1
+  vs ra=rand()*99999
+  pn mx my+18 5x5p h 1 1 ra >%05.f<
+  wte 100
+rn
+
+# Flash the last random number
+w 1000
+vs w=50
+wts
+rf fl=0 fl<15 fl=fl+1
+  prf mx my+18 30 6 0 5
+  wte w
+  pn mx my+18 5x5p h 1 1 ra >%05.f<
+  wte w
+rn
+
+# Flash the entire contents of the box
+w 3000
+vs w=50
+wts
+rf fl=0 fl<15 fl=fl+1
+  prf bx+1 by+1 32 13 0 5
+  wte w
+  pa bx+3 by+2 5x5p h 1 1 glcdline
+  pa bx+2 by+8 5x5p h 1 1 sin / cos
+  wte w
+rn
+
+# Remove the important messages except last
+w 3000
+prf mx my 27 17 0 5
+
+# Remove the box and text details in reverse order
+w 1000
+prf bx+2 by+8 30 5 0 5
+w 150
+prf bx+3 by+2 28 5 0 5
+w 150
+prf bx by 34 15 0 5
+
+# Remove the curves by redrawing the axis
+w 2500
+le
+pl 2 ys-yr 2 ys+yr
+rf y=ys-yr y<=ys+yr y=y+6
+  pd 1 y
+rn
+pl xe-1 31 xs+xl ys
+rf x=xs x<=xs+xl x=x+xe
+  pd x ys+1
+rn
+
+# Remove the axis by fading backlight and exit
+w 500
+wts
+rf bs=15 bs>=0 bs=bs-1
+  lbs bs
+  wte 100
+rn
+le
+lbs 16
+w 1000

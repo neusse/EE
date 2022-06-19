@@ -1,0 +1,32 @@
+#
+# Test command script for the Monochron emulator
+#
+# Purpose: Use repeat loops to quickly skip through one hour and see how a
+# clock redraws itself
+#
+# Prerequisites:
+# - Select a clock (if not selected there's no visual feedback)
+# - Set the second step using variable 's'
+# - Set the wait delay between timestamps using variable 'w'
+#
+# Usage example (with Spotfire cascade, second step 1 and delay of 40 msec):
+# cs 11
+# vs s=1
+# vs w=40
+# e s ../script/time-ms.txt
+#
+
+wts
+# Repeat m(inute) between 0..59
+rf m=0 m<60 m=m+1
+  # Repeat s(econd) between 0..59 step 5
+  rf x=0 x<60 x=x+s
+    # Change the time using the 'm' and 'x' variables
+    # This will update the selected clock
+    ts 12 m x
+    # Wait remainder of 'w'*0.001 seconds since last wts or wte call
+    wte w
+  # Next x second
+  rn
+# Next m(inute)
+rn

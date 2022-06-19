@@ -1,0 +1,37 @@
+#
+# Test command script for the Monochron emulator
+#
+# Purpose: This script is used for testing gldcdLine() and numeric argument
+# expressions
+#
+
+# Erase lcd display
+le
+psf
+
+# Set horizontal and vertical display size
+vs hor=127
+vs ver=63
+# Set number of lines to draw minus 1
+vs lines=6
+
+# Paint in total 5x5 lines twice
+rf factor=1/lines factor<1 factor=factor+1/lines
+  # From left to top and left to bottom
+  pl 0 ver*factor (hor-hor*factor)/2 0
+  pl 0 ver*factor hor*factor/2 ver
+  pl 64 ver*factor (hor-hor*factor)/2+64 0
+  pl 64 ver*factor hor*factor/2+64 ver
+
+  # From right to top and right to bottom
+  pl hor/2 ver*factor hor*factor/2 0
+  pl hor/2 ver*factor (hor-hor*factor)/2 ver
+  pl hor ver*factor hor*factor/2+64 0
+  pl hor ver*factor (hor-hor*factor)/2+64 ver
+rn
+
+# Paint the glcdline function name in a rectangle box
+pr 17 27 31 9
+pa 19 29 5x5p h 1 1 glcdline
+pr 81 27 31 9
+pa 83 29 5x5p h 1 1 glcdline

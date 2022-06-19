@@ -1,0 +1,25 @@
+#
+# Test command script for the Monochron emulator
+#
+# Purpose: Consider this a performance test for the interpreter/CPU by running
+# a time consuming loop.
+# Run this test a few times to average out the result duration.
+# On a decent Intel VM machine this script takes about 14 secs to run.
+#
+
+hm -- wait for the script to complete or abort with 'q' --
+
+# Clear variables
+vr .
+
+# Loop 8 million times
+rf x=0 x<8000000 x=x+1
+  # Comments
+  vs y=x+1
+rn
+
+# Print resulting variables
+# Values reported must be 8*10^6 for both x and y
+hm Variables x and y:
+he x
+he y

@@ -1,0 +1,44 @@
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+*.d
+*.eep
+*.lss
+*.map
+*.sym
+*.lst
+*.au
+*.log
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.elf
+core
+
+# Emuchron project object files
+/firmware/mchron
+/firmware/emulator/expr.tab.c
+/firmware/emulator/expr.tab.h
+/firmware/emulator/expr.yy.c
+/firmware/emulator/genalarm
+
+# IDE files and folders
+.vscode
+gede2.ini
+*.anjuta*

@@ -1,0 +1,21 @@
+#
+# Test command script for the Monochron emulator
+#
+# Purpose: Put all clocks through the emulator
+#
+
+# Set max clock value and exclude performance test clock id
+vs maxClock=26
+vs perfTest=26
+
+# Run all clocks
+rf clock=1 clock<=maxClock clock=clock+1
+  # Skip the glcd performance test clock
+  iif clock!=perfTest
+    hm
+    vp ^clock$
+    cs clock
+    cf n
+  ien
+rn
+cs 0
