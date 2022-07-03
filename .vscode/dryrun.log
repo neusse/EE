@@ -1,3 +1,4 @@
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/neusse/Documents/GitHub/EE'
 make: Leaving directory '/home/neusse/Documents/GitHub/EE'
  
